@@ -1,0 +1,13 @@
+id: "11"
+type: number
+display: "11"
+mappings:
+  - system: cultural
+    to: "Master number"
+    note: "In numerology, 11 is one of three 'master numbers' (with 22 and 33) — not reduced to a single digit. Read as intuition, insight, the spiritual messenger."
+  - system: cultural
+    to: "Apollo 11"
+    note: "First crewed Moon landing, 20 July 1969. Armstrong, Aldrin, Collins."
+  - system: cultural
+    to: "Eleven players per side"
+    note: "Football (association and American), cricket, field hockey."

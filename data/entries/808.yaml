@@ -1,0 +1,13 @@
+id: "808"
+type: number
+display: "808"
+mappings:
+  - system: cultural
+    to: "Roland TR-808"
+    note: "1980 drum machine. Its kick, snare, and cowbell underpin hip hop, house, electro, R&B, and dance — to the point that '808s' became a genre label."
+  - system: cultural
+    to: "808s & Heartbreak"
+    note: "Kanye West's 2008 album that mainstreamed the auto-tuned-over-808-kick sound and reshaped popular music for the decade that followed."
+  - system: cultural
+    to: "Hawaii area code"
+    note: "Covering all of Hawaii since 1957."

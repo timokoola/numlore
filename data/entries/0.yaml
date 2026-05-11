@@ -1,0 +1,13 @@
+id: "0"
+type: number
+display: "0"
+mappings:
+  - system: cultural
+    to: "The cipher"
+    note: "From Arabic ṣifr ('empty'), via medieval Latin cifra. The same root gave English both 'zero' and 'cipher' — code."
+  - system: cultural
+    to: "Origin / unmanifest"
+    note: "In numerology, 0 amplifies whatever it accompanies and represents potential before form."
+  - system: math
+    to: "Additive identity"
+    note: "0 + n = n for every n. Also the only number that is neither positive nor negative."

@@ -1,0 +1,13 @@
+id: "3"
+type: number
+display: "3"
+mappings:
+  - system: cultural
+    to: "The speaker"
+    note: "Pythagorean numerology: creativity, expression, the synthesis where 1 + 2 = 3."
+  - system: cultural
+    to: "Trinity"
+    note: "Father, Son, Holy Spirit in Christianity; Hindu Trimurti (Brahma, Vishnu, Shiva); Three Jewels of Buddhism; tripartite souls in Plato."
+  - system: math
+    to: "First odd prime"
+    note: "Also the smallest non-trivial triangular number (1 + 2 = 3)."

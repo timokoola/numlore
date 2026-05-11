@@ -1,0 +1,16 @@
+id: "1969"
+type: number
+display: "1969"
+mappings:
+  - system: cultural
+    to: "Apollo 11"
+    note: "Moon landing, 20 July. Armstrong, Aldrin, Collins."
+  - system: cultural
+    to: "Woodstock"
+    note: "Music and Art Fair, 15–18 August, Bethel, New York. ~400,000 attendees."
+  - system: cultural
+    to: "Stonewall riots"
+    note: "28 June, Greenwich Village. Widely considered the catalyst for the modern LGBTQ+ rights movement."
+  - system: cultural
+    to: "Bryan Adams"
+    note: "'Summer of '69' — 1985 single, anthemic at karaoke."

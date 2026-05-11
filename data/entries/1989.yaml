@@ -1,0 +1,13 @@
+id: "1989"
+type: number
+display: "1989"
+mappings:
+  - system: cultural
+    to: "Fall of the Berlin Wall"
+    note: "9 November. End of the Eastern Bloc; German reunification followed in 1990."
+  - system: cultural
+    to: "World Wide Web proposed"
+    note: "Tim Berners-Lee's CERN proposal, 'Information Management: A Proposal', circulated in March 1989. Implementation followed in 1990."
+  - system: cultural
+    to: "Taylor Swift, 1989"
+    note: "2014 pop album; the singer's birth year. Title nodding to the era's pop sound. Re-recorded as 1989 (Taylor's Version) in 2023."

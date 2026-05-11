@@ -1,0 +1,13 @@
+id: "1"
+type: number
+display: "1"
+mappings:
+  - system: cultural
+    to: "The initiator"
+    note: "Pythagorean numerology: the monad — beginning, leadership, the self that has not yet met another."
+  - system: math
+    to: "Multiplicative identity"
+    note: "1 × n = n. The unit on which the natural numbers are built. By convention, 1 is not prime."
+  - system: cultural
+    to: "#1"
+    note: "Sports, charts, politics — the universal symbol of primacy."

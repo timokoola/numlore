@@ -1,0 +1,13 @@
+id: "4"
+type: number
+display: "4"
+mappings:
+  - system: cultural
+    to: "The builder"
+    note: "Pythagorean numerology: structure, foundation, the four cardinal directions, the four classical elements (earth, water, fire, air)."
+  - system: cultural
+    to: "Tetraphobia"
+    note: "In Mandarin, Cantonese, Japanese, and Korean, 四 (sì / shi) is a near-homophone for 死 ('death'). Some East Asian buildings skip a 4th floor."
+  - system: math
+    to: "First composite number"
+    note: "4 = 2 × 2; the smallest non-prime greater than 1."

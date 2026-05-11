@@ -1,0 +1,13 @@
+id: "5"
+type: number
+display: "5"
+mappings:
+  - system: cultural
+    to: "The seeker"
+    note: "Pythagorean numerology: freedom, change, the five senses, the five fingers, the pentagram."
+  - system: cultural
+    to: "Five pillars of Islam"
+    note: "Shahada (faith), salah (prayer), zakat (alms), sawm (fasting), hajj (pilgrimage)."
+  - system: math
+    to: "Third prime"
+    note: "Also the hypotenuse of the smallest Pythagorean triple: 3² + 4² = 5²."

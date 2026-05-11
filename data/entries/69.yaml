@@ -1,0 +1,13 @@
+id: "69"
+type: number
+display: "69"
+mappings:
+  - system: cultural
+    to: "Sexual position"
+    note: "Mutual oral. Named for the visual symmetry of the digits, one inverted relative to the other."
+  - system: cultural
+    to: "1969"
+    note: "Apollo 11, Woodstock, Stonewall — the year compressed to its last two digits."
+  - system: cultural
+    to: "Nice"
+    note: "Internet shorthand acknowledging the number's adolescent reputation. Often deployed when a price, follower count, or score happens to land here."

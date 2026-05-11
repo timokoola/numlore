@@ -1,0 +1,13 @@
+id: "13"
+type: number
+display: "13"
+mappings:
+  - system: cultural
+    to: "Triskaidekaphobia"
+    note: "Western unlucky number. Friday the 13th, missing 13th floors in Western hotels and high-rises; the 13th guest at the Last Supper."
+  - system: cultural
+    to: "Lucky in Italy"
+    note: "Particularly in matters of love — the opposite of 17, which is the unlucky number there."
+  - system: cultural
+    to: "Apollo 13"
+    note: "April 1970. Oxygen-tank rupture en route to the Moon; crew returned safely. 'Houston, we've had a problem.'"

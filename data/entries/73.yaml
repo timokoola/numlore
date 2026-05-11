@@ -1,0 +1,12 @@
+id: "73"
+type: number
+display: "73"
+mappings:
+  - system: cultural
+    to: "Sheldon Cooper's favourite"
+    note: "The Big Bang Theory, episode 'The Alien Parasite Hypothesis' (2010): '73 is the 21st prime; its mirror, 37, is the 12th — and 21 is the product of multiplying 7 and 3. And in binary, 73 is 1001001 — a palindrome.'"
+  - system: cultural
+    to: "73 — best regards"
+    note: "Amateur and ham radio telegraphic shorthand for 'best regards', in continuous use since the 1850s."
+  - system: math
+    to: "21st prime"

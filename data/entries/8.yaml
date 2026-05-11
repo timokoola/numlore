@@ -1,0 +1,13 @@
+id: "8"
+type: number
+display: "8"
+mappings:
+  - system: cultural
+    to: "The powerful"
+    note: "Pythagorean numerology: material mastery, ambition. Rotated, the infinity symbol (∞)."
+  - system: cultural
+    to: "Lucky in Chinese culture"
+    note: "八 (bā) is a near-homophone for 發 (fā, 'prosper'). Premium phone numbers and licence plates pay heavily for 8s."
+  - system: math
+    to: "First cube > 1"
+    note: "8 = 2³."

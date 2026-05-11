@@ -1,0 +1,13 @@
+id: "2"
+type: number
+display: "2"
+mappings:
+  - system: cultural
+    to: "The partner"
+    note: "Pythagorean numerology: duality, polarity, the first 'other'. Yin and yang."
+  - system: math
+    to: "The only even prime"
+    note: "Every other prime is odd by definition."
+  - system: math
+    to: "Binary base"
+    note: "Base of the binary numeral system that underlies digital computing."

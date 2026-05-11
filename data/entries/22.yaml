@@ -1,0 +1,13 @@
+id: "22"
+type: number
+display: "22"
+mappings:
+  - system: cultural
+    to: "Master number"
+    note: "Numerology's 'master builder' — the practical realisation of vision. Like 11 and 33, not reduced to a single digit."
+  - system: cultural
+    to: "Catch-22"
+    note: "Joseph Heller's 1961 satirical novel. The term has since entered English for any self-defeating bureaucratic rule."
+  - system: cultural
+    to: "22 Hebrew letters"
+    note: "The aleph-bet, also the number of paths on the Kabbalistic Tree of Life and major arcana in the Tarot."

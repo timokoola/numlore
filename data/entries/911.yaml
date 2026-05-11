@@ -4,10 +4,7 @@ display: "911"
 mappings:
   - system: cultural
     to: "US emergency telephone number"
-    note: "Universal three-digit emergency line for police, fire, and medical services in the United States and Canada."
-  - system: cultural
-    to: "September 11, 2001"
-    note: "Date of the terrorist attacks in the United States; commonly written 9/11."
+    note: "Universal three-digit emergency line for police, fire, and medical services in the United States and Canada since 1968. Predated by the UK's 999 (1937)."
   - system: cultural
     to: "Porsche 911"
-    note: "Rear-engined sports car in continuous production since 1964."
+    note: "Rear-engined sports car in continuous production since 1964. The model name was originally to be 901; Porsche renumbered after Peugeot claimed exclusive rights to three-digit names with a middle zero."

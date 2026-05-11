@@ -1,0 +1,13 @@
+id: "9"
+type: number
+display: "9"
+mappings:
+  - system: cultural
+    to: "The completer"
+    note: "Pythagorean numerology: humanitarianism, endings, the final single digit before the cycle resets."
+  - system: cultural
+    to: "Nine lives"
+    note: "Cats, said since ancient Egypt; possibly from the cat's flexibility and fall reflex."
+  - system: math
+    to: "3²"
+    note: "First odd composite number."

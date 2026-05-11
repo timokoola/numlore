@@ -1,0 +1,12 @@
+id: "47"
+type: number
+display: "47"
+mappings:
+  - system: cultural
+    to: "The Star Trek 47s"
+    note: "Writers on Star Trek: The Next Generation and later series deliberately worked the number 47 into scripts. Originated as an in-joke from writer Joe Menosky's Pomona College mentor Donald Bentley, who 'proved' all numbers equal 47."
+  - system: cultural
+    to: "Agent 47"
+    note: "Genetically engineered assassin protagonist of IO Interactive's Hitman video game series since 2000."
+  - system: math
+    to: "15th prime"

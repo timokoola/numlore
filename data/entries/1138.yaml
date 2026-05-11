@@ -1,0 +1,10 @@
+id: "1138"
+type: number
+display: "1138"
+mappings:
+  - system: cultural
+    to: "THX 1138"
+    note: "George Lucas's 1971 directorial debut. A dystopian SF film whose title became a Lucasfilm signature."
+  - system: cultural
+    to: "Lucasfilm Easter egg"
+    note: "Lucas has worked '1138' into every subsequent film: cell block 1138 in Star Wars (1977), pilot call sign Red Five Three Eight in Episode I, transport 1138 in Episode III, and so on."

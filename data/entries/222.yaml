@@ -1,0 +1,10 @@
+id: "222"
+type: number
+display: "222"
+mappings:
+  - system: cultural
+    to: "Angel number"
+    note: "In New Age numerology, 222 is read as a sign of balance, partnership, and trust in the unfolding."
+  - system: cultural
+    to: "Numerological root 6"
+    note: "2+2+2 = 6 — the harmoniser."

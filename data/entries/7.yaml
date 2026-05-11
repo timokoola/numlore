@@ -1,0 +1,13 @@
+id: "7"
+type: number
+display: "7"
+mappings:
+  - system: cultural
+    to: "The mystic"
+    note: "Pythagorean numerology: introspection, wisdom, the analytical mind."
+  - system: cultural
+    to: "Lucky 7"
+    note: "Western superstition. Seven seas, seven wonders, seven days of the week, seven deadly sins, seven heavens."
+  - system: math
+    to: "Fourth prime"
+    note: "Also a Mersenne prime: 7 = 2³ − 1."

@@ -1,0 +1,13 @@
+id: "6"
+type: number
+display: "6"
+mappings:
+  - system: cultural
+    to: "The harmoniser"
+    note: "Pythagorean numerology: harmony, nurturing, responsibility. The Star of David has six points; Brahma has six faces."
+  - system: math
+    to: "First perfect number"
+    note: "Equal to the sum of its proper divisors: 1 + 2 + 3 = 6."
+  - system: cultural
+    to: "Six-sided die"
+    note: "The d6 — the world's most-used random-number generator since at least 3000 BCE."

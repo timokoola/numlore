@@ -1,0 +1,12 @@
+id: "12345"
+type: number
+display: "12345"
+mappings:
+  - system: cultural
+    to: "World's most-used password"
+    note: "Tops most leaked-credential rankings, alongside 'password' and 123456. Has been the #1 worst PIN for at least two decades."
+  - system: cultural
+    to: "Spaceballs"
+    note: "President Skroob: 'So the combination is 1, 2, 3, 4, 5? That's the stupidest combination I've ever heard in my life! That's the kind of thing an idiot would have on his luggage!' (1987)"
+  - system: math
+    to: "Ascending sequence"

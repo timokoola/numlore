@@ -1,0 +1,13 @@
+id: "999"
+type: number
+display: "999"
+mappings:
+  - system: cultural
+    to: "Angel number"
+    note: "In New Age numerology, 999 is read as completion — a cycle ending, a threshold ahead of a new beginning."
+  - system: cultural
+    to: "UK emergency number"
+    note: "Established 1937 as the world's first dedicated three-digit emergency line; predates 911 (1968) and the EU 112 (1991)."
+  - system: math
+    to: "Largest 3-digit number"
+    note: "Inverted, it is 666."

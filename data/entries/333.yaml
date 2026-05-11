@@ -1,0 +1,10 @@
+id: "333"
+type: number
+display: "333"
+mappings:
+  - system: cultural
+    to: "Angel number"
+    note: "In New Age numerology, 333 is read as a call to creative expression and to the alignment of mind, body, and spirit."
+  - system: cultural
+    to: "Numerological root 9"
+    note: "3+3+3 = 9 — the completer."
