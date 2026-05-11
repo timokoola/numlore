@@ -27,6 +27,21 @@ Brysbaert, Warriner, & Kuperman (2014)
   Concreteness ratings for 40 thousand generally known English word lemmas.
   Behavior Research Methods, 46(3), 904-911.
 
+Cinzel by Natanael Gama
+  Roman capital display face used for headings, the brand mark, and small caps
+  ornaments. Self-hosted via @fontsource-variable/cinzel.
+  License: SIL OFL 1.1.
+
+Cormorant Garamond by Christian Thalmann
+  Serif body face used for prose, italics, and tagline copy. Self-hosted via
+  @fontsource-variable/cormorant-garamond.
+  License: SIL OFL 1.1.
+
+JetBrains Mono by JetBrains
+  Monospace face used for numerals, mappings, and calculations. Self-hosted via
+  @fontsource-variable/jetbrains-mono.
+  License: SIL OFL 1.1.
+
 Glyphex
   Aggregate page analytics. The only third-party script loaded by Numlore;
   used to measure page hits without recording individual user choices.

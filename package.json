@@ -21,7 +21,8 @@
   "dependencies": {
     "@astrojs/cloudflare": "^11.2.0",
     "@astrojs/tailwind": "^5.1.0",
-    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/cinzel": "^5.2.8",
+    "@fontsource-variable/cormorant-garamond": "^5.2.6",
     "@fontsource-variable/jetbrains-mono": "^5.2.5",
     "astro": "^4.16.0",
     "fuse.js": "^7.0.0",

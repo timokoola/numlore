@@ -1,5 +1,6 @@
 ---
 import type { NumberResult, Mapping, System } from '../lib/mnemonics';
+import { digitalRoot, archetype } from '../lib/numerology';
 
 interface Props {
   number: string;
@@ -14,12 +15,14 @@ const nextNum = asInt !== null ? asInt + 1 : null;
 const prevHref = prevNum !== null ? `/n/${prevNum}` : null;
 const nextHref = nextNum !== null ? `/n/${nextNum}` : null;
 
-const SYSTEMS: ReadonlyArray<{ key: System; label: string; chipMod: string }> = [
-  { key: 'cultural', label: 'Cultural', chipMod: 'chip--cultural' },
-  { key: 'major',    label: 'Major',    chipMod: 'chip--major' },
-  { key: 'keypad',   label: 'T9 keypad', chipMod: 'chip--keypad' },
-  { key: 'leet',     label: 'Leet',     chipMod: 'chip--leet' },
-  { key: 'math',     label: 'Math',     chipMod: 'chip--math' },
+const root = digitalRoot(number);
+
+const SYSTEMS: ReadonlyArray<{ key: System; label: string; chipMod: string; descr: string }> = [
+  { key: 'cultural', label: 'Cultural', chipMod: 'chip--cultural', descr: 'the named echo' },
+  { key: 'major',    label: 'Major',    chipMod: 'chip--major',    descr: 'the phonetic cipher' },
+  { key: 'keypad',   label: 'T9 Keypad', chipMod: 'chip--keypad',  descr: 'the tactile cipher' },
+  { key: 'leet',     label: 'Leet',     chipMod: 'chip--leet',     descr: 'the modern glyph' },
+  { key: 'math',     label: 'Math',     chipMod: 'chip--math',     descr: 'the property' },
 ];
 
 const groupedMappings = SYSTEMS.map((s) => ({
@@ -28,51 +31,53 @@ const groupedMappings = SYSTEMS.map((s) => ({
 })).filter((g) => g.items.length > 0);
 
 const tierLabel: Record<string, string> = {
-  curated: 'Curated',
-  notable: 'Notable',
-  longtail: 'Algorithmic',
-};
-
-const tierColor: Record<string, string> = {
-  curated: 'var(--accent)',
-  notable: 'var(--hot)',
-  longtail: 'var(--text-dim)',
+  curated: 'Curated · Hand-written',
+  notable: 'Notable · Auto-flagged',
+  longtail: 'Algorithmic · Computed',
 };
 ---
 
 <article>
-  <!-- ── Specimen header ─────────────────────────────── -->
-  <header class="grid items-end gap-x-8 gap-y-4 md:grid-cols-[auto_1fr]">
+  <p class="kicker text-center">{tierLabel[data.tier] ?? data.tier}</p>
+
+  <header class="mt-4 text-center">
     <h1 class="specimen text-[clamp(6rem,28vw,18rem)]">{number}</h1>
-    <div class="md:pb-3">
-      <p class="kicker" style={`color: ${tierColor[data.tier] ?? 'var(--ink)'}`}>
-        Tier · {tierLabel[data.tier] ?? data.tier}
+    <p class="lede mx-auto mt-4 text-center">{data.summary}</p>
+
+    {root && (
+      <div class="mx-auto mt-6 inline-block border border-[color:var(--gold-dim)] px-6 py-3">
+        <p class="kicker">Numerological root</p>
+        <p class="mono mt-2 text-[color:var(--gold-dim)] text-sm">{root.steps.join(' → ')}</p>
+        <p class="display mt-2 text-4xl font-black text-[color:var(--amaranth)]">{root.root}</p>
+        <p class="italic-serif mt-1 text-[color:var(--ink)] opacity-80">— {archetype(root.root)}</p>
+      </div>
+    )}
+
+    {asInt !== null && prevHref && nextHref && (
+      <p class="kicker mt-6 text-[color:var(--gold-dim)]">
+        ← <a class="mono text-[color:var(--gold)]" href={prevHref}>{prevNum}</a>
+        <span class="dot"></span>
+        <a class="mono text-[color:var(--gold)]" href={nextHref}>{nextNum}</a> →
       </p>
-      <p class="lede mt-4 text-xl text-[color:var(--text)]">{data.summary}</p>
-      {asInt !== null && prevHref && nextHref && (
-        <p class="kicker mt-5 text-[color:var(--text-dim)]">
-          <span class="slash"></span>
-          adjacent &nbsp;
-          <a class="mono u text-[color:var(--text)]" href={prevHref}>{prevNum}</a>
-          &nbsp;·&nbsp;
-          <a class="mono u text-[color:var(--text)]" href={nextHref}>{nextNum}</a>
-        </p>
-      )}
-    </div>
+    )}
   </header>
 
-  <!-- ── Mappings ────────────────────────────────────── -->
+  <div class="divider"><span class="line"></span><span class="glyph">readings</span><span class="line"></span></div>
+
   {groupedMappings.length > 0 ? (
-    <section class="mt-14 grid gap-4 md:grid-cols-2">
+    <section class="grid gap-4 md:grid-cols-2">
       {groupedMappings.map((g) => (
         <article class="card">
-          <span class={`chip ${g.chipMod}`}>{g.label}</span>
+          <div class="flex items-baseline justify-between">
+            <span class={`chip ${g.chipMod}`}>{g.label}</span>
+            <span class="italic-serif text-sm text-[color:var(--ink)] opacity-70">— {g.descr}</span>
+          </div>
           <ul class="mt-4 space-y-3">
             {g.items.map((m) => (
               <li>
-                <p class="mono text-2xl leading-tight">{m.to}</p>
+                <p class="display text-2xl text-[color:var(--ink)]">{m.to}</p>
                 {m.note && (
-                  <p class="mt-1 text-sm italic text-[color:var(--text-dim)]">{m.note}</p>
+                  <p class="italic-serif mt-1 text-sm text-[color:var(--ink)] opacity-75">{m.note}</p>
                 )}
               </li>
             ))}
@@ -81,24 +86,23 @@ const tierColor: Record<string, string> = {
       ))}
     </section>
   ) : (
-    <section class="card mt-14">
-      <span class="chip chip--math">Mappings</span>
-      <p class="mt-4 text-[color:var(--text-dim)]">
+    <section class="card">
+      <span class="chip chip--math">Readings</span>
+      <p class="italic-serif mt-4 text-[color:var(--ink)] opacity-80">
         Nothing landed for this input. Try a different number or word.
       </p>
     </section>
   )}
 
-  <!-- ── Walk ────────────────────────────────────────── -->
   {prevHref && nextHref && (
-    <nav class="mt-16 grid gap-3 md:grid-cols-2">
-      <a class="card flex items-baseline justify-between hover:bg-[color:var(--accent-soft)] transition-colors" href={prevHref}>
-        <span class="kicker text-[color:var(--text-dim)]">← Previous</span>
-        <span class="mono text-2xl">{prevNum}</span>
+    <nav class="mt-12 grid gap-3 md:grid-cols-2">
+      <a class="card flex items-baseline justify-between hover:border-[color:var(--gold)]" href={prevHref}>
+        <span class="kicker">← Previous</span>
+        <span class="mono text-2xl text-[color:var(--gold)]">{prevNum}</span>
       </a>
-      <a class="card flex items-baseline justify-between hover:bg-[color:var(--accent-soft)] transition-colors" href={nextHref}>
-        <span class="mono text-2xl">{nextNum}</span>
-        <span class="kicker text-[color:var(--text-dim)]">Next →</span>
+      <a class="card flex items-baseline justify-between hover:border-[color:var(--gold)]" href={nextHref}>
+        <span class="mono text-2xl text-[color:var(--gold)]">{nextNum}</span>
+        <span class="kicker">Next →</span>
       </a>
     </nav>
   )}

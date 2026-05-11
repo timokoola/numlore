@@ -2,29 +2,26 @@
 const year = new Date().getUTCFullYear();
 ---
 
-<footer class="mt-24 border-t-2 border-[color:var(--ink)]">
-  <div class="mx-auto max-w-6xl px-6 py-8">
-    <div class="grid items-end gap-6 md:grid-cols-[1fr_auto]">
-      <p class="text-lg">
-        <span class="slash"></span>
-        <span class="serif-italic">We don't log what you look up.</span>
-        <a href="/privacy" class="u text-[color:var(--accent)]">Why &rarr;</a>
-      </p>
-      <nav class="kicker flex flex-wrap gap-x-5 gap-y-2">
-        <a class="u" href="/">Home</a>
-        <a class="u" href="/systems">Systems</a>
-        <a class="u" href="/about">About</a>
-        <a class="u" href="/credits">Credits</a>
-        <a class="u" href="/submit">Submit</a>
-        <a class="u" href="/privacy">Privacy</a>
-      </nav>
-    </div>
-    <p class="kicker mt-8 flex flex-wrap items-baseline gap-x-3 text-[color:var(--text-dim)]">
-      <span>© {year} Skadi Oy</span>
-      <span aria-hidden="true">·</span>
-      <span>Built in Helsinki</span>
-      <span aria-hidden="true">·</span>
-      <a class="u" href="/credits">Sources &amp; attributions</a>
+<footer class="mt-24 border-t border-[color:var(--gold-dim)]">
+  <div class="mx-auto max-w-5xl px-6 py-10 text-center">
+    <p class="moons">○ ◐ ● ◑ ○</p>
+    <p class="italic-serif mt-4 text-lg">
+      We do not record what you look up.
+      <a href="/privacy" class="kicker ml-2 inline-block align-middle">→ /privacy</a>
+    </p>
+
+    <nav class="kicker mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2">
+      <a href="/">Home</a>
+      <a href="/systems">Systems</a>
+      <a href="/about">About</a>
+      <a href="/credits">Credits</a>
+      <a href="/submit">Submit</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+
+    <p class="kicker mt-6 text-[color:var(--gold-dim)]">
+      © {year} Skadi Oy <span class="dot">·</span> Helsinki <span class="dot">·</span>
+      <a href="/credits" class="text-[color:var(--gold-dim)] hover:text-[color:var(--gold)]">Sources &amp; attributions</a>
     </p>
   </div>
 </footer>

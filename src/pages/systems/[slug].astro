@@ -15,17 +15,21 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 
 interface SystemCopy {
+  roman: string;
   title: string;
+  subtitle: string;
   body: string;
-  mod: string;
   table?: Array<{ key: string; value: string }>;
   example?: string;
+  chipMod: string;
 }
 
 const copy: Record<string, SystemCopy> = {
   major: {
+    roman: 'I',
     title: 'The Major System',
-    mod: 'major',
+    subtitle: 'the phonetic cipher',
+    chipMod: 'chip--major',
     body: 'A phonetic mnemonic technique that maps each digit 0–9 to a set of consonant sounds. Vowels, w, y, and h are free to insert, so any number can be rewritten as a pronounceable word.',
     table: [
       { key: '0', value: 's, z' },
@@ -42,8 +46,10 @@ const copy: Record<string, SystemCopy> = {
     example: '32 → m·n → "moon"',
   },
   keypad: {
+    roman: 'II',
     title: 'T9 phone keypad',
-    mod: 'keypad',
+    subtitle: 'the tactile cipher',
+    chipMod: 'chip--keypad',
     body: 'Legacy mobile phones mapped letters to digits 2–9. The system survives in vanity numbers and in mnemonic word ↔ number conversion.',
     table: [
       { key: '2', value: 'A B C' },
@@ -58,8 +64,10 @@ const copy: Record<string, SystemCopy> = {
     example: 'M·O·N·E·Y → 66639',
   },
   leet: {
+    roman: 'III',
     title: 'Leet (1337-speak)',
-    mod: 'leet',
+    subtitle: 'the modern glyph',
+    chipMod: 'chip--leet',
     body: 'Numbers and symbols substituted for similar-looking letters: 0=O, 1=I, 3=E, 4=A, 5=S, 7=T. Common since the early 1980s BBS scene.',
     table: [
       { key: '0', value: 'O' },
@@ -73,31 +81,37 @@ const copy: Record<string, SystemCopy> = {
     example: '1337 → LEET',
   },
   cultural: {
+    roman: 'IV',
     title: 'Cultural references',
-    mod: 'cultural',
+    subtitle: 'the named echoes',
+    chipMod: 'chip--cultural',
     body: 'Numbers that mean something specific in a cultural or fictional context: 007 (James Bond), 451 (Fahrenheit 451), 90210 (Beverly Hills), 31337 (elite). Curated by hand.',
     example: '90210 → Beverly Hills',
   },
 };
 
-const entry = copy[slug ?? ''] ?? { title: 'Unknown system', body: '', mod: '' };
+const entry = copy[slug ?? ''] ?? { roman: '·', title: 'Unknown system', subtitle: '', body: '', chipMod: '' };
 ---
 
 <BaseLayout title={`${entry.title} — Numlore`} description={entry.body} wide={true}>
-  <header>
-    <span class={`chip chip--${entry.mod}`}>System</span>
-    <h1 class="headline mt-4 text-[clamp(3rem,8vw,5.5rem)]">{entry.title}</h1>
-    <p class="lede mt-5 max-w-prose text-[color:var(--text)]">{entry.body}</p>
-  </header>
+  <p class="kicker text-center">Sphere <span class="dot"></span> {entry.roman}</p>
+  <h1 class="display mt-3 text-center text-[clamp(3rem,8vw,5.5rem)] font-bold leading-tight text-[color:var(--ink)]">
+    {entry.title}
+  </h1>
+  <p class="lede mx-auto mt-2 text-center italic-serif text-[color:var(--gold-soft)]">— {entry.subtitle}</p>
+
+  <div class="divider"><span class="line"></span><span class="glyph">✦  ☉  ✦</span><span class="line"></span></div>
+
+  <p class="italic-serif mx-auto max-w-prose text-center text-lg">{entry.body}</p>
 
   {entry.table && (
-    <section class="mt-14">
-      <p class="kicker text-[color:var(--hot)]">Mapping table</p>
-      <dl class="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-4 lg:grid-cols-5">
+    <section class="mt-12">
+      <p class="kicker text-center">Mapping table</p>
+      <dl class="mx-auto mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-5" style="max-width: 880px;">
         {entry.table.map((row) => (
-          <div class="card">
-            <dt class="mono text-3xl text-[color:var(--hot)]">{row.key}</dt>
-            <dd class="mono mt-2 text-base">{row.value}</dd>
+          <div class="card text-center">
+            <dt class="display text-3xl font-bold text-[color:var(--amaranth)]">{row.key}</dt>
+            <dd class="mono mt-2 text-base text-[color:var(--ink)]">{row.value}</dd>
           </div>
         ))}
       </dl>
@@ -105,9 +119,9 @@ const entry = copy[slug ?? ''] ?? { title: 'Unknown system', body: '', mod: '' }
   )}
 
   {entry.example && (
-    <section class="card mt-10 max-w-md">
-      <p class="kicker text-[color:var(--text-dim)]">Example</p>
-      <p class="mono mt-3 text-2xl">{entry.example}</p>
+    <section class="card mx-auto mt-10 max-w-md text-center">
+      <p class="kicker">Example</p>
+      <p class="mono mt-3 text-2xl text-[color:var(--gold)]">{entry.example}</p>
     </section>
   )}
 </BaseLayout>

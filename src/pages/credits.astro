@@ -3,54 +3,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 export const prerender = true;
 
 const sources = [
-  {
-    name: 'CMU Pronouncing Dictionary',
-    summary: 'ARPAbet phonetic transcriptions for approximately 134,000 English words.',
-    license: 'public-domain-style',
-    chipMod: 'chip--major',
-  },
-  {
-    name: 'Princeton WordNet 3.1',
-    summary: 'Lexical database providing parts of speech and semantic hierarchies.',
-    license: 'WordNet (BSD-style attribution)',
-    chipMod: 'chip--cultural',
-  },
-  {
-    name: 'wordfreq',
-    summary: 'Used at build time to compute Zipf word frequency. Development dependency only.',
-    license: 'MIT',
-    chipMod: 'chip--keypad',
-  },
-  {
-    name: 'Brysbaert, Warriner & Kuperman (2014)',
-    summary: 'Concreteness ratings for 40,000 generally known English word lemmas. Behavior Research Methods, 46(3), 904–911.',
-    license: 'Academic use',
-    chipMod: 'chip--leet',
-  },
-  {
-    name: 'Glyphex',
-    summary: 'Aggregate page analytics. The only third-party script Numlore loads — used to count visits, not to identify visitors.',
-    license: 'See glyphex.io',
-    chipMod: '',
-  },
+  { name: 'CMU Pronouncing Dictionary',  summary: 'ARPAbet phonetic transcriptions for approximately 134,000 English words.',                                    license: 'public-domain-style', chipMod: 'chip--major' },
+  { name: 'Princeton WordNet 3.1',        summary: 'Lexical database providing parts of speech and semantic hierarchies.',                                          license: 'WordNet (BSD-style attribution)', chipMod: 'chip--cultural' },
+  { name: 'wordfreq',                    summary: 'Used at build time to compute Zipf word frequency. Development dependency only.',                                license: 'MIT', chipMod: 'chip--keypad' },
+  { name: 'Brysbaert, Warriner & Kuperman (2014)', summary: 'Concreteness ratings for 40,000 generally known English word lemmas. Behavior Research Methods, 46(3), 904–911.', license: 'Academic use', chipMod: 'chip--leet' },
+  { name: 'Cinzel by Natanael Gama',     summary: 'Roman capital display face used for headings, marks, and brand. Self-hosted.',                                   license: 'SIL OFL 1.1', chipMod: '' },
+  { name: 'Cormorant Garamond',          summary: 'Body and italic serif face. Self-hosted.',                                                                       license: 'SIL OFL 1.1', chipMod: '' },
+  { name: 'JetBrains Mono',              summary: 'Monospace face for numerals and calculations. Self-hosted.',                                                     license: 'SIL OFL 1.1', chipMod: '' },
+  { name: 'Glyphex',                     summary: 'Aggregate page analytics. The only third-party script Numlore loads — used to count visits, not identify visitors.', license: 'See glyphex.io', chipMod: 'chip--math' },
 ];
 ---
 
 <BaseLayout title="Credits — Numlore" description="Third-party data sources Numlore builds on." wide={true}>
-  <header>
-    <p class="kicker text-[color:var(--hot)]">Sources</p>
-    <h1 class="headline mt-3 text-[clamp(3rem,9vw,6rem)]">Built on the<br/>shoulders of others.</h1>
-  </header>
+  <p class="kicker text-center">Sources</p>
+  <h1 class="display mt-3 text-center text-[clamp(3rem,9vw,6rem)] font-bold leading-tight text-[color:var(--ink)]">
+    Built on the<br/>shoulders of others.
+  </h1>
 
-  <ol class="mt-14 grid gap-4 md:grid-cols-2">
+  <div class="divider"><span class="line"></span><span class="glyph">✦  ☉  ✦</span><span class="line"></span></div>
+
+  <ol class="mx-auto grid gap-4 md:grid-cols-2" style="max-width: 880px;">
     {sources.map((s, i) => (
       <li class="card">
         <div class="flex items-baseline justify-between">
           <span class={`chip ${s.chipMod}`}>{s.name}</span>
-          <span class="mono text-[color:var(--text-dim)]">{String(i + 1).padStart(2, '0')}</span>
+          <span class="mono text-xs text-[color:var(--gold-dim)]">№ {String(i + 1).padStart(2, '0')}</span>
         </div>
-        <p class="mt-4 max-w-prose">{s.summary}</p>
-        <p class="kicker mt-3 text-[color:var(--text-dim)]">{s.license}</p>
+        <p class="italic-serif mt-3">{s.summary}</p>
+        <p class="kicker mt-3 text-[color:var(--gold-dim)]">{s.license}</p>
       </li>
     ))}
   </ol>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadCategory, listCategorySlugs } from '../../lib/mnemonics';
+import { digitalRoot, archetype } from '../../lib/numerology';
 
 export const prerender = true;
 
@@ -11,24 +12,30 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const data = await loadCategory(category ?? '');
+
+const rows = data.includes.map((id) => {
+  const r = digitalRoot(id);
+  return { id, root: r?.root ?? 0, label: r ? archetype(r.root) : '' };
+});
 ---
 
 <BaseLayout title={`${data.title} — Numlore`} description={data.description} wide={true}>
   <article>
-    <header class="grid items-end gap-x-8 gap-y-4 md:grid-cols-[1fr_auto] md:items-baseline">
-      <div>
-        <p class="kicker text-[color:var(--neon)]" style="color: var(--accent)">Collection · {data.slug}</p>
-        <h1 class="headline mt-3 text-[clamp(3rem,9vw,6.5rem)]">{data.title}</h1>
-        <p class="lede mt-5 text-[color:var(--text)]">{data.description}</p>
-      </div>
-      <span class="tag tag--category text-base">{data.includes.length} entries</span>
+    <p class="kicker text-center">Collection <span class="dot"></span> {data.slug}</p>
+
+    <header class="mt-4 text-center">
+      <h1 class="display text-[clamp(3rem,9vw,6rem)] font-bold leading-tight text-[color:var(--ink)]">{data.title}</h1>
+      <p class="lede mx-auto mt-3">{data.description}</p>
     </header>
 
-    <section class="mt-14 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {data.includes.map((id) => (
-        <a class="card flex items-baseline justify-between gap-2 hover:bg-[color:var(--accent-soft)] transition-colors" href={`/n/${id}`}>
-          <span class="kicker text-[color:var(--text-dim)]">№</span>
-          <span class="mono text-3xl">{id}</span>
+    <div class="divider"><span class="line"></span><span class="glyph">{data.includes.length} entries</span><span class="line"></span></div>
+
+    <section class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+      {rows.map((row) => (
+        <a class="plate" href={`/n/${row.id}`}>
+          <div class="plate-digits">{row.id}</div>
+          <p class="plate-reduce">root <span class="arrow">→</span> <span class="root">{row.root}</span></p>
+          <p class="plate-meta">{row.label}</p>
         </a>
       ))}
     </section>

@@ -29,3 +29,5 @@ Thumbs.db
 
 # dictionary build intermediates (artifacts in /data/dictionaries/compiled/ are committed)
 /data/dictionaries/_intermediate/
+design-candidates/
+/tmp/

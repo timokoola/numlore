@@ -4,38 +4,40 @@ export const prerender = true;
 ---
 
 <BaseLayout title="About Numlore" description="A bidirectional dictionary for numbers and the words they mean." wide={true}>
-  <header>
-    <p class="kicker text-[color:var(--hot)]">Colophon</p>
-    <h1 class="headline mt-3 text-[clamp(3rem,9vw,6rem)]">About<br/>Numlore.</h1>
-  </header>
+  <p class="kicker text-center">Colophon</p>
+  <h1 class="display mt-3 text-center text-[clamp(3rem,9vw,6rem)] font-bold leading-tight text-[color:var(--ink)]">
+    About<br/>Numlore.
+  </h1>
 
-  <section class="mt-12 grid gap-4 md:grid-cols-2">
+  <div class="divider"><span class="line"></span><span class="glyph">✦  ☉  ✦</span><span class="line"></span></div>
+
+  <div class="mx-auto grid gap-4 md:grid-cols-2" style="max-width: 880px;">
     <article class="card">
       <span class="chip">What</span>
-      <p class="mt-3 max-w-prose">
-        Numlore is a bidirectional number↔word mnemonic dictionary. Type a number to see its cultural references, Major System mnemonics, T9 keypad letters, and leet readings. Type a word to find the numbers it encodes to.
+      <p class="italic-serif mt-3">
+        Numlore is a bidirectional number↔word mnemonic dictionary. Type a number to see its cultural references, Major System mnemonics, T9 keypad letters, and leet readings. Type a word to find the numbers it encodes to. Every entry shows its numerological root.
       </p>
     </article>
 
     <article class="card">
       <span class="chip chip--keypad">How</span>
-      <p class="mt-3 max-w-prose">
-        Curated entries are written by hand. Notable numbers — years, repdigits, palindromes, well-known codes — are auto-flagged at build time. Everything else is rendered algorithmically on demand at the edge.
+      <p class="italic-serif mt-3">
+        Curated entries are hand-written. Notable numbers — years, repdigits, palindromes, well-known codes — are auto-flagged at build time. Everything else is rendered algorithmically on demand.
       </p>
     </article>
 
     <article class="card">
       <span class="chip chip--cultural">Privacy</span>
-      <p class="mt-3 max-w-prose">
-        We don't record individual choices that can be mapped back to a person. Aggregate page hits via Glyphex are the only telemetry. Full posture on <a class="u text-[color:var(--accent)]" href="/privacy">/privacy</a>.
+      <p class="italic-serif mt-3">
+        We do not record individual choices that can be mapped back to a person. Aggregate page hits via Glyphex are the only telemetry. Full posture on <a href="/privacy">/privacy</a>.
       </p>
     </article>
 
     <article class="card">
       <span class="chip chip--math">Made by</span>
-      <p class="mt-3 max-w-prose">
+      <p class="italic-serif mt-3">
         A Skadi Oy property. Helsinki.
       </p>
     </article>
-  </section>
+  </div>
 </BaseLayout>

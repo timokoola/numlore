@@ -3,32 +3,35 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export const prerender = true;
 
-const systems = [
-  { slug: 'major', title: 'Major System', summary: 'Consonant sounds map to digits 0–9. Vowels are free, so encoded numbers turn into pronounceable words.', example: '32 ⇄ moon', mod: 'major' },
-  { slug: 'keypad', title: 'T9 phone keypad', summary: 'Letters mapped to digits 2–9 on legacy mobile phones. Words can be entered as their numeric sequence.', example: '66639 ⇄ money', mod: 'keypad' },
-  { slug: 'leet', title: 'Leet (1337-speak)', summary: 'Numbers and symbols substituted for similar-looking letters. Used since the early 1980s BBS scene.', example: '1337 ⇄ LEET', mod: 'leet' },
-  { slug: 'cultural', title: 'Cultural references', summary: 'Numbers that carry meaning beyond arithmetic: codes, addresses, agent IDs, recurring motifs.', example: '007 ⇄ James Bond', mod: 'cultural' },
+const spheres = [
+  { slug: 'major',    roman: 'I',   name: 'Major',     descr: 'the phonetic cipher — consonants resolve to digits, vowels are free.', example: '32 ⇄ moon' },
+  { slug: 'keypad',   roman: 'II',  name: 'T9 Keypad', descr: 'the tactile cipher — the digits remember the alphabet.',              example: '66639 ⇄ money' },
+  { slug: 'leet',     roman: 'III', name: 'Leet',      descr: 'the modern glyph — digits worn as letters, since 1980.',              example: '1337 ⇄ LEET' },
+  { slug: 'cultural', roman: 'IV',  name: 'Cultural',  descr: 'the named echoes — codes, addresses, agents, omens.',                 example: '90210 ⇄ Beverly Hills' },
 ];
 ---
 
-<BaseLayout title="Systems — Numlore" description="The mnemonic systems Numlore catalogs." wide={true}>
-  <header>
-    <p class="kicker text-[color:var(--hot)]">Index · Systems</p>
-    <h1 class="headline mt-3 text-[clamp(3rem,9vw,6rem)]">Four ways<br/>to read a number.</h1>
-  </header>
+<BaseLayout title="The four spheres — Numlore" description="The four mnemonic systems Numlore reads." wide={true}>
+  <p class="kicker text-center">Index <span class="dot"></span> the four spheres</p>
+  <h1 class="display mt-3 text-center text-[clamp(3rem,9vw,6rem)] font-bold leading-tight text-[color:var(--ink)]">
+    Four ways<br/>to read a number.
+  </h1>
 
-  <ul class="mt-14 grid gap-4 md:grid-cols-2">
-    {systems.map((s, i) => (
+  <div class="divider"><span class="line"></span><span class="glyph">✦  ☉  ✦</span><span class="line"></span></div>
+
+  <ol class="mx-auto" style="max-width: 760px;">
+    {spheres.map((s) => (
       <li>
-        <a href={`/systems/${s.slug}`} class="card block hover:bg-[color:var(--accent-soft)] transition-colors">
-          <div class="flex items-baseline justify-between">
-            <span class={`chip chip--${s.mod}`}>{s.title}</span>
-            <span class="mono text-[color:var(--text-dim)]">{String(i + 1).padStart(2, '0')}</span>
-          </div>
-          <p class="mt-4 max-w-prose text-[color:var(--text)]">{s.summary}</p>
-          <p class="mono mt-4 text-2xl text-[color:var(--hot)]">{s.example}</p>
+        <a href={`/systems/${s.slug}`} class="sphere-row block hover:bg-[color:var(--night-soft)] -mx-2 px-2">
+          <span class="roman">{s.roman}</span>
+          <span>
+            <span class="sphere-name block">{s.name}</span>
+            <span class="sphere-descr">{s.descr}</span>
+            <span class="mono mt-1 block text-xs text-[color:var(--gold-soft)]">{s.example}</span>
+          </span>
+          <span class="kicker text-[color:var(--gold-dim)]">→</span>
         </a>
       </li>
     ))}
-  </ul>
+  </ol>
 </BaseLayout>

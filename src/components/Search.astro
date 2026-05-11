@@ -1,40 +1,37 @@
 ---
-// Single-input search. Anything goes — numeric input routes to /n/, text
-// to /w/. Live preview renders inline as you type.
+// Oracle-styled single-input search. Anything typed is routed —
+// numeric to /n/, text to /w/. Inline live preview as the user types.
 ---
 
-<div class="search-block">
-  <form id="numlore-search" method="get" action="/" autocomplete="off">
-    <label class="sr-only" for="numlore-q">Type a number or a word</label>
-    <div class="search-shell">
-      <span class="search-glyph mono" aria-hidden="true">→</span>
-      <input
-        id="numlore-q"
-        name="q"
-        type="text"
-        inputmode="text"
-        placeholder="007 · 1337 · money · 90210 · password…"
-        class="search-input mono"
-        role="combobox"
-        aria-autocomplete="list"
-        aria-controls="numlore-suggestions"
-        aria-expanded="false"
-        autofocus
-      />
-      <button type="submit" class="search-go mono" aria-label="Look up">↵</button>
-    </div>
-    <p class="mt-3 text-sm text-[color:var(--text-dim)]">
-      <span class="mono">type anything</span> — a number (with leading zeros if you want), a word, a partial. We figure it out.
-    </p>
+<section class="oracle" aria-label="lookup">
+  <p class="oracle-label">Consult the dictionary</p>
+  <form id="numlore-search" class="oracle-row" method="get" action="/" autocomplete="off">
+    <label for="numlore-q" class="sr-only">Number or word</label>
+    <input
+      id="numlore-q"
+      name="q"
+      type="text"
+      inputmode="text"
+      placeholder="007 · 1337 · money · 90210 · password…"
+      role="combobox"
+      aria-autocomplete="list"
+      aria-controls="numlore-suggestions"
+      aria-expanded="false"
+      autofocus
+    />
+    <button type="submit">Reveal ✦</button>
   </form>
-
+  <p class="oracle-hint">
+    Type any number or any word. Numlore figures out the rest.
+    <span class="small">N → W or W → N — automatic</span>
+  </p>
   <ul
     id="numlore-suggestions"
     role="listbox"
     class="suggestions"
     hidden
   ></ul>
-</div>
+</section>
 
 <script>
   type IndexRow = {
@@ -93,12 +90,13 @@
       if (rows.length === 0) return close();
       panel.innerHTML = rows
         .map((r) => {
-          const display = r.type === 'number' ? `<span class="mono">${r.display}</span>` : r.display;
-          const typeClass = `tag tag--${r.type}`;
-          return `<li role="option" data-path="${r.path}">` +
+          const display = r.type === 'number'
+            ? `<span class="display font-bold text-[color:var(--gold)]">${r.display}</span>`
+            : `<span class="italic-serif">${r.display}</span>`;
+          return `<li role="option">` +
             `<a href="${r.path}">` +
-              `<span class="suggestion-display">${display}</span>` +
-              `<span class="${typeClass}">${r.type}</span>` +
+              `<span>${display}</span>` +
+              `<span class="stype">${r.type}</span>` +
             `</a>` +
           `</li>`;
         })
@@ -109,10 +107,7 @@
 
     const runQuery = async () => {
       const q = input.value.trim();
-      if (!q) {
-        close();
-        return;
-      }
+      if (!q) { close(); return; }
       const direct: IndexRow = isNumberLike(q)
         ? { id: q, display: q, type: 'number', path: `/n/${encodeURIComponent(q)}` }
         : { id: q, display: q, type: 'word', path: routeFor(q) };

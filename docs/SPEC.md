@@ -17,7 +17,7 @@ A bidirectional number↔word mnemonic dictionary at **numlore.com**. Type a num
 - **Satori** for OG image generation (build-time for notable, on-demand Worker for longtail)
 - **Cloudflare Turnstile** on the `/submit` form
 - **Glyphex** for aggregate page analytics — the only third-party script the site loads, and the only one the build audit permits
-- Self-hosted fonts; no third-party fonts, no fingerprinters, no session recorders, no A/B tools
+- Self-hosted fonts (Cinzel + Cormorant Garamond + JetBrains Mono, via `@fontsource-variable/*`); no third-party fonts, no fingerprinters, no session recorders, no A/B tools
 
 ---
 
@@ -243,9 +243,9 @@ Keep top 20 per skeleton key.
 --gutter: 24px;
 ```
 
-Hero is a split search: input on the left, result on the right, flip-direction arrow between them. Numbers in mono, words in Inter. System chips (small amber labels) on result cards. Generous whitespace, sharp corners, no rounded blobs. Dark mode respects `prefers-color-scheme`.
+Visual direction is an esoteric / numerological field guide. Deep midnight indigo background, aged-gold accents, parchment-cream entry plates. Brand mark in **Cinzel** (Roman capitals), body and tagline in **Cormorant Garamond** (with italics), numerals in **JetBrains Mono**. Sunburst SVG ornament crowns the home; ornamental divider rules with a centered glyph separate sections. Every entry shows its numerological root: the digital sum for numbers, the Pythagorean letter cipher (A=1, …, I=9, then repeating) for words, each with the archetype label (1 = the initiator, 7 = the mystic, 9 = the completer, etc.). Light mode flips to parchment-on-ink for daytime reading. Sharp corners, no rounded blobs. Dark and light variants respect `prefers-color-scheme`.
 
-Self-host Inter and JetBrains Mono. Never link Google Fonts.
+Self-host Cinzel, Cormorant Garamond, and JetBrains Mono via `@fontsource-variable/*`. Never link Google Fonts.
 
 ---
 

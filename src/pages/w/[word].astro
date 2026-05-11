@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { resolveWord } from '../../lib/mnemonics';
 import type { Mapping, System } from '../../lib/mnemonics';
 import { listCuratedWordIds } from '../../lib/entries';
+import { pythagoreanRoot, archetype } from '../../lib/numerology';
 
 export const prerender = true;
 
@@ -12,13 +13,14 @@ export async function getStaticPaths() {
 
 const { word } = Astro.params;
 const data = await resolveWord(word ?? '');
+const root = pythagoreanRoot(word ?? '');
 
-const SYSTEMS: ReadonlyArray<{ key: System; label: string; chipMod: string }> = [
-  { key: 'keypad',   label: 'T9 keypad', chipMod: 'chip--keypad' },
-  { key: 'major',    label: 'Major',    chipMod: 'chip--major' },
-  { key: 'leet',     label: 'Leet',     chipMod: 'chip--leet' },
-  { key: 'cultural', label: 'Cultural', chipMod: 'chip--cultural' },
-  { key: 'math',     label: 'Math',     chipMod: 'chip--math' },
+const SYSTEMS: ReadonlyArray<{ key: System; label: string; chipMod: string; descr: string }> = [
+  { key: 'keypad',   label: 'T9 Keypad', chipMod: 'chip--keypad',  descr: 'the tactile cipher' },
+  { key: 'major',    label: 'Major',    chipMod: 'chip--major',    descr: 'the phonetic cipher' },
+  { key: 'leet',     label: 'Leet',     chipMod: 'chip--leet',     descr: 'the modern glyph' },
+  { key: 'cultural', label: 'Cultural', chipMod: 'chip--cultural', descr: 'the named echo' },
+  { key: 'math',     label: 'Math',     chipMod: 'chip--math',     descr: 'the property' },
 ];
 
 const groupedMappings = SYSTEMS.map((s) => ({
@@ -27,41 +29,46 @@ const groupedMappings = SYSTEMS.map((s) => ({
 })).filter((g) => g.items.length > 0);
 
 const tierLabel: Record<string, string> = {
-  curated: 'Curated',
-  notable: 'Notable',
-  longtail: 'Algorithmic',
-};
-
-const tierColor: Record<string, string> = {
-  curated: 'var(--accent)',
-  notable: 'var(--hot)',
-  longtail: 'var(--text-dim)',
+  curated: 'Curated · Hand-written',
+  notable: 'Notable · Auto-flagged',
+  longtail: 'Algorithmic · Computed',
 };
 ---
 
 <BaseLayout title={`${word} — Numlore`} description={data.summary} wide={true}>
   <article>
-    <header class="grid items-end gap-x-8 gap-y-4 md:grid-cols-[auto_1fr]">
-      <h1 class="headline serif-italic text-[clamp(4rem,16vw,11rem)] text-[color:var(--hot)]">{word}</h1>
-      <div class="md:pb-3">
-        <p class="kicker" style={`color: ${tierColor[data.tier] ?? 'var(--ink)'}`}>
-          Tier · {tierLabel[data.tier] ?? data.tier}
-        </p>
-        <p class="lede mt-4 text-xl text-[color:var(--text)]">{data.summary}</p>
-      </div>
+    <p class="kicker text-center">{tierLabel[data.tier] ?? data.tier}</p>
+
+    <header class="mt-4 text-center">
+      <h1 class="specimen italic-serif text-[clamp(4rem,16vw,11rem)] text-[color:var(--gold-soft)]">{word}</h1>
+      <p class="lede mx-auto mt-4 text-center">{data.summary}</p>
+
+      {root && (
+        <div class="mx-auto mt-6 inline-block border border-[color:var(--gold-dim)] px-6 py-3">
+          <p class="kicker">Letter root <span class="dot"></span> Pythagorean</p>
+          <p class="mono mt-2 text-[color:var(--gold-dim)] text-xs">{root.steps.join(' → ')}</p>
+          <p class="display mt-2 text-4xl font-black text-[color:var(--amaranth)]">{root.root}</p>
+          <p class="italic-serif mt-1 text-[color:var(--ink)] opacity-80">— {archetype(root.root)}</p>
+        </div>
+      )}
     </header>
 
+    <div class="divider"><span class="line"></span><span class="glyph">encodings</span><span class="line"></span></div>
+
     {groupedMappings.length > 0 ? (
-      <section class="mt-14 grid gap-4 md:grid-cols-2">
+      <section class="grid gap-4 md:grid-cols-2">
         {groupedMappings.map((g) => (
           <article class="card">
-            <span class={`chip ${g.chipMod}`}>{g.label}</span>
+            <div class="flex items-baseline justify-between">
+              <span class={`chip ${g.chipMod}`}>{g.label}</span>
+              <span class="italic-serif text-sm text-[color:var(--ink)] opacity-70">— {g.descr}</span>
+            </div>
             <ul class="mt-4 space-y-3">
               {g.items.map((m) => (
                 <li>
-                  <p class="mono text-3xl leading-tight">{m.to}</p>
+                  <p class="display text-3xl text-[color:var(--ink)]">{m.to}</p>
                   {m.note && (
-                    <p class="mt-1 text-sm italic text-[color:var(--text-dim)]">{m.note}</p>
+                    <p class="italic-serif mt-1 text-sm text-[color:var(--ink)] opacity-75">{m.note}</p>
                   )}
                 </li>
               ))}
@@ -70,9 +77,9 @@ const tierColor: Record<string, string> = {
         ))}
       </section>
     ) : (
-      <section class="card mt-14">
+      <section class="card">
         <span class="chip chip--math">Encodings</span>
-        <p class="mt-4 text-[color:var(--text-dim)]">No encodings found.</p>
+        <p class="italic-serif mt-4 text-[color:var(--ink)] opacity-80">No encodings found.</p>
       </section>
     )}
   </article>
