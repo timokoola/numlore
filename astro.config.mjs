@@ -13,9 +13,4 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
-  vite: {
-    ssr: {
-      external: ['node:fs', 'node:path', 'node:url'],
-    },
-  },
 });
