@@ -7,52 +7,50 @@ const sources = [
     name: 'CMU Pronouncing Dictionary',
     summary: 'ARPAbet phonetic transcriptions for approximately 134,000 English words.',
     license: 'public-domain-style',
+    chipMod: 'chip--major',
   },
   {
     name: 'Princeton WordNet 3.1',
     summary: 'Lexical database providing parts of speech and semantic hierarchies.',
     license: 'WordNet (BSD-style attribution)',
+    chipMod: 'chip--cultural',
   },
   {
     name: 'wordfreq',
     summary: 'Used at build time to compute Zipf word frequency. Development dependency only.',
     license: 'MIT',
+    chipMod: 'chip--keypad',
   },
   {
     name: 'Brysbaert, Warriner & Kuperman (2014)',
     summary: 'Concreteness ratings for 40,000 generally known English word lemmas. Behavior Research Methods, 46(3), 904–911.',
     license: 'Academic use',
+    chipMod: 'chip--leet',
   },
   {
     name: 'Glyphex',
     summary: 'Aggregate page analytics. The only third-party script Numlore loads — used to count visits, not to identify visitors.',
     license: 'See glyphex.io',
+    chipMod: '',
   },
 ];
 ---
 
-<BaseLayout title="Credits — Numlore" description="Third-party data sources Numlore builds on.">
-  <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
-    <span class="label">Sources</span>
-    <span class="label">Credits</span>
-  </div>
-
-  <header class="mt-10">
-    <h1 class="text-5xl font-medium tracking-tight md:text-6xl">Credits</h1>
-    <p class="lede mt-3">Numlore builds on the following third-party data sources and libraries.</p>
+<BaseLayout title="Credits — Numlore" description="Third-party data sources Numlore builds on." wide={true}>
+  <header>
+    <p class="kicker text-[color:var(--hot)]">Sources</p>
+    <h1 class="headline mt-3 text-[clamp(3rem,9vw,6rem)]">Built on the<br/>shoulders of others.</h1>
   </header>
 
-  <ol class="mt-14 space-y-10">
+  <ol class="mt-14 grid gap-4 md:grid-cols-2">
     {sources.map((s, i) => (
-      <li class="entry">
-        <div class="entry-label">
-          <span class="label num">{String(i + 1).padStart(2, '0')}</span>
+      <li class="card">
+        <div class="flex items-baseline justify-between">
+          <span class={`chip ${s.chipMod}`}>{s.name}</span>
+          <span class="mono text-[color:var(--text-dim)]">{String(i + 1).padStart(2, '0')}</span>
         </div>
-        <div class="entry-value">
-          <h2 class="text-2xl font-medium">{s.name}</h2>
-          <p class="mt-1 max-w-prose text-[color:var(--text-dim)]">{s.summary}</p>
-          <p class="label mt-2">{s.license}</p>
-        </div>
+        <p class="mt-4 max-w-prose">{s.summary}</p>
+        <p class="kicker mt-3 text-[color:var(--text-dim)]">{s.license}</p>
       </li>
     ))}
   </ol>

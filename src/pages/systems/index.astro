@@ -4,36 +4,31 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 export const prerender = true;
 
 const systems = [
-  { slug: 'major', title: 'The Major System', summary: 'Consonant sounds map to digits 0–9. Vowels are free, so encoded numbers turn into pronounceable words.', example: '32 ⇄ moon' },
-  { slug: 'keypad', title: 'T9 phone keypad', summary: 'Letters mapped to digits 2–9 on legacy mobile phones. Words can be entered as their numeric sequence.', example: '66639 ⇄ money' },
-  { slug: 'leet', title: 'Leet (1337-speak)', summary: 'Numbers and symbols substituted for similar-looking letters. Used since the early 1980s BBS scene.', example: '1337 ⇄ LEET' },
-  { slug: 'cultural', title: 'Cultural references', summary: 'Numbers that carry meaning beyond arithmetic: codes, addresses, agent IDs, recurring motifs.', example: '007 ⇄ James Bond' },
+  { slug: 'major', title: 'Major System', summary: 'Consonant sounds map to digits 0–9. Vowels are free, so encoded numbers turn into pronounceable words.', example: '32 ⇄ moon', mod: 'major' },
+  { slug: 'keypad', title: 'T9 phone keypad', summary: 'Letters mapped to digits 2–9 on legacy mobile phones. Words can be entered as their numeric sequence.', example: '66639 ⇄ money', mod: 'keypad' },
+  { slug: 'leet', title: 'Leet (1337-speak)', summary: 'Numbers and symbols substituted for similar-looking letters. Used since the early 1980s BBS scene.', example: '1337 ⇄ LEET', mod: 'leet' },
+  { slug: 'cultural', title: 'Cultural references', summary: 'Numbers that carry meaning beyond arithmetic: codes, addresses, agent IDs, recurring motifs.', example: '007 ⇄ James Bond', mod: 'cultural' },
 ];
 ---
 
 <BaseLayout title="Systems — Numlore" description="The mnemonic systems Numlore catalogs." wide={true}>
-  <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
-    <span class="label">Index</span>
-    <span class="label num">{systems.length} systems</span>
-  </div>
-
-  <header class="mt-10">
-    <h1 class="text-5xl font-medium tracking-tight md:text-6xl">Systems</h1>
-    <p class="lede mt-3">The four ways Numlore reads a number.</p>
+  <header>
+    <p class="kicker text-[color:var(--hot)]">Index · Systems</p>
+    <h1 class="headline mt-3 text-[clamp(3rem,9vw,6rem)]">Four ways<br/>to read a number.</h1>
   </header>
 
-  <ol class="mt-14 space-y-12">
+  <ul class="mt-14 grid gap-4 md:grid-cols-2">
     {systems.map((s, i) => (
-      <li class="entry">
-        <div class="entry-label">
-          <span class="label num">{String(i + 1).padStart(2, '0')}</span>
-        </div>
-        <div class="entry-value">
-          <a class="block text-2xl font-medium u" href={`/systems/${s.slug}`}>{s.title}</a>
-          <p class="mt-1 max-w-prose text-[color:var(--text-dim)]">{s.summary}</p>
-          <p class="mono mt-3 text-sm text-[color:var(--secondary)]">{s.example}</p>
-        </div>
+      <li>
+        <a href={`/systems/${s.slug}`} class="card block hover:bg-[color:var(--accent-soft)] transition-colors">
+          <div class="flex items-baseline justify-between">
+            <span class={`chip chip--${s.mod}`}>{s.title}</span>
+            <span class="mono text-[color:var(--text-dim)]">{String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <p class="mt-4 max-w-prose text-[color:var(--text)]">{s.summary}</p>
+          <p class="mono mt-4 text-2xl text-[color:var(--hot)]">{s.example}</p>
+        </a>
       </li>
     ))}
-  </ol>
+  </ul>
 </BaseLayout>

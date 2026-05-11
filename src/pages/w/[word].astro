@@ -14,9 +14,9 @@ const { word } = Astro.params;
 const data = await resolveWord(word ?? '');
 
 const SYSTEMS: ReadonlyArray<{ key: System; label: string; chipMod: string }> = [
-  { key: 'keypad',   label: 'T9 keypad', chipMod: '' },
-  { key: 'major',    label: 'Major',    chipMod: '' },
-  { key: 'leet',     label: 'Leet',     chipMod: '' },
+  { key: 'keypad',   label: 'T9 keypad', chipMod: 'chip--keypad' },
+  { key: 'major',    label: 'Major',    chipMod: 'chip--major' },
+  { key: 'leet',     label: 'Leet',     chipMod: 'chip--leet' },
   { key: 'cultural', label: 'Cultural', chipMod: 'chip--cultural' },
   { key: 'math',     label: 'Math',     chipMod: 'chip--math' },
 ];
@@ -31,44 +31,48 @@ const tierLabel: Record<string, string> = {
   notable: 'Notable',
   longtail: 'Algorithmic',
 };
+
+const tierColor: Record<string, string> = {
+  curated: 'var(--accent)',
+  notable: 'var(--hot)',
+  longtail: 'var(--text-dim)',
+};
 ---
 
-<BaseLayout title={`${word} — Numlore`} description={data.summary}>
+<BaseLayout title={`${word} — Numlore`} description={data.summary} wide={true}>
   <article>
-    <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
-      <span class="label">{tierLabel[data.tier] ?? data.tier}</span>
-      <span class="label">Word · entry</span>
-    </div>
-
-    <header class="mt-8">
-      <h1 class="text-[clamp(3.5rem,12vw,7rem)] font-medium italic leading-[0.95] tracking-tight">{word}</h1>
-      <p class="lede mt-5">{data.summary}</p>
+    <header class="grid items-end gap-x-8 gap-y-4 md:grid-cols-[auto_1fr]">
+      <h1 class="headline serif-italic text-[clamp(4rem,16vw,11rem)] text-[color:var(--hot)]">{word}</h1>
+      <div class="md:pb-3">
+        <p class="kicker" style={`color: ${tierColor[data.tier] ?? 'var(--ink)'}`}>
+          Tier · {tierLabel[data.tier] ?? data.tier}
+        </p>
+        <p class="lede mt-4 text-xl text-[color:var(--text)]">{data.summary}</p>
+      </div>
     </header>
 
     {groupedMappings.length > 0 ? (
-      <section class="entry mt-12">
+      <section class="mt-14 grid gap-4 md:grid-cols-2">
         {groupedMappings.map((g) => (
-          <Fragment>
-            <div class="entry-label">
-              <span class={`chip ${g.chipMod}`}>{g.label}</span>
-            </div>
-            <ul class="entry-value space-y-2">
+          <article class="card">
+            <span class={`chip ${g.chipMod}`}>{g.label}</span>
+            <ul class="mt-4 space-y-3">
               {g.items.map((m) => (
-                <li class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
-                  <span class="mono text-2xl">{m.to}</span>
+                <li>
+                  <p class="mono text-3xl leading-tight">{m.to}</p>
                   {m.note && (
-                    <span class="text-sm italic text-[color:var(--text-dim)]">{m.note}</span>
+                    <p class="mt-1 text-sm italic text-[color:var(--text-dim)]">{m.note}</p>
                   )}
                 </li>
               ))}
             </ul>
-          </Fragment>
+          </article>
         ))}
       </section>
     ) : (
-      <section class="entry mt-12">
-        <div class="entry-label label">Encodings</div>
-        <div class="entry-value text-[color:var(--text-dim)]">No encodings found.</div>
+      <section class="card mt-14">
+        <span class="chip chip--math">Encodings</span>
+        <p class="mt-4 text-[color:var(--text-dim)]">No encodings found.</p>
       </section>
     )}
   </article>

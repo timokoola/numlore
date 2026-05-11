@@ -9,25 +9,37 @@
   --font-ui: 'Inter Variable', Inter, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
 
-  --bg: #FAFAF7;
+  --bg: #F4EFE3;
+  --paper: #FAF6EC;
+  --ink: #0E0E10;
   --text: #1A1A1A;
-  --text-dim: #555;
-  --hairline: #d8d6cc;
-  --accent: #2E6AFF;
-  --secondary: #F5A623;
-  --border: #E8E6DD;
+  --text-dim: #5b5b58;
+  --rule: #1A1A1A;
+  --hairline: #d3cdbd;
 
-  --radius: 4px;
+  --accent: #2E3FFF;   /* electric blue */
+  --accent-soft: #d9deff;
+  --hot: #FF4F1F;      /* riso-print orange */
+  --amber: #F5A623;
+  --neon: #B8FF3D;     /* leet/highlight */
+
+  --radius: 0;
   --gutter: 24px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0E0E10;
-    --text: #EFEFEC;
-    --text-dim: #9a9a96;
-    --hairline: #2b2b2f;
-    --border: #1c1c1f;
+    --bg: #0B0B0E;
+    --paper: #16151A;
+    --ink: #F4EFE3;
+    --text: #F4EFE3;
+    --text-dim: #9893a0;
+    --rule: #F4EFE3;
+    --hairline: #2a2730;
+    --accent: #6B7BFF;
+    --accent-soft: #2a2f55;
+    --hot: #FF6E47;
+    --neon: #D2FF6B;
   }
 }
 
@@ -46,26 +58,20 @@ body {
 }
 
 ::selection {
-  background: var(--secondary);
-  color: #0E0E10;
+  background: var(--hot);
+  color: var(--paper);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
   border-radius: 0;
 }
 
-a {
-  color: inherit;
-}
+a { color: inherit; }
+hr { border: 0; border-top: 2px solid var(--rule); }
 
-hr {
-  border: 0;
-  border-top: 1px solid var(--hairline);
-}
-
-/* ── Typography helpers ─────────────────────────────────── */
+/* ── Type helpers ───────────────────────────────────────── */
 
 .mono {
   font-family: var(--font-mono);
@@ -73,182 +79,327 @@ hr {
   font-variant-numeric: tabular-nums;
 }
 
-.num {
-  font-variant-numeric: tabular-nums;
-}
+.num { font-variant-numeric: tabular-nums; }
 
-.label {
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--text-dim);
-  font-feature-settings: 'tnum';
   font-weight: 500;
 }
 
 .lede {
-  font-size: 1.0625rem;
-  line-height: 1.55;
-  color: var(--text-dim);
-  max-width: 38em;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  max-width: 36em;
 }
 
-.dot::before {
-  content: "■";
-  color: var(--secondary);
-  margin-right: 0.45em;
-  font-size: 0.55em;
-  vertical-align: 0.25em;
-  line-height: 1;
+.serif-italic {
+  font-style: italic;
+  font-weight: 500;
 }
 
-/* ── Number specimen (used on number pages) ────────────── */
+/* ── Big number specimen ───────────────────────────────── */
 
 .specimen {
   font-family: var(--font-mono);
   font-feature-settings: 'tnum', 'ss01', 'zero';
   font-variant-numeric: tabular-nums;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.85;
+  color: var(--ink);
 }
 
-/* ── System chip (small amber capsule, sharp corners) ───── */
+.specimen-hot { color: var(--hot); }
+
+/* ── Headlines ──────────────────────────────────────────── */
+
+.headline {
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 0.96;
+}
+
+/* ── Chips & tags (sharp, opaque, loud) ────────────────── */
 
 .chip {
   display: inline-flex;
   align-items: center;
-  height: 1.4rem;
-  padding: 0 0.45rem;
-  border: 1px solid var(--secondary);
-  color: var(--secondary);
-  font-size: 0.65rem;
-  letter-spacing: 0.16em;
+  height: 1.75rem;
+  padding: 0 0.7rem;
+  background: var(--amber);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 0;
-  font-feature-settings: 'tnum';
 }
 
-.chip--cultural { border-color: var(--accent); color: var(--accent); }
-.chip--math     { border-color: var(--text-dim); color: var(--text-dim); }
+.chip--cultural { background: var(--accent); color: var(--paper); }
+.chip--major    { background: var(--ink); color: var(--paper); }
+.chip--keypad   { background: var(--hot); color: var(--paper); }
+.chip--leet     { background: var(--neon); color: var(--ink); }
+.chip--math     { background: transparent; border: 2px solid var(--ink); color: var(--ink); }
 
-/* ── Sticky two-column rhythm: label / content ─────────── */
+.tag {
+  display: inline-block;
+  padding: 0.05rem 0.45rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+.tag--number   { background: var(--hot); }
+.tag--word     { background: var(--accent); color: var(--paper); }
+.tag--category { background: var(--neon); color: var(--ink); }
+.tag--system   { background: var(--amber); color: var(--ink); }
 
-.entry {
-  display: grid;
-  grid-template-columns: 7.5rem 1fr;
-  column-gap: var(--gutter);
-  row-gap: 0.85rem;
-  align-items: baseline;
+/* ── Cards & blocks (paper on bg) ───────────────────────── */
+
+.card {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  padding: 1.25rem;
 }
 
-.entry > .entry-label {
-  padding-top: 0.25rem;
-  border-top: 1px solid var(--hairline);
+.card-stack > * + * { border-top: 2px solid var(--ink); }
+
+/* ── Search ─────────────────────────────────────────────── */
+
+.search-block { width: 100%; }
+
+.search-shell {
+  display: flex;
+  align-items: stretch;
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
 }
 
-.entry > .entry-value {
-  padding-top: 0.25rem;
-  border-top: 1px solid var(--hairline);
+@media (prefers-color-scheme: dark) {
+  .search-shell { box-shadow: 8px 8px 0 var(--hot); }
 }
 
-@media (max-width: 640px) {
-  .entry {
-    grid-template-columns: 1fr;
-    row-gap: 0.25rem;
-  }
-  .entry > .entry-label { border-top: 1px solid var(--hairline); }
-  .entry > .entry-value { border-top: 0; padding-top: 0; padding-bottom: 0.85rem; }
+.search-glyph {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 1.2rem;
 }
 
-/* ── Sharp inputs ───────────────────────────────────────── */
-
-.field {
+.search-input {
+  flex: 1;
   appearance: none;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid var(--text);
-  padding: 0.4rem 0;
-  font-family: var(--font-mono);
-  font-feature-settings: 'tnum', 'ss01';
-  font-size: 1.5rem;
+  padding: 0.9rem 1rem;
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
   color: var(--text);
   width: 100%;
   border-radius: 0;
+  font-weight: 500;
 }
 
-.field::placeholder {
-  color: var(--text-dim);
-  font-style: italic;
-  font-family: var(--font-ui);
-  font-size: 1.05rem;
-}
-
-.field:focus {
+.search-input:focus {
   outline: none;
-  border-bottom-color: var(--accent);
+  background: var(--accent-soft);
 }
 
-/* ── Button (sharp, monoline) ──────────────────────────── */
+.search-input::placeholder {
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.search-go {
+  border: 0;
+  background: var(--hot);
+  color: var(--paper);
+  padding: 0 1.1rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 100ms ease;
+}
+
+.search-go:hover { background: var(--accent); }
+
+.suggestions {
+  margin-top: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.suggestions[hidden] { display: none; }
+
+.suggestions li + li {
+  border-top: 1px solid var(--hairline);
+}
+
+.suggestions a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 0.25rem;
+  text-decoration: none;
+  font-size: 1.15rem;
+  transition: background-color 100ms ease, padding-left 150ms ease;
+}
+
+.suggestions a:hover,
+.suggestions a:focus-visible {
+  background: var(--accent-soft);
+  padding-left: 0.75rem;
+}
+
+.suggestion-display { font-weight: 500; }
+
+/* ── Button ─────────────────────────────────────────────── */
 
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border: 1px solid var(--text);
-  background: transparent;
-  color: var(--text);
-  padding: 0.55rem 0.9rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
+  gap: 0.5rem;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 0;
   cursor: pointer;
-  transition: background-color 120ms ease, color 120ms ease;
+  transition: transform 100ms ease, box-shadow 100ms ease, background-color 100ms ease;
 }
 
 .btn:hover {
-  background: var(--text);
-  color: var(--bg);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--ink);
+  background: var(--neon);
 }
 
-.btn--accent {
-  border-color: var(--accent);
-  color: var(--accent);
+.btn--hot {
+  background: var(--hot);
+  color: var(--paper);
+  border-color: var(--ink);
 }
 
-.btn--accent:hover {
+.btn--hot:hover {
   background: var(--accent);
-  color: #FAFAF7;
+  color: var(--paper);
 }
 
-/* ── Underline-on-hover ─────────────────────────────────── */
+/* ── Underline-on-hover link ───────────────────────────── */
 
 .u {
   text-decoration: none;
-  background-image: linear-gradient(var(--text), var(--text));
-  background-size: 100% 1px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 2px;
   background-repeat: no-repeat;
   background-position: 0 100%;
-  transition: background-size 200ms ease;
+  padding-bottom: 1px;
+  transition: background-size 180ms ease, color 120ms ease;
 }
 
-.u:hover {
-  background-size: 100% 2px;
+.u:hover { color: var(--accent); }
+
+/* ── Number ticker ─────────────────────────────────────── */
+
+.ticker {
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
 }
 
-.u-accent {
-  background-image: linear-gradient(var(--accent), var(--accent));
-  color: var(--accent);
+.ticker-track {
+  display: flex;
+  gap: 2.5rem;
+  white-space: nowrap;
+  padding: 0.55rem 0;
+  animation: ticker-scroll 38s linear infinite;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
 }
 
-/* ── Subtle hairline grid backdrop for hero ─────────────── */
+.ticker-track > * { flex-shrink: 0; }
+.ticker .swatch { color: var(--hot); margin-right: 0.4em; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
 
-.backdrop-grid {
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Digit-pattern background (subtle, home only) ─────── */
+
+.digit-bg {
+  position: relative;
+  isolation: isolate;
+}
+.digit-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background-image:
-    linear-gradient(to right, var(--hairline) 1px, transparent 1px);
-  background-size: 25% 100%;
-  background-position: 0 0;
+    radial-gradient(circle at 12% 18%, var(--hairline) 1.5px, transparent 1.6px),
+    radial-gradient(circle at 78% 62%, var(--hairline) 1.5px, transparent 1.6px),
+    radial-gradient(circle at 42% 82%, var(--hairline) 1.5px, transparent 1.6px);
+  background-size: 160px 160px;
+  background-position: 0 0, 80px 40px, 40px 120px;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Spec sheet (label / value rhythm, but bolder) ─────── */
+
+.spec {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  column-gap: 1.5rem;
+  row-gap: 1.25rem;
+}
+
+.spec > .spec-label {
+  border-top: 2px solid var(--ink);
+  padding-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.spec > .spec-value {
+  border-top: 2px solid var(--ink);
+  padding-top: 0.4rem;
+}
+
+@media (max-width: 640px) {
+  .spec { grid-template-columns: 1fr; row-gap: 0.5rem; }
+  .spec > .spec-value { border-top: 0; padding-top: 0; padding-bottom: 1rem; }
+}
+
+/* ── Decorative slash ornament ─────────────────────────── */
+
+.slash::before {
+  content: "//";
+  color: var(--hot);
+  margin-right: 0.45em;
+  font-family: var(--font-mono);
+  font-weight: 700;
 }

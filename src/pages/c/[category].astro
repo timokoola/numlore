@@ -15,31 +15,22 @@ const data = await loadCategory(category ?? '');
 
 <BaseLayout title={`${data.title} — Numlore`} description={data.description} wide={true}>
   <article>
-    <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
-      <span class="label">Collection</span>
-      <span class="label num">{data.includes.length} entries</span>
-    </div>
-
-    <header class="mt-10 grid items-end gap-6 md:grid-cols-[1fr_auto]">
+    <header class="grid items-end gap-x-8 gap-y-4 md:grid-cols-[1fr_auto] md:items-baseline">
       <div>
-        <p class="label">{data.slug}</p>
-        <h1 class="mt-2 text-5xl font-medium leading-[1.05] tracking-tight md:text-6xl">{data.title}</h1>
+        <p class="kicker text-[color:var(--neon)]" style="color: var(--accent)">Collection · {data.slug}</p>
+        <h1 class="headline mt-3 text-[clamp(3rem,9vw,6.5rem)]">{data.title}</h1>
+        <p class="lede mt-5 text-[color:var(--text)]">{data.description}</p>
       </div>
-      <p class="lede md:max-w-sm md:text-right">{data.description}</p>
+      <span class="tag tag--category text-base">{data.includes.length} entries</span>
     </header>
 
-    <section class="mt-14 entry">
-      <div class="entry-label label">Includes</div>
-      <div class="entry-value">
-        <ul class="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 md:grid-cols-4">
-          {data.includes.map((id) => (
-            <li class="flex items-baseline gap-3 border-t border-[color:var(--hairline)] pt-2">
-              <span class="label num shrink-0">№</span>
-              <a class="mono u text-2xl" href={`/n/${id}`}>{id}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <section class="mt-14 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {data.includes.map((id) => (
+        <a class="card flex items-baseline justify-between gap-2 hover:bg-[color:var(--accent-soft)] transition-colors" href={`/n/${id}`}>
+          <span class="kicker text-[color:var(--text-dim)]">№</span>
+          <span class="mono text-3xl">{id}</span>
+        </a>
+      ))}
     </section>
   </article>
 </BaseLayout>
