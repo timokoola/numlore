@@ -1,6 +1,6 @@
 # Numlore
 
-> **Engineering contract.** Numlore is a zero-telemetry lookup site. We do not log, store, or analyze user inputs except on `/submit`.
+> **Engineering contract.** Numlore does not record individual choices that can be mapped back to a person. Aggregate page analytics run via Glyphex; nothing else third-party. The build pipeline hard-fails on any deviation.
 
 A bidirectional number↔word mnemonic dictionary at **numlore.com**. Type a number, get its associations (cultural references, Major System mnemonics, T9 keypad letters, leet readings). Type a word, get the numbers it encodes to. Pages are prebuilt where curated or notable, rendered on demand at the edge otherwise.
 
@@ -14,7 +14,8 @@ A bidirectional number↔word mnemonic dictionary at **numlore.com**. Type a num
 - pnpm
 - Satori for OG image generation
 - Cloudflare Turnstile on the `/submit` form
-- No analytics, no tracking, no third-party scripts, no third-party fonts
+- Glyphex for aggregate page analytics — the only third-party script on the site, and the only one the build audit permits
+- Self-hosted fonts; no third-party fonts, no fingerprinters, no session recorders, no A/B tools
 
 ## Getting started
 

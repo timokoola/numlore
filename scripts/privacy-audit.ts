@@ -19,6 +19,7 @@ import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { FETCH_ALLOWLIST } from '../src/lib/fetch-allowlist';
+import { SCRIPT_ALLOWLIST } from '../src/lib/script-allowlist';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 
@@ -175,18 +176,26 @@ async function postAudit() {
 
   const htmlFiles = await walk(distDir, ['.html']);
 
-  const externalScript = /<script\b[^>]*\bsrc=["'](?!\/)/i;
-  const externalStyle = /<link\b[^>]*\brel=["']stylesheet["'][^>]*\bhref=["'](?!\/)/i;
+  const externalScriptRe = /<script\b[^>]*\bsrc=["']([^"']+)["']/gi;
+  const externalStyleRe = /<link\b[^>]*\brel=["']stylesheet["'][^>]*\bhref=["']([^"']+)["']/gi;
 
   for (const file of htmlFiles) {
     const rel = relative(ROOT, file).split(sep).join('/');
     const content = await readFile(file, 'utf8');
 
-    if (externalScript.test(content)) {
-      violate('external-script', rel, 'built HTML loads a script from an off-origin URL');
+    let sm: RegExpExecArray | null;
+    while ((sm = externalScriptRe.exec(content))) {
+      const src = sm[1];
+      if (src.startsWith('/') && !src.startsWith('//')) continue; // same-origin
+      if (SCRIPT_ALLOWLIST.includes(src)) continue;
+      violate('external-script', rel, `script src="${src}" not on the allowlist`);
     }
-    if (externalStyle.test(content)) {
-      violate('external-stylesheet', rel, 'built HTML loads a stylesheet from an off-origin URL');
+
+    let lm: RegExpExecArray | null;
+    while ((lm = externalStyleRe.exec(content))) {
+      const href = lm[1];
+      if (href.startsWith('/') && !href.startsWith('//')) continue; // same-origin
+      violate('external-stylesheet', rel, `stylesheet href="${href}" loads from an off-origin URL`);
     }
   }
 

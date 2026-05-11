@@ -3,19 +3,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 export const prerender = true;
 ---
 
-<BaseLayout title="Privacy at Numlore" description="What Numlore does and does not record.">
+<BaseLayout title="Privacy at Numlore" description="What Numlore measures, what it doesn't, and the line in between.">
   <article class="prose-tight max-w-prose space-y-6">
     <h1 class="text-4xl tracking-tight">Privacy at Numlore</h1>
 
     <section>
-      <h2 class="text-lg font-semibold">What we don't record.</h2>
+      <h2 class="text-lg font-semibold">The promise.</h2>
       <p>
-        The numbers and words you look up. Search runs in your browser. Page requests reach our server only as anonymous URL hits; we don't log, analyze, store, or export them.
+        Numlore does not record individual choices that can be mapped back to a person. The numbers and words you type into the search box never leave your browser until you click through to a page.
       </p>
     </section>
 
     <section>
-      <h2 class="text-lg font-semibold">What we do record.</h2>
+      <h2 class="text-lg font-semibold">What we measure.</h2>
+      <p>
+        Aggregate page hits via Glyphex (<a class="underline" href="https://glyphex.io">glyphex.io</a>) — how many people visit, which pages are popular, where traffic comes from. Counts only. No identifier we can use to single anyone out.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold">What we record.</h2>
       <p>
         Entries you submit through the Submit form. Submissions are held for editorial review and, if accepted, published as entries on the site. Don't include personal information in submissions.
       </p>
@@ -31,14 +38,14 @@ export const prerender = true;
     <section>
       <h2 class="text-lg font-semibold">What we don't use.</h2>
       <p>
-        Analytics scripts. Third-party fonts or assets. Ad networks. Fingerprinting. Session recorders. A/B testing tools. Cookies, except a transient anti-spam token on the submission form.
+        Ad networks. Fingerprinting. Session recorders. A/B testing tools. Third-party fonts or assets. Any third-party script other than Glyphex. Cookies, except a transient anti-spam token on the submission form.
       </p>
     </section>
 
     <section>
       <h2 class="text-lg font-semibold">How this is enforced.</h2>
       <p>
-        Our build pipeline fails to deploy if a code change would introduce any of the above.
+        Our build pipeline fails to deploy if a code change would introduce a tracker we haven't listed here, an off-origin script other than Glyphex, persistence of user inputs outside the submit flow, or any item on our analytics denylist.
       </p>
     </section>
   </article>

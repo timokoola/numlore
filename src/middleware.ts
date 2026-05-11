@@ -1,12 +1,15 @@
 import { defineMiddleware } from 'astro:middleware';
 
+// Glyphex is the only permitted third party. See src/lib/script-allowlist.ts
+// and /privacy. Any addition to script-src or connect-src must be paired with
+// an audit + copy update.
 const CSP = [
   "default-src 'self'",
-  "script-src 'self'",
+  "script-src 'self' https://glyphex.io",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self'",
-  "connect-src 'self'",
+  "connect-src 'self' https://glyphex.io",
   "object-src 'none'",
   "base-uri 'self'",
   "frame-ancestors 'none'",

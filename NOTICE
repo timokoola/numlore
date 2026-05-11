@@ -27,6 +27,11 @@ Brysbaert, Warriner, & Kuperman (2014)
   Concreteness ratings for 40 thousand generally known English word lemmas.
   Behavior Research Methods, 46(3), 904-911.
 
+Glyphex
+  Aggregate page analytics. The only third-party script loaded by Numlore;
+  used to measure page hits without recording individual user choices.
+  Source: https://glyphex.io
+
 ----------------------------------------------------------------------
 
 Vendored source files live under data/dictionaries/_sources/. They are
