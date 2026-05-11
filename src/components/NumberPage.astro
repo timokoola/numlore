@@ -1,0 +1,43 @@
+---
+import type { NumberResult } from '../lib/mnemonics';
+
+interface Props {
+  number: string;
+  data: NumberResult;
+}
+
+const { number, data } = Astro.props;
+
+const asInt = /^-?\d+$/.test(number) ? Number(number) : null;
+const prevHref = asInt !== null ? `/n/${Math.max(0, asInt - 1)}` : null;
+const nextHref = asInt !== null ? `/n/${asInt + 1}` : null;
+---
+
+<article>
+  <header class="mb-8">
+    <h1 class="mono text-5xl tracking-tight">{number}</h1>
+    <p class="mt-2 text-[color:var(--text-dim)]">{data.summary}</p>
+  </header>
+
+  {data.mappings.length > 0 && (
+    <section class="space-y-3">
+      <h2 class="text-sm uppercase tracking-widest text-[color:var(--text-dim)]">Mappings</h2>
+      <ul class="space-y-2">
+        {data.mappings.map((m) => (
+          <li class="flex flex-wrap items-baseline gap-3">
+            <span class="rounded-[var(--radius)] bg-[color:var(--secondary)]/15 px-2 py-0.5 text-xs uppercase tracking-wide text-[color:var(--secondary)]">{m.system}</span>
+            <span class="mono">{m.to}</span>
+            {m.note && <span class="text-sm text-[color:var(--text-dim)]">{m.note}</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {prevHref && nextHref && (
+    <nav class="mt-12 flex justify-between text-sm">
+      <a class="mono underline" href={prevHref}>← prev</a>
+      <a class="mono underline" href={nextHref}>next →</a>
+    </nav>
+  )}
+</article>
