@@ -1,47 +1,59 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 export const prerender = true;
+
+const sources = [
+  {
+    name: 'CMU Pronouncing Dictionary',
+    summary: 'ARPAbet phonetic transcriptions for approximately 134,000 English words.',
+    license: 'public-domain-style',
+  },
+  {
+    name: 'Princeton WordNet 3.1',
+    summary: 'Lexical database providing parts of speech and semantic hierarchies.',
+    license: 'WordNet (BSD-style attribution)',
+  },
+  {
+    name: 'wordfreq',
+    summary: 'Used at build time to compute Zipf word frequency. Development dependency only.',
+    license: 'MIT',
+  },
+  {
+    name: 'Brysbaert, Warriner & Kuperman (2014)',
+    summary: 'Concreteness ratings for 40,000 generally known English word lemmas. Behavior Research Methods, 46(3), 904–911.',
+    license: 'Academic use',
+  },
+  {
+    name: 'Glyphex',
+    summary: 'Aggregate page analytics. The only third-party script Numlore loads — used to count visits, not to identify visitors.',
+    license: 'See glyphex.io',
+  },
+];
 ---
 
 <BaseLayout title="Credits — Numlore" description="Third-party data sources Numlore builds on.">
-  <article class="max-w-prose space-y-6">
-    <h1 class="text-4xl tracking-tight">Credits</h1>
+  <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
+    <span class="label">Sources</span>
+    <span class="label">Credits</span>
+  </div>
 
-    <p>Numlore builds on the following third-party data sources and libraries.</p>
+  <header class="mt-10">
+    <h1 class="text-5xl font-medium tracking-tight md:text-6xl">Credits</h1>
+    <p class="lede mt-3">Numlore builds on the following third-party data sources and libraries.</p>
+  </header>
 
-    <section>
-      <h2 class="text-lg font-semibold">CMU Pronouncing Dictionary</h2>
-      <p class="text-sm text-[color:var(--text-dim)]">
-        ARPAbet phonetic transcriptions for approximately 134,000 English words.
-      </p>
-    </section>
-
-    <section>
-      <h2 class="text-lg font-semibold">Princeton WordNet 3.1</h2>
-      <p class="text-sm text-[color:var(--text-dim)]">
-        Lexical database providing parts of speech and semantic hierarchies.
-      </p>
-    </section>
-
-    <section>
-      <h2 class="text-lg font-semibold">wordfreq</h2>
-      <p class="text-sm text-[color:var(--text-dim)]">
-        Used at build time to compute Zipf word frequency. Development dependency only.
-      </p>
-    </section>
-
-    <section>
-      <h2 class="text-lg font-semibold">Brysbaert, Warriner, & Kuperman (2014)</h2>
-      <p class="text-sm text-[color:var(--text-dim)]">
-        Concreteness ratings for 40,000 generally known English word lemmas. Behavior Research Methods, 46(3), 904–911.
-      </p>
-    </section>
-
-    <section>
-      <h2 class="text-lg font-semibold">Glyphex</h2>
-      <p class="text-sm text-[color:var(--text-dim)]">
-        Aggregate page analytics. The only third-party script Numlore loads — used to count visits, not to identify visitors. See <a class="underline" href="/privacy">/privacy</a> for the contract.
-      </p>
-    </section>
-  </article>
+  <ol class="mt-14 space-y-10">
+    {sources.map((s, i) => (
+      <li class="entry">
+        <div class="entry-label">
+          <span class="label num">{String(i + 1).padStart(2, '0')}</span>
+        </div>
+        <div class="entry-value">
+          <h2 class="text-2xl font-medium">{s.name}</h2>
+          <p class="mt-1 max-w-prose text-[color:var(--text-dim)]">{s.summary}</p>
+          <p class="label mt-2">{s.license}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
 </BaseLayout>

@@ -12,6 +12,7 @@
   --bg: #FAFAF7;
   --text: #1A1A1A;
   --text-dim: #555;
+  --hairline: #d8d6cc;
   --accent: #2E6AFF;
   --secondary: #F5A623;
   --border: #E8E6DD;
@@ -25,8 +26,14 @@
     --bg: #0E0E10;
     --text: #EFEFEC;
     --text-dim: #9a9a96;
+    --hairline: #2b2b2f;
     --border: #1c1c1f;
   }
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html,
@@ -34,9 +41,214 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-ui);
-  font-feature-settings: 'ss01', 'cv11';
+  font-feature-settings: 'ss01', 'cv11', 'tnum';
+  text-rendering: optimizeLegibility;
 }
+
+::selection {
+  background: var(--secondary);
+  color: #0E0E10;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 0;
+}
+
+a {
+  color: inherit;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+/* ── Typography helpers ─────────────────────────────────── */
 
 .mono {
   font-family: var(--font-mono);
+  font-feature-settings: 'tnum', 'ss01', 'zero';
+  font-variant-numeric: tabular-nums;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-feature-settings: 'tnum';
+  font-weight: 500;
+}
+
+.lede {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+  max-width: 38em;
+}
+
+.dot::before {
+  content: "■";
+  color: var(--secondary);
+  margin-right: 0.45em;
+  font-size: 0.55em;
+  vertical-align: 0.25em;
+  line-height: 1;
+}
+
+/* ── Number specimen (used on number pages) ────────────── */
+
+.specimen {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum', 'ss01', 'zero';
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+/* ── System chip (small amber capsule, sharp corners) ───── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 1.4rem;
+  padding: 0 0.45rem;
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 0;
+  font-feature-settings: 'tnum';
+}
+
+.chip--cultural { border-color: var(--accent); color: var(--accent); }
+.chip--math     { border-color: var(--text-dim); color: var(--text-dim); }
+
+/* ── Sticky two-column rhythm: label / content ─────────── */
+
+.entry {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  column-gap: var(--gutter);
+  row-gap: 0.85rem;
+  align-items: baseline;
+}
+
+.entry > .entry-label {
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.entry > .entry-value {
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--hairline);
+}
+
+@media (max-width: 640px) {
+  .entry {
+    grid-template-columns: 1fr;
+    row-gap: 0.25rem;
+  }
+  .entry > .entry-label { border-top: 1px solid var(--hairline); }
+  .entry > .entry-value { border-top: 0; padding-top: 0; padding-bottom: 0.85rem; }
+}
+
+/* ── Sharp inputs ───────────────────────────────────────── */
+
+.field {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--text);
+  padding: 0.4rem 0;
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum', 'ss01';
+  font-size: 1.5rem;
+  color: var(--text);
+  width: 100%;
+  border-radius: 0;
+}
+
+.field::placeholder {
+  color: var(--text-dim);
+  font-style: italic;
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+}
+
+.field:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+/* ── Button (sharp, monoline) ──────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--text);
+  background: transparent;
+  color: var(--text);
+  padding: 0.55rem 0.9rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.btn:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.btn--accent {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn--accent:hover {
+  background: var(--accent);
+  color: #FAFAF7;
+}
+
+/* ── Underline-on-hover ─────────────────────────────────── */
+
+.u {
+  text-decoration: none;
+  background-image: linear-gradient(var(--text), var(--text));
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 200ms ease;
+}
+
+.u:hover {
+  background-size: 100% 2px;
+}
+
+.u-accent {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  color: var(--accent);
+}
+
+/* ── Subtle hairline grid backdrop for hero ─────────────── */
+
+.backdrop-grid {
+  background-image:
+    linear-gradient(to right, var(--hairline) 1px, transparent 1px);
+  background-size: 25% 100%;
+  background-position: 0 0;
 }

@@ -1,14 +1,29 @@
 ---
+const year = new Date().getUTCFullYear();
 ---
-<footer class="mx-auto max-w-3xl px-6 pb-12 pt-8 text-sm text-[color:var(--text-dim)]">
-  <p>
-    We don't log what you look up. <a href="/privacy" class="underline">Why →</a>
-  </p>
-  <nav class="mt-2 space-x-4">
-    <a href="/" class="hover:text-[color:var(--text)]">Home</a>
-    <a href="/systems" class="hover:text-[color:var(--text)]">Systems</a>
-    <a href="/about" class="hover:text-[color:var(--text)]">About</a>
-    <a href="/credits" class="hover:text-[color:var(--text)]">Credits</a>
-    <a href="/submit" class="hover:text-[color:var(--text)]">Submit</a>
-  </nav>
+
+<footer class="mt-24 border-t border-[color:var(--hairline)]">
+  <div class="mx-auto max-w-5xl px-6 pb-10 pt-6">
+    <div class="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-baseline">
+      <p class="max-w-prose text-sm">
+        <span class="dot">We don't log what you look up.</span>
+        <a href="/privacy" class="u u-accent">Why &rarr;</a>
+      </p>
+      <nav class="label flex flex-wrap gap-x-5 gap-y-2">
+        <a class="hover:text-[color:var(--text)]" href="/">Home</a>
+        <a class="hover:text-[color:var(--text)]" href="/systems">Systems</a>
+        <a class="hover:text-[color:var(--text)]" href="/about">About</a>
+        <a class="hover:text-[color:var(--text)]" href="/credits">Credits</a>
+        <a class="hover:text-[color:var(--text)]" href="/submit">Submit</a>
+        <a class="hover:text-[color:var(--text)]" href="/privacy">Privacy</a>
+      </nav>
+    </div>
+    <p class="mt-8 label flex flex-wrap items-baseline gap-x-4">
+      <span>© {year} Skadi Oy</span>
+      <span aria-hidden="true">·</span>
+      <span>Built in Helsinki</span>
+      <span aria-hidden="true">·</span>
+      <a class="hover:text-[color:var(--text)]" href="/credits">Sources &amp; attributions</a>
+    </p>
+  </div>
 </footer>

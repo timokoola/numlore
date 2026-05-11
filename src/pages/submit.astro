@@ -7,77 +7,88 @@ export const prerender = true;
   title="Submit an entry — Numlore"
   description="Suggest a number↔word mnemonic for editorial review."
 >
-  <article class="max-w-prose space-y-6">
-    <h1 class="text-4xl tracking-tight">Submit an entry</h1>
+  <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
+    <span class="label">Editorial</span>
+    <span class="label">Submit</span>
+  </div>
 
-    <p class="rounded-[var(--radius)] border border-[color:var(--border)] bg-[color:var(--secondary)]/10 p-4 text-sm">
-      Submissions go through editorial review. Accepted entries are published publicly on the site. Don't include personal information.
-    </p>
+  <header class="mt-10">
+    <h1 class="text-5xl font-medium tracking-tight md:text-6xl">Submit an entry</h1>
+    <p class="lede mt-3">Propose a number↔word mnemonic. Accepted entries are published on the site.</p>
+  </header>
 
-    <form method="post" action="/submit" class="space-y-4">
-      <div>
-        <label for="entry-id" class="mb-1 block text-sm font-medium">ID (number or word)</label>
-        <input
-          id="entry-id"
-          name="id"
-          type="text"
-          required
-          class="w-full rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-3 py-2 mono outline-none focus:border-[color:var(--accent)]"
-        />
-      </div>
+  <p class="mt-8 max-w-prose border-l-2 border-[color:var(--secondary)] bg-[color:var(--secondary)]/5 px-4 py-3 text-sm">
+    Submissions go through editorial review. Accepted entries are published publicly on the site. Don't include personal information.
+  </p>
 
-      <fieldset>
-        <legend class="mb-1 text-sm font-medium">Type</legend>
-        <label class="mr-4 inline-flex items-center gap-2">
-          <input type="radio" name="type" value="number" required /> number
-        </label>
-        <label class="inline-flex items-center gap-2">
-          <input type="radio" name="type" value="word" /> word
-        </label>
-      </fieldset>
+  <form method="post" action="/submit" class="entry mt-12">
+    <div class="entry-label label"><label for="entry-id">ID</label></div>
+    <div class="entry-value">
+      <input
+        id="entry-id"
+        name="id"
+        type="text"
+        required
+        placeholder="007, money, …"
+        class="field"
+      />
+      <p class="label mt-1">A number (with leading zeros if you like) or a single word.</p>
+    </div>
 
-      <div>
-        <label for="entry-system" class="mb-1 block text-sm font-medium">System</label>
-        <select id="entry-system" name="system" required class="w-full rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-3 py-2">
-          <option value="cultural">cultural</option>
-          <option value="major">major</option>
-          <option value="keypad">keypad</option>
-          <option value="leet">leet</option>
-        </select>
-      </div>
+    <div class="entry-label label">Type</div>
+    <div class="entry-value flex gap-6">
+      <label class="inline-flex items-center gap-2">
+        <input type="radio" name="type" value="number" required class="h-3 w-3 accent-[color:var(--accent)]" /> <span class="label">Number</span>
+      </label>
+      <label class="inline-flex items-center gap-2">
+        <input type="radio" name="type" value="word" class="h-3 w-3 accent-[color:var(--accent)]" /> <span class="label">Word</span>
+      </label>
+    </div>
 
-      <div>
-        <label for="entry-to" class="mb-1 block text-sm font-medium">Mapping value</label>
-        <input
-          id="entry-to"
-          name="to"
-          type="text"
-          required
-          class="w-full rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-3 py-2 mono outline-none focus:border-[color:var(--accent)]"
-        />
-      </div>
+    <div class="entry-label label"><label for="entry-system">System</label></div>
+    <div class="entry-value">
+      <select id="entry-system" name="system" required
+        class="w-full border-b border-[color:var(--text)] bg-transparent py-2 text-lg font-medium focus:border-[color:var(--accent)] focus:outline-none">
+        <option value="cultural">cultural</option>
+        <option value="major">major</option>
+        <option value="keypad">keypad</option>
+        <option value="leet">leet</option>
+      </select>
+    </div>
 
-      <div>
-        <label for="entry-note" class="mb-1 block text-sm font-medium">Note (optional)</label>
-        <textarea
-          id="entry-note"
-          name="note"
-          rows="3"
-          class="w-full rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-3 py-2 outline-none focus:border-[color:var(--accent)]"
-        ></textarea>
-      </div>
+    <div class="entry-label label"><label for="entry-to">Mapping</label></div>
+    <div class="entry-value">
+      <input
+        id="entry-to"
+        name="to"
+        type="text"
+        required
+        placeholder="James Bond / sock / 66639"
+        class="field"
+      />
+    </div>
 
-      <!-- Cloudflare Turnstile placeholder. The challenge widget is server-injected during the submit handler. -->
-      <div data-turnstile-placeholder class="text-xs text-[color:var(--text-dim)]">
+    <div class="entry-label label"><label for="entry-note">Note</label></div>
+    <div class="entry-value">
+      <textarea
+        id="entry-note"
+        name="note"
+        rows="3"
+        placeholder="Optional context, citation, or rationale."
+        class="w-full border border-[color:var(--hairline)] bg-transparent p-3 text-base focus:border-[color:var(--accent)] focus:outline-none"
+      ></textarea>
+    </div>
+
+    <div class="entry-label label">Verify</div>
+    <div class="entry-value">
+      <div data-turnstile-placeholder class="border border-dashed border-[color:var(--hairline)] px-3 py-4 text-sm text-[color:var(--text-dim)]">
         Anti-spam challenge will appear here.
       </div>
+    </div>
 
-      <button
-        type="submit"
-        class="rounded-[var(--radius)] border border-[color:var(--accent)] bg-[color:var(--accent)] px-4 py-2 text-sm font-medium text-white"
-      >
-        Submit for review
-      </button>
-    </form>
-  </article>
+    <div class="entry-label"></div>
+    <div class="entry-value">
+      <button type="submit" class="btn btn--accent">Submit for review &rarr;</button>
+    </div>
+  </form>
 </BaseLayout>

@@ -1,32 +1,63 @@
 ---
+// Split-search hero: input on the left, live preview on the right, with a
+// flip-direction arrow between them. The arrow rotates the framing labels
+// (NUMBER → WORD vs WORD → NUMBER) and the placeholder; the lookup itself
+// resolves the input either way.
 ---
-<div class="relative">
-  <form id="numlore-search" method="get" action="/" class="flex gap-2 items-stretch" autocomplete="off">
-    <label class="sr-only" for="numlore-q">Enter a number or word</label>
+
+<div class="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
+  <!-- ── Input column ───────────────────────────────────────── -->
+  <form id="numlore-search" method="get" action="/" class="flex flex-col" autocomplete="off">
+    <div class="flex items-baseline justify-between">
+      <span class="label">You enter</span>
+      <span class="label num" data-mode-from>Number</span>
+    </div>
+    <label class="sr-only" for="numlore-q">Number or word to look up</label>
     <input
       id="numlore-q"
       name="q"
       type="text"
       inputmode="text"
-      placeholder="Type a number or a word…"
-      class="flex-1 rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-4 py-3 mono text-lg outline-none focus:border-[color:var(--accent)]"
+      placeholder="007, 1337, money, hello…"
+      class="field mt-3"
       role="combobox"
       aria-autocomplete="list"
       aria-controls="numlore-suggestions"
       aria-expanded="false"
     />
-    <button
-      type="submit"
-      class="rounded-[var(--radius)] border border-[color:var(--accent)] bg-[color:var(--accent)] px-4 py-3 text-sm font-medium text-white"
-    >
-      Look up
-    </button>
+    <div class="mt-3 flex items-center justify-between">
+      <span class="label" data-hint>Type a number or a word</span>
+      <button type="submit" class="btn btn--accent">Look up &rarr;</button>
+    </div>
   </form>
-  <ul
-    id="numlore-suggestions"
-    role="listbox"
-    class="absolute left-0 right-0 z-10 mt-1 hidden max-h-72 overflow-auto rounded-[var(--radius)] border border-[color:var(--border)] bg-[color:var(--bg)] shadow-sm"
-  ></ul>
+
+  <!-- ── Flip arrow ──────────────────────────────────────────── -->
+  <div class="flex md:flex-col items-center justify-center md:px-4">
+    <button
+      type="button"
+      id="numlore-flip"
+      class="group relative inline-flex h-10 w-10 items-center justify-center border border-[color:var(--text)] hover:bg-[color:var(--text)] hover:text-[color:var(--bg)]"
+      aria-label="Flip direction"
+    >
+      <span class="mono text-base leading-none transition-transform duration-200" data-arrow>⇄</span>
+    </button>
+    <span class="label mt-2 hidden md:block" data-direction>N → W</span>
+  </div>
+
+  <!-- ── Preview column ──────────────────────────────────────── -->
+  <aside class="border-t border-[color:var(--hairline)] pt-3 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+    <div class="flex items-baseline justify-between">
+      <span class="label">Numlore tells you</span>
+      <span class="label num" data-mode-to>Word</span>
+    </div>
+    <ul
+      id="numlore-suggestions"
+      role="listbox"
+      class="mt-3 min-h-[6.5rem] divide-y divide-[color:var(--hairline)]"
+    >
+      <li class="py-2 label">Start typing to see candidates</li>
+    </ul>
+  </aside>
 </div>
 
 <script>
@@ -41,10 +72,27 @@
   const form = document.getElementById('numlore-search') as HTMLFormElement | null;
   const input = document.getElementById('numlore-q') as HTMLInputElement | null;
   const panel = document.getElementById('numlore-suggestions') as HTMLUListElement | null;
-  if (!form || !input || !panel) {
-    // no-op
-  } else {
+  const flipBtn = document.getElementById('numlore-flip') as HTMLButtonElement | null;
+
+  if (form && input && panel) {
     let fusePromise: Promise<{ search: (q: string) => Array<{ item: IndexRow }> }> | null = null;
+    let mode: 'n2w' | 'w2n' = 'n2w';
+
+    const placeholders: Record<typeof mode, string> = {
+      n2w: '007, 1337, 90210, 3.14…',
+      w2n: 'money, password, hello…',
+    };
+
+    const hints: Record<typeof mode, string> = {
+      n2w: 'Type a number — we resolve to its words.',
+      w2n: 'Type a word — we resolve to its numbers.',
+    };
+
+    const modeFrom = document.querySelector('[data-mode-from]');
+    const modeTo = document.querySelector('[data-mode-to]');
+    const hintEl = document.querySelector('[data-hint]');
+    const arrowEl = document.querySelector('[data-arrow]') as HTMLElement | null;
+    const directionEl = document.querySelector('[data-direction]');
 
     const ensureFuse = () => {
       if (fusePromise) return fusePromise;
@@ -56,7 +104,7 @@
         const rows: IndexRow[] = await indexRes.json();
         return new Fuse(rows, {
           includeScore: false,
-          threshold: 0.3,
+          threshold: 0.32,
           keys: [
             { name: 'id', weight: 2 },
             { name: 'display', weight: 1.5 },
@@ -77,38 +125,62 @@
       return `/w/${encodeURIComponent(slug)}`;
     };
 
-    const close = () => {
-      panel.classList.add('hidden');
-      panel.innerHTML = '';
+    const renderEmpty = (message: string) => {
+      panel.innerHTML = `<li class="py-2 label">${message}</li>`;
       input.setAttribute('aria-expanded', 'false');
     };
 
-    const render = (rows: IndexRow[]) => {
-      if (rows.length === 0) return close();
+    const renderRows = (rows: IndexRow[]) => {
+      if (rows.length === 0) {
+        renderEmpty('No matches');
+        return;
+      }
       panel.innerHTML = rows
-        .map(
-          (r, i) =>
-            `<li role="option" data-path="${r.path}" data-i="${i}" class="cursor-pointer px-4 py-2 hover:bg-[color:var(--border)]/30">` +
-              `<span class="${r.type === 'number' ? 'mono' : ''} text-[color:var(--text)]">${r.display}</span>` +
-              `<span class="ml-2 text-xs uppercase tracking-wide text-[color:var(--text-dim)]">${r.type}</span>` +
-            `</li>`,
-        )
+        .map((r) => {
+          const display = r.type === 'number' ? `<span class="mono">${r.display}</span>` : r.display;
+          return `<li role="option" data-path="${r.path}" class="cursor-pointer py-2 flex items-baseline justify-between gap-3 hover:text-[color:var(--accent)]">` +
+            `<span class="truncate">${display}</span>` +
+            `<span class="label shrink-0">${r.type}</span>` +
+          `</li>`;
+        })
         .join('');
-      panel.classList.remove('hidden');
       input.setAttribute('aria-expanded', 'true');
     };
 
     const runQuery = async () => {
       const q = input.value.trim();
-      if (q.length < 1) return close();
+      if (!q) {
+        renderEmpty('Start typing to see candidates');
+        return;
+      }
+      const direct: IndexRow = isNumberLike(q)
+        ? { id: q, display: q, type: 'number', path: `/n/${encodeURIComponent(q)}` }
+        : { id: q, display: q, type: 'word', path: routeFor(q) };
       const fuse = await ensureFuse();
-      const hits = fuse.search(q).slice(0, 8).map((h) => h.item);
-      render(hits);
+      const fuzzy = fuse.search(q).slice(0, 6).map((h) => h.item);
+      const seen = new Set<string>();
+      const rows: IndexRow[] = [];
+      for (const r of [direct, ...fuzzy]) {
+        const k = r.path;
+        if (seen.has(k)) continue;
+        seen.add(k);
+        rows.push(r);
+        if (rows.length >= 6) break;
+      }
+      renderRows(rows);
+    };
+
+    const applyMode = () => {
+      if (modeFrom) modeFrom.textContent = mode === 'n2w' ? 'Number' : 'Word';
+      if (modeTo) modeTo.textContent = mode === 'n2w' ? 'Word' : 'Number';
+      if (hintEl) hintEl.textContent = hints[mode];
+      if (directionEl) directionEl.textContent = mode === 'n2w' ? 'N → W' : 'W → N';
+      input.placeholder = placeholders[mode];
+      if (arrowEl) arrowEl.style.transform = mode === 'n2w' ? 'rotate(0deg)' : 'rotate(180deg)';
     };
 
     input.addEventListener('focus', () => { void ensureFuse(); });
     input.addEventListener('input', () => { void runQuery(); });
-    input.addEventListener('blur', () => { setTimeout(close, 120); });
 
     panel.addEventListener('mousedown', (event) => {
       const target = (event.target as HTMLElement)?.closest('li[data-path]');
@@ -119,11 +191,19 @@
       }
     });
 
+    flipBtn?.addEventListener('click', () => {
+      mode = mode === 'n2w' ? 'w2n' : 'n2w';
+      applyMode();
+      input.focus();
+    });
+
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const v = input.value.trim();
       if (!v) return;
       window.location.assign(routeFor(v));
     });
+
+    applyMode();
   }
 </script>

@@ -14,22 +14,64 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 
-const copy: Record<string, { title: string; body: string }> = {
+interface SystemCopy {
+  title: string;
+  body: string;
+  table?: Array<{ key: string; value: string }>;
+  example?: string;
+}
+
+const copy: Record<string, SystemCopy> = {
   major: {
     title: 'The Major System',
     body: 'A phonetic mnemonic technique that maps each digit 0–9 to a set of consonant sounds. Vowels, w, y, and h are free to insert, so any number can be rewritten as a pronounceable word.',
+    table: [
+      { key: '0', value: 's, z' },
+      { key: '1', value: 't, d, th' },
+      { key: '2', value: 'n, ng' },
+      { key: '3', value: 'm' },
+      { key: '4', value: 'r' },
+      { key: '5', value: 'l' },
+      { key: '6', value: 'sh, ch, j' },
+      { key: '7', value: 'k, g' },
+      { key: '8', value: 'f, v' },
+      { key: '9', value: 'p, b' },
+    ],
+    example: '32 → m·n → "moon"',
   },
   keypad: {
     title: 'T9 phone keypad',
     body: 'Legacy mobile phones mapped letters to digits 2–9. The system survives in vanity numbers and in mnemonic word ↔ number conversion.',
+    table: [
+      { key: '2', value: 'A B C' },
+      { key: '3', value: 'D E F' },
+      { key: '4', value: 'G H I' },
+      { key: '5', value: 'J K L' },
+      { key: '6', value: 'M N O' },
+      { key: '7', value: 'P Q R S' },
+      { key: '8', value: 'T U V' },
+      { key: '9', value: 'W X Y Z' },
+    ],
+    example: 'M·O·N·E·Y → 66639',
   },
   leet: {
     title: 'Leet (1337-speak)',
     body: 'Numbers and symbols substituted for similar-looking letters: 0=O, 1=I, 3=E, 4=A, 5=S, 7=T. Common since the early 1980s BBS scene.',
+    table: [
+      { key: '0', value: 'O' },
+      { key: '1', value: 'I, L' },
+      { key: '3', value: 'E' },
+      { key: '4', value: 'A' },
+      { key: '5', value: 'S' },
+      { key: '7', value: 'T' },
+      { key: '8', value: 'B' },
+    ],
+    example: '1337 → LEET',
   },
   cultural: {
     title: 'Cultural references',
-    body: 'Numbers that mean something specific in a cultural or fictional context: 007 (James Bond), 451 (Fahrenheit 451), 90210 (Beverly Hills), 31337 (elite).',
+    body: 'Numbers that mean something specific in a cultural or fictional context: 007 (James Bond), 451 (Fahrenheit 451), 90210 (Beverly Hills), 31337 (elite). Curated by hand.',
+    example: '90210 → Beverly Hills',
   },
 };
 
@@ -37,6 +79,36 @@ const entry = copy[slug ?? ''] ?? { title: 'Unknown system', body: '' };
 ---
 
 <BaseLayout title={`${entry.title} — Numlore`} description={entry.body}>
-  <h1 class="mb-4 text-4xl tracking-tight">{entry.title}</h1>
-  <p class="max-w-prose text-[color:var(--text-dim)]">{entry.body}</p>
+  <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
+    <span class="label">System</span>
+    <span class="label">{slug}</span>
+  </div>
+
+  <header class="mt-10">
+    <h1 class="text-5xl font-medium tracking-tight md:text-6xl">{entry.title}</h1>
+    <p class="lede mt-3">{entry.body}</p>
+  </header>
+
+  {entry.table && (
+    <section class="mt-14 entry">
+      <div class="entry-label label">Mapping</div>
+      <div class="entry-value">
+        <dl class="grid grid-cols-[3rem_1fr] gap-y-2">
+          {entry.table.map((row) => (
+            <Fragment>
+              <dt class="mono text-lg text-[color:var(--secondary)]">{row.key}</dt>
+              <dd class="text-lg">{row.value}</dd>
+            </Fragment>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  {entry.example && (
+    <section class="mt-10 entry">
+      <div class="entry-label label">Example</div>
+      <div class="entry-value mono text-xl">{entry.example}</div>
+    </section>
+  )}
 </BaseLayout>

@@ -4,16 +4,41 @@ export const prerender = true;
 ---
 
 <BaseLayout title="About Numlore" description="A bidirectional dictionary for numbers and the words they mean.">
-  <article class="max-w-prose space-y-6">
-    <h1 class="text-4xl tracking-tight">About</h1>
-    <p>
+  <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
+    <span class="label">Colophon</span>
+    <span class="label">About</span>
+  </div>
+
+  <header class="mt-10">
+    <h1 class="text-5xl font-medium tracking-tight md:text-6xl">About</h1>
+    <p class="lede mt-3">A field guide to the meanings of numbers.</p>
+  </header>
+
+  <section class="entry mt-14">
+    <div class="entry-label label">What</div>
+    <div class="entry-value max-w-prose">
       Numlore is a bidirectional number↔word mnemonic dictionary. Type a number to see its cultural references, Major System mnemonics, T9 keypad letters, and leet readings. Type a word to find the numbers it encodes to.
-    </p>
-    <p>
-      Curated entries are written by hand. Notable numbers (years, repdigits, palindromes, well-known codes) are flagged automatically. Everything else is rendered algorithmically on demand.
-    </p>
-    <p>
-      We don't log what you look up. The privacy contract is enforced by our build pipeline — see <a class="underline" href="/privacy">/privacy</a> for the full posture.
-    </p>
-  </article>
+    </div>
+  </section>
+
+  <section class="entry mt-6">
+    <div class="entry-label label">How</div>
+    <div class="entry-value max-w-prose">
+      Curated entries are written by hand. Notable numbers — years, repdigits, palindromes, well-known codes — are auto-flagged at build time. Everything else is rendered algorithmically on demand at the edge.
+    </div>
+  </section>
+
+  <section class="entry mt-6">
+    <div class="entry-label label">Privacy</div>
+    <div class="entry-value max-w-prose">
+      We don't record individual choices that can be mapped back to a person. Aggregate page hits via Glyphex are the only telemetry. The full posture is on <a class="u" href="/privacy">/privacy</a>.
+    </div>
+  </section>
+
+  <section class="entry mt-6">
+    <div class="entry-label label">Made by</div>
+    <div class="entry-value max-w-prose">
+      Numlore is a Skadi Oy property. Helsinki.
+    </div>
+  </section>
 </BaseLayout>

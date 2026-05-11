@@ -13,17 +13,33 @@ const { category } = Astro.params;
 const data = await loadCategory(category ?? '');
 ---
 
-<BaseLayout title={`${data.title} — Numlore`} description={data.description}>
+<BaseLayout title={`${data.title} — Numlore`} description={data.description} wide={true}>
   <article>
-    <header class="mb-8">
-      <h1 class="text-4xl tracking-tight">{data.title}</h1>
-      <p class="mt-2 max-w-prose text-[color:var(--text-dim)]">{data.description}</p>
+    <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
+      <span class="label">Collection</span>
+      <span class="label num">{data.includes.length} entries</span>
+    </div>
+
+    <header class="mt-10 grid items-end gap-6 md:grid-cols-[1fr_auto]">
+      <div>
+        <p class="label">{data.slug}</p>
+        <h1 class="mt-2 text-5xl font-medium leading-[1.05] tracking-tight md:text-6xl">{data.title}</h1>
+      </div>
+      <p class="lede md:max-w-sm md:text-right">{data.description}</p>
     </header>
 
-    <ul class="grid grid-cols-2 gap-2 sm:grid-cols-3">
-      {data.includes.map((id) => (
-        <li><a class="mono underline" href={`/n/${id}`}>{id}</a></li>
-      ))}
-    </ul>
+    <section class="mt-14 entry">
+      <div class="entry-label label">Includes</div>
+      <div class="entry-value">
+        <ul class="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 md:grid-cols-4">
+          {data.includes.map((id) => (
+            <li class="flex items-baseline gap-3 border-t border-[color:var(--hairline)] pt-2">
+              <span class="label num shrink-0">№</span>
+              <a class="mono u text-2xl" href={`/n/${id}`}>{id}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   </article>
 </BaseLayout>

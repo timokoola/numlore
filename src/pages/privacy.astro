@@ -4,49 +4,55 @@ export const prerender = true;
 ---
 
 <BaseLayout title="Privacy at Numlore" description="What Numlore measures, what it doesn't, and the line in between.">
-  <article class="prose-tight max-w-prose space-y-6">
-    <h1 class="text-4xl tracking-tight">Privacy at Numlore</h1>
+  <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
+    <span class="label">Posture</span>
+    <span class="label">Privacy</span>
+  </div>
 
-    <section>
-      <h2 class="text-lg font-semibold">The promise.</h2>
-      <p>
-        Numlore does not record individual choices that can be mapped back to a person. The numbers and words you type into the search box never leave your browser until you click through to a page.
-      </p>
-    </section>
+  <header class="mt-10">
+    <h1 class="text-5xl font-medium tracking-tight md:text-6xl">Privacy at Numlore</h1>
+    <p class="lede mt-3">What we measure, what we don't, and the line in between.</p>
+  </header>
 
-    <section>
-      <h2 class="text-lg font-semibold">What we measure.</h2>
-      <p>
-        Aggregate page hits via Glyphex (<a class="underline" href="https://glyphex.io">glyphex.io</a>) — how many people visit, which pages are popular, where traffic comes from. Counts only. No identifier we can use to single anyone out.
-      </p>
-    </section>
+  <section class="entry mt-14">
+    <div class="entry-label label">Promise</div>
+    <div class="entry-value max-w-prose">
+      Numlore does not record individual choices that can be mapped back to a person. The numbers and words you type into the search box never leave your browser until you click through to a page.
+    </div>
+  </section>
 
-    <section>
-      <h2 class="text-lg font-semibold">What we record.</h2>
-      <p>
-        Entries you submit through the Submit form. Submissions are held for editorial review and, if accepted, published as entries on the site. Don't include personal information in submissions.
-      </p>
-    </section>
+  <section class="entry mt-6">
+    <div class="entry-label label">Measure</div>
+    <div class="entry-value max-w-prose">
+      Aggregate page hits via Glyphex (<a class="u" href="https://glyphex.io">glyphex.io</a>) — how many people visit, which pages are popular, where traffic comes from. Counts only. No identifier we can use to single anyone out.
+    </div>
+  </section>
 
-    <section>
-      <h2 class="text-lg font-semibold">What our infrastructure sees.</h2>
-      <p>
-        Numlore runs on Cloudflare, which handles network-level routing. Cloudflare may retain short-term edge logs for operational reasons. We don't query, export, or analyze them.
-      </p>
-    </section>
+  <section class="entry mt-6">
+    <div class="entry-label label">Record</div>
+    <div class="entry-value max-w-prose">
+      Entries you submit through the Submit form. Submissions are held for editorial review and, if accepted, published as entries on the site. Don't include personal information in submissions.
+    </div>
+  </section>
 
-    <section>
-      <h2 class="text-lg font-semibold">What we don't use.</h2>
-      <p>
-        Ad networks. Fingerprinting. Session recorders. A/B testing tools. Third-party fonts or assets. Any third-party script other than Glyphex. Cookies, except a transient anti-spam token on the submission form.
-      </p>
-    </section>
+  <section class="entry mt-6">
+    <div class="entry-label label">Infra</div>
+    <div class="entry-value max-w-prose">
+      Numlore runs on Cloudflare, which handles network-level routing. Cloudflare may retain short-term edge logs for operational reasons. We don't query, export, or analyze them.
+    </div>
+  </section>
 
-    <section>
-      <h2 class="text-lg font-semibold">How this is enforced.</h2>
-      <p>
-        Our build pipeline fails to deploy if a code change would introduce a tracker we haven't listed here, an off-origin script other than Glyphex, persistence of user inputs outside the submit flow, or any item on our analytics denylist.
-      </p>
-    </section>
-  </article>
+  <section class="entry mt-6">
+    <div class="entry-label label">Don't use</div>
+    <div class="entry-value max-w-prose">
+      Ad networks. Fingerprinting. Session recorders. A/B testing tools. Third-party fonts or assets. Any third-party script other than Glyphex. Cookies, except a transient anti-spam token on the submission form.
+    </div>
+  </section>
+
+  <section class="entry mt-6">
+    <div class="entry-label label">Enforced</div>
+    <div class="entry-value max-w-prose">
+      Our build pipeline fails to deploy if a code change would introduce a tracker we haven't listed here, an off-origin script other than Glyphex, persistence of user inputs outside the submit flow, or any item on our analytics denylist.
+    </div>
+  </section>
 </BaseLayout>

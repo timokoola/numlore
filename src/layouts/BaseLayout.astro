@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Masthead from '../components/Masthead.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
   description?: string;
   robots?: string;
   ogImage?: string;
+  wide?: boolean;
 }
 
 const {
@@ -14,6 +16,7 @@ const {
   description = 'A bidirectional number↔word mnemonic dictionary.',
   robots,
   ogImage,
+  wide = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://numlore.com').toString();
@@ -24,6 +27,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://numlore.com
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0E0E10" media="(prefers-color-scheme: dark)" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -32,12 +38,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://numlore.com
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Numlore" />
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content="summary_large_image" />
     <script defer data-site-id="8a94eed0-5d97-4b94-b629-1c75ec5e8606" src="https://glyphex.io/tracker.js"></script>
   </head>
   <body>
-    <main class="mx-auto max-w-3xl px-6 py-12">
+    <Masthead />
+    <main class={`mx-auto ${wide ? 'max-w-5xl' : 'max-w-3xl'} px-6 py-14`}>
       <slot />
     </main>
     <Footer />

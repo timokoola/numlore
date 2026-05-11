@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { resolveWord } from '../../lib/mnemonics';
+import type { Mapping, System } from '../../lib/mnemonics';
 import { listCuratedWordIds } from '../../lib/entries';
 
 export const prerender = true;
@@ -11,27 +12,63 @@ export async function getStaticPaths() {
 
 const { word } = Astro.params;
 const data = await resolveWord(word ?? '');
+
+const SYSTEMS: ReadonlyArray<{ key: System; label: string; chipMod: string }> = [
+  { key: 'keypad',   label: 'T9 keypad', chipMod: '' },
+  { key: 'major',    label: 'Major',    chipMod: '' },
+  { key: 'leet',     label: 'Leet',     chipMod: '' },
+  { key: 'cultural', label: 'Cultural', chipMod: 'chip--cultural' },
+  { key: 'math',     label: 'Math',     chipMod: 'chip--math' },
+];
+
+const groupedMappings = SYSTEMS.map((s) => ({
+  ...s,
+  items: data.mappings.filter((m: Mapping) => m.system === s.key),
+})).filter((g) => g.items.length > 0);
+
+const tierLabel: Record<string, string> = {
+  curated: 'Curated',
+  notable: 'Notable',
+  longtail: 'Algorithmic',
+};
 ---
 
 <BaseLayout title={`${word} — Numlore`} description={data.summary}>
   <article>
-    <header class="mb-8">
-      <h1 class="text-5xl tracking-tight">{word}</h1>
-      <p class="mt-2 text-[color:var(--text-dim)]">{data.summary}</p>
+    <div class="flex items-baseline justify-between border-b border-[color:var(--hairline)] pb-2">
+      <span class="label">{tierLabel[data.tier] ?? data.tier}</span>
+      <span class="label">Word · entry</span>
+    </div>
+
+    <header class="mt-8">
+      <h1 class="text-[clamp(3.5rem,12vw,7rem)] font-medium italic leading-[0.95] tracking-tight">{word}</h1>
+      <p class="lede mt-5">{data.summary}</p>
     </header>
 
-    {data.mappings.length > 0 && (
-      <section class="space-y-3">
-        <h2 class="text-sm uppercase tracking-widest text-[color:var(--text-dim)]">Encodes to</h2>
-        <ul class="space-y-2">
-          {data.mappings.map((m) => (
-            <li class="flex flex-wrap items-baseline gap-3">
-              <span class="rounded-[var(--radius)] bg-[color:var(--secondary)]/15 px-2 py-0.5 text-xs uppercase tracking-wide text-[color:var(--secondary)]">{m.system}</span>
-              <span class="mono">{m.to}</span>
-              {m.note && <span class="text-sm text-[color:var(--text-dim)]">{m.note}</span>}
-            </li>
-          ))}
-        </ul>
+    {groupedMappings.length > 0 ? (
+      <section class="entry mt-12">
+        {groupedMappings.map((g) => (
+          <Fragment>
+            <div class="entry-label">
+              <span class={`chip ${g.chipMod}`}>{g.label}</span>
+            </div>
+            <ul class="entry-value space-y-2">
+              {g.items.map((m) => (
+                <li class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                  <span class="mono text-2xl">{m.to}</span>
+                  {m.note && (
+                    <span class="text-sm italic text-[color:var(--text-dim)]">{m.note}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </Fragment>
+        ))}
+      </section>
+    ) : (
+      <section class="entry mt-12">
+        <div class="entry-label label">Encodings</div>
+        <div class="entry-value text-[color:var(--text-dim)]">No encodings found.</div>
       </section>
     )}
   </article>

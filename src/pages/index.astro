@@ -3,35 +3,106 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Search from '../components/Search.astro';
 
 export const prerender = true;
+
+const numberExamples = ['007', '42', '420', '666', '911', '1337', '1984', '2001', '90210', '31337'];
+const wordExamples = ['money', 'love', 'password', 'hello'];
+const categories = [
+  { slug: 'bond-numbers', title: 'Numbers in James Bond' },
+  { slug: 'angel-numbers', title: 'Angel numbers' },
+];
+const systems = [
+  { slug: 'major', title: 'Major System' },
+  { slug: 'keypad', title: 'T9 keypad' },
+  { slug: 'leet', title: 'Leet (1337-speak)' },
+  { slug: 'cultural', title: 'Cultural references' },
+];
 ---
 
 <BaseLayout
   title="Numlore — a dictionary of numbers and the words they mean"
-  description="A bidirectional number↔word mnemonic dictionary. Type a number to see its associations; type a word to find the numbers it encodes to."
+  description="Type a number to see its cultural references, Major System mnemonics, T9 keypad letters, and leet readings. Type a word to find the numbers it encodes to."
+  wide={true}
 >
-  <header class="mb-10">
-    <h1 class="font-ui text-4xl tracking-tight">Numlore</h1>
-    <p class="mt-2 max-w-prose text-[color:var(--text-dim)]">
-      Type a number to see its cultural references, Major System mnemonics, T9 keypad letters, and leet readings. Type a word to find the numbers it encodes to.
-    </p>
-  </header>
+  <!-- ── Hero ────────────────────────────────────────────── -->
+  <section class="border-b border-[color:var(--hairline)] pb-14">
+    <div class="grid items-baseline gap-6 md:grid-cols-[1fr_auto]">
+      <div>
+        <p class="label">Vol. I &nbsp;·&nbsp; Numbers ⇄ Words</p>
+        <h1 class="mt-2 text-5xl font-medium leading-[1.02] tracking-tight md:text-6xl">
+          A field guide<br />
+          to the <span class="italic">meanings</span><br />
+          of <span class="mono">numbers</span>.
+        </h1>
+        <p class="lede mt-5">
+          Type a number — get its cultural references, Major System mnemonics, T9 keypad letters, and leet readings. Type a word — get the numbers it encodes to.
+        </p>
+      </div>
+      <ul class="space-y-2 md:text-right">
+        <li class="label">26 curated entries</li>
+        <li class="label">11,800+ prebuilt pages</li>
+        <li class="label">Zero recording of your lookups</li>
+      </ul>
+    </div>
 
-  <section class="mb-12">
-    <Search />
+    <div class="mt-12">
+      <Search />
+    </div>
   </section>
 
-  <section class="space-y-6">
-    <h2 class="text-sm uppercase tracking-widest text-[color:var(--text-dim)]">Examples</h2>
-    <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3">
-      <li><a class="mono underline" href="/n/007">007</a></li>
-      <li><a class="mono underline" href="/n/911">911</a></li>
-      <li><a class="mono underline" href="/n/420">420</a></li>
-      <li><a class="mono underline" href="/n/1337">1337</a></li>
-      <li><a class="mono underline" href="/n/666">666</a></li>
-      <li><a class="mono underline" href="/n/90210">90210</a></li>
-      <li><a class="underline" href="/w/money">money</a></li>
-      <li><a class="underline" href="/w/love">love</a></li>
-      <li><a class="underline" href="/w/hello">hello</a></li>
-    </ul>
+  <!-- ── Examples ───────────────────────────────────────── -->
+  <section class="mt-14 entry">
+    <div class="entry-label label">Try</div>
+    <div class="entry-value">
+      <ul class="flex flex-wrap gap-x-5 gap-y-3 text-lg">
+        {numberExamples.map((n) => (
+          <li><a class="mono u" href={`/n/${n}`}>{n}</a></li>
+        ))}
+      </ul>
+      <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-lg">
+        {wordExamples.map((w) => (
+          <li><a class="u" href={`/w/${w}`}>{w}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Categories ─────────────────────────────────────── -->
+  <section class="mt-10 entry">
+    <div class="entry-label label">Collections</div>
+    <div class="entry-value">
+      <ul class="space-y-2 text-lg">
+        {categories.map((c) => (
+          <li><a class="u" href={`/c/${c.slug}`}>{c.title}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Systems ────────────────────────────────────────── -->
+  <section class="mt-10 entry">
+    <div class="entry-label label">Systems</div>
+    <div class="entry-value">
+      <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-lg sm:grid-cols-4">
+        {systems.map((s) => (
+          <li><a class="u" href={`/systems/${s.slug}`}>{s.title}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── How it works ───────────────────────────────────── -->
+  <section class="mt-10 entry">
+    <div class="entry-label label">Tiers</div>
+    <div class="entry-value max-w-prose space-y-3">
+      <p>
+        Every number page is one of three tiers, computed at build:
+        <strong>curated</strong> (hand-written),
+        <strong>notable</strong> (auto-flagged years, palindromes, well-known codes),
+        or <strong>longtail</strong> (purely algorithmic, no-index).
+      </p>
+      <p class="text-sm text-[color:var(--text-dim)]">
+        See <a class="u" href="/about">/about</a> for the long version.
+      </p>
+    </div>
   </section>
 </BaseLayout>
