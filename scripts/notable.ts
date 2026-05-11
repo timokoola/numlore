@@ -1,4 +1,3 @@
-#!/usr/bin/env tsx
 // Auto-flag rules for "notable" 5–6 digit numbers. Owned here so the rules
 // stay auditable and changeable. A number is notable if any of the rules
 // below match. The build pipeline includes notable numbers in the prebuilt
