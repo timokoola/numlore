@@ -1,0 +1,10 @@
+id: "3.14"
+type: number
+display: "3.14"
+mappings:
+  - system: cultural
+    to: "π (pi) to two decimal places"
+    note: "The ratio of a circle's circumference to its diameter; an irrational constant approximately 3.14159…"
+  - system: cultural
+    to: "Pi Day"
+    note: "Celebrated on 14 March (3/14 in US date format)."

@@ -1,0 +1,10 @@
+id: "111"
+type: number
+display: "111"
+mappings:
+  - system: cultural
+    to: "Angel number"
+    note: "In New Age numerology, 111 is read as a message of alignment or new beginnings."
+  - system: cultural
+    to: "Nelson"
+    note: "British and Australian colloquial term for a score of 111 in cricket — considered unlucky."

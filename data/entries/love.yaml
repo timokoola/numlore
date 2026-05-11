@@ -1,0 +1,10 @@
+id: "love"
+type: word
+display: "love"
+mappings:
+  - system: keypad
+    to: "5683"
+    note: "T9 phone keypad: L-O-V-E"
+  - system: major
+    to: "58"
+    note: "L=5, V=8 (silent vowels)"

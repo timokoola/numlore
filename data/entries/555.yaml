@@ -1,0 +1,7 @@
+id: "555"
+type: number
+display: "555"
+mappings:
+  - system: cultural
+    to: "Hollywood placeholder phone exchange"
+    note: "555-01xx numbers are reserved in the North American Numbering Plan for use in film and television so real subscribers don't receive crank calls."

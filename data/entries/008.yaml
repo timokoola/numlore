@@ -1,0 +1,7 @@
+id: "008"
+type: number
+display: "008"
+mappings:
+  - system: cultural
+    to: "James Bond agent designation"
+    note: "Appears in Fleming's Goldfinger (1959) and Diamonds Are Forever as a backup when 007 is unavailable."

@@ -1,0 +1,10 @@
+id: "420"
+type: number
+display: "420"
+mappings:
+  - system: cultural
+    to: "Cannabis culture"
+    note: "Traced to a 1971 group of San Rafael high-school students known as the Waldos, who met at 4:20 pm."
+  - system: cultural
+    to: "April 20 (4/20)"
+    note: "Informal cannabis-culture holiday on the calendar date."

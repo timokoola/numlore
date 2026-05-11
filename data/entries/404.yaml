@@ -1,0 +1,7 @@
+id: "404"
+type: number
+display: "404"
+mappings:
+  - system: cultural
+    to: "HTTP 404 Not Found"
+    note: "Standard web status code returned when a server cannot find the requested resource."

@@ -1,0 +1,10 @@
+id: "31337"
+type: number
+display: "31337"
+mappings:
+  - system: leet
+    to: "ELEET"
+    note: "3=E, 1=L (variant), 3=E, 3=E, 7=T — \"elite\". Self-aware extension of the 1337 form."
+  - system: cultural
+    to: "Hacker-culture marker"
+    note: "Common as an in-joke port number and as a self-descriptor in older online communities."

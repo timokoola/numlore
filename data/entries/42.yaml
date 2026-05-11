@@ -1,0 +1,10 @@
+id: "42"
+type: number
+display: "42"
+mappings:
+  - system: cultural
+    to: "The Answer to the Ultimate Question of Life, the Universe, and Everything"
+    note: "From Douglas Adams's The Hitchhiker's Guide to the Galaxy (1979)."
+  - system: cultural
+    to: "Jackie Robinson's jersey number"
+    note: "Retired across Major League Baseball in 1997."

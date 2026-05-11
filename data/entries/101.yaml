@@ -1,0 +1,10 @@
+id: "101"
+type: number
+display: "101"
+mappings:
+  - system: cultural
+    to: "Introductory course"
+    note: "Convention borrowed from American university course numbering; now used informally for any beginner-level subject."
+  - system: cultural
+    to: "Room 101"
+    note: "The torture room in Orwell's Nineteen Eighty-Four."

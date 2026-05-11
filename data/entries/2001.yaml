@@ -1,0 +1,7 @@
+id: "2001"
+type: number
+display: "2001"
+mappings:
+  - system: cultural
+    to: "2001: A Space Odyssey"
+    note: "1968 science-fiction film directed by Stanley Kubrick; concurrent novel by Arthur C. Clarke."

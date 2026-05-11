@@ -1,13 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { resolveWord } from '../../lib/mnemonics';
+import { listCuratedWordIds } from '../../lib/entries';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  // Word pages are prebuilt from curated entries plus high-rank words.
-  // Build pipeline will expand this list from data/dictionaries/compiled.
-  return [] as Array<{ params: { word: string } }>;
+  return listCuratedWordIds().map((word) => ({ params: { word } }));
 }
 
 const { word } = Astro.params;

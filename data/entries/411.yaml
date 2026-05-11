@@ -1,0 +1,10 @@
+id: "411"
+type: number
+display: "411"
+mappings:
+  - system: cultural
+    to: "Directory assistance"
+    note: "North American three-digit dialling code for telephone information services."
+  - system: cultural
+    to: "Information; the lowdown"
+    note: "Slang derived from the dialling code: \"what's the 411?\""

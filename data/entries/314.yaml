@@ -1,0 +1,7 @@
+id: "314"
+type: number
+display: "314"
+mappings:
+  - system: cultural
+    to: "The first three digits of π"
+    note: "Often used as a shorthand or area code for π-themed references."

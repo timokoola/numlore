@@ -1,0 +1,13 @@
+id: "777"
+type: number
+display: "777"
+mappings:
+  - system: cultural
+    to: "Slot-machine jackpot"
+    note: "Triple sevens are the classic winning combination on mechanical and digital slot machines."
+  - system: cultural
+    to: "Boeing 777"
+    note: "Wide-body twin-engine jet airliner, in service since 1995."
+  - system: cultural
+    to: "Angel number"
+    note: "In New Age numerology, often read as spiritual alignment."

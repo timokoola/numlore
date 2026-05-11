@@ -1,0 +1,10 @@
+id: "1984"
+type: number
+display: "1984"
+mappings:
+  - system: cultural
+    to: "Nineteen Eighty-Four"
+    note: "Dystopian novel by George Orwell, published in 1949."
+  - system: cultural
+    to: "Apple Macintosh launch year"
+    note: "The Macintosh was introduced on 24 January 1984, advertised with Ridley Scott's \"1984\" Super Bowl spot."

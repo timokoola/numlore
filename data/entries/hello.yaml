@@ -1,0 +1,10 @@
+id: "hello"
+type: word
+display: "hello"
+mappings:
+  - system: keypad
+    to: "43556"
+    note: "T9 phone keypad: H-E-L-L-O"
+  - system: major
+    to: "5"
+    note: "L=5 (single L sound; H and vowels ignored)"

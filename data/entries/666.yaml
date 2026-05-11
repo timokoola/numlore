@@ -1,0 +1,10 @@
+id: "666"
+type: number
+display: "666"
+mappings:
+  - system: cultural
+    to: "The number of the beast"
+    note: "From the Book of Revelation 13:18; widely cited in apocalyptic and occult contexts."
+  - system: cultural
+    to: "Angel number"
+    note: "In New Age numerology, often read as a prompt to rebalance material concerns."

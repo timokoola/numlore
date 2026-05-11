@@ -1,0 +1,10 @@
+id: "1337"
+type: number
+display: "1337"
+mappings:
+  - system: leet
+    to: "LEET"
+    note: "1=L, 3=E, 3=E, 7=T — \"leet\", short for elite. Hacker-culture orthography from the 1980s BBS scene."
+  - system: cultural
+    to: "Hacker and gamer in-joke"
+    note: "Used as a self-descriptor and in screen names; e.g., port 1337 is a stereotypical pick for casual servers."

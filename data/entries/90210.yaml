@@ -1,0 +1,10 @@
+id: "90210"
+type: number
+display: "90210"
+mappings:
+  - system: cultural
+    to: "Beverly Hills, California ZIP code"
+    note: "One of the most recognisable US ZIP codes; an iconic shorthand for affluence."
+  - system: cultural
+    to: "Beverly Hills, 90210"
+    note: "American teen drama series, Fox 1990–2000; later reboots."

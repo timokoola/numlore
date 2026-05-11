@@ -1,0 +1,13 @@
+id: "911"
+type: number
+display: "911"
+mappings:
+  - system: cultural
+    to: "US emergency telephone number"
+    note: "Universal three-digit emergency line for police, fire, and medical services in the United States and Canada."
+  - system: cultural
+    to: "September 11, 2001"
+    note: "Date of the terrorist attacks in the United States; commonly written 9/11."
+  - system: cultural
+    to: "Porsche 911"
+    note: "Rear-engined sports car in continuous production since 1964."

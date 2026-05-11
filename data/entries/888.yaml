@@ -1,0 +1,7 @@
+id: "888"
+type: number
+display: "888"
+mappings:
+  - system: cultural
+    to: "Lucky number (Chinese)"
+    note: "八 (bā, eight) is a near-homophone for 發 (fā, to prosper); 888 amplifies the association with wealth."

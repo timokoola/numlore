@@ -1,0 +1,10 @@
+id: "23"
+type: number
+display: "23"
+mappings:
+  - system: cultural
+    to: "Michael Jordan's jersey number"
+    note: "Worn through most of his Chicago Bulls career; later adopted as a brand identity."
+  - system: cultural
+    to: "The 23 enigma"
+    note: "Discordian / Robert Anton Wilson belief that the number 23 appears with uncanny frequency."
