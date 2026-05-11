@@ -1,0 +1,20 @@
+# Global headers for Cloudflare Pages.
+# Astro's src/middleware.ts only runs for SSR routes; this file covers the
+# prerendered static surface (the majority of Numlore's pages).
+
+/*
+  Referrer-Policy: same-origin
+  X-Content-Type-Options: nosniff
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://glyphex.io; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://glyphex.io; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https://challenges.cloudflare.com
+
+# Sitemap and search index get longer cache than HTML pages.
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+/search-index.json
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+# Fonts and hashed assets can be cached aggressively.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
