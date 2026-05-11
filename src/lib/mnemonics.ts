@@ -4,15 +4,49 @@
 // Read order for numbers:  curated YAML  →  notable auto-flag rules  →  longtail algorithmic.
 // Read order for words:    curated YAML  →  longtail algorithmic.
 //
-// The dictionary-backed Major-System mnemonic candidates are not wired here
-// yet; they will draw from /data/dictionaries/compiled/mnemonic-index.json
-// once the build pipeline produces real artifacts.
+// The Major-System mnemonic candidates are sourced from the build-time
+// dictionary pipeline (scripts/dictionary/build.ts → mnemonic-index.json).
 
 import { getCuratedNumber, getCuratedWord, listCuratedNumberIds } from './entries';
 import { getCategory, listCategories } from './categories';
 import { isNotable } from '../../scripts/notable';
 import { digitsToLeet, wordToT9 } from '../../scripts/dictionary/encoders';
 import { findCalculationPatterns } from './number-properties';
+import mnemonicIndex from '../../data/dictionaries/compiled/mnemonic-index.json';
+
+interface MnemonicCandidate {
+  word: string;
+  phonemes: string;
+  zipf: number;
+}
+const INDEX = mnemonicIndex as Record<string, MnemonicCandidate[]>;
+
+const MAJOR_PHONEMES: Record<string, string> = {
+  '0': 's·z',
+  '1': 't·d',
+  '2': 'n',
+  '3': 'm',
+  '4': 'r',
+  '5': 'l',
+  '6': 'sh·ch·j',
+  '7': 'k·g',
+  '8': 'f·v',
+  '9': 'p·b',
+};
+
+const MAX_MAJOR_CANDIDATES = 6;
+
+function majorFromIndex(digits: string): Mapping | null {
+  const candidates = INDEX[digits];
+  if (!candidates || candidates.length === 0) return null;
+  const phonemeKey = digits.split('').map((d) => MAJOR_PHONEMES[d] ?? d).join('·');
+  const sample = candidates.slice(0, MAX_MAJOR_CANDIDATES).map((c) => c.word).join(', ');
+  return {
+    system: 'major',
+    to: sample,
+    note: `consonant skeleton ${phonemeKey} — ${candidates.length} candidate${candidates.length === 1 ? '' : 's'} in the dictionary`,
+  };
+}
 
 export type System = 'cultural' | 'major' | 'keypad' | 'leet' | 'math';
 export type Tier = 'curated' | 'notable' | 'longtail';
@@ -52,11 +86,19 @@ export async function resolveNumber(raw: string): Promise<NumberResult> {
 
   const curated = getCuratedNumber(number);
   if (curated) {
+    const mappings = [...curated.mappings];
+    // Augment curated entries that don't carry a hand-written Major mapping
+    // with index-derived candidates, so /n/420 etc. still get word options.
+    const hasMajor = mappings.some((m) => m.system === 'major');
+    if (!hasMajor && INTEGER_RE.test(number)) {
+      const extra = majorFromIndex(number.replace(/^-/, ''));
+      if (extra) mappings.push(extra);
+    }
     return {
       number,
       tier: 'curated',
       summary: curatedNumberSummary(curated.display),
-      mappings: curated.mappings,
+      mappings,
     };
   }
 
@@ -172,6 +214,9 @@ function algorithmicNumberMappings(raw: string, asInt: number | null): Mapping[]
 
   out.push({ system: 'keypad', to: digitsToKeypadLetters(digits), note: 'T9 phone-keypad letter set per digit' });
   out.push({ system: 'leet', to: digitsToLeet(digits), note: 'leet substitution: 0=O, 1=I, 3=E, 4=A, 5=S, 7=T, etc.' });
+
+  const majorMapping = majorFromIndex(digits);
+  if (majorMapping) out.push(majorMapping);
 
   if (digits.length === 5 || digits.length === 6) {
     for (const chunked of chunkings(digits)) {

@@ -27,7 +27,9 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
-# dictionary build intermediates (artifacts in /data/dictionaries/compiled/ are committed)
+# dictionary build intermediates (compiled mnemonic-index.json and
+# search-words.json ARE committed; words.json is regenerable and too big)
 /data/dictionaries/_intermediate/
+/data/dictionaries/compiled/words.json
 design-candidates/
 /tmp/
