@@ -67,8 +67,9 @@ export function listNotable(min = 10000, max = 999999): Array<{ n: number; reaso
   return out;
 }
 
-// Runnable preview.
-if (import.meta.url === `file://${process.argv[1]}`) {
+// Runnable preview. Guarded so the module stays safe to import inside the
+// Cloudflare worker runtime, which has no `process` global.
+if (typeof process !== 'undefined' && process.argv && import.meta.url === `file://${process.argv[1]}`) {
   const sample = listNotable().slice(0, 50);
   console.log(`notable sample (first 50 of ${listNotable().length}):`);
   for (const { n, reason } of sample) console.log(`  ${n}  ${reason}`);
