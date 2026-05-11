@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { resolveNumber } from '../../lib/mnemonics';
+
+// TODO: split prebuild (0-9999 + curated + notable) from SSR longtail.
+// For now this route runs SSR for every number and relies on edge caching
+// for the prebuild-tier feel. The dedicated split is tracked in
+// docs/ARCHITECTURE.md.
+export const prerender = false;
+
+const { number } = Astro.params;
+const data = await resolveNumber(number ?? '');
+
+const robots = data.tier === 'longtail' ? 'noindex,follow' : undefined;
+
+Astro.response.headers.set(
+  'Cache-Control',
+  data.tier === 'longtail'
+    ? 'public, max-age=31536000, immutable'
+    : 'public, max-age=86400, stale-while-revalidate=31536000',
+);
+---
+
+<BaseLayout
+  title={`${number} — Numlore`}
+  description={data.summary}
+  robots={robots}
+>
+  <article>
+    <header class="mb-8">
+      <h1 class="mono text-5xl tracking-tight">{number}</h1>
+      <p class="mt-2 text-[color:var(--text-dim)]">{data.summary}</p>
+    </header>
+
+    {data.mappings.length > 0 && (
+      <section class="space-y-3">
+        <h2 class="text-sm uppercase tracking-widest text-[color:var(--text-dim)]">Mappings</h2>
+        <ul class="space-y-2">
+          {data.mappings.map((m) => (
+            <li class="flex flex-wrap items-baseline gap-3">
+              <span class="rounded-[var(--radius)] bg-[color:var(--secondary)]/15 px-2 py-0.5 text-xs uppercase tracking-wide text-[color:var(--secondary)]">{m.system}</span>
+              <span class="mono">{m.to}</span>
+              {m.note && <span class="text-sm text-[color:var(--text-dim)]">{m.note}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <nav class="mt-12 flex justify-between text-sm">
+      <a class="mono underline" href={`/n/${Math.max(0, Number(number) - 1)}`}>← prev</a>
+      <a class="mono underline" href={`/n/${Number(number) + 1}`}>next →</a>
+    </nav>
+  </article>
+</BaseLayout>

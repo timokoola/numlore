@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+export const prerender = true;
+---
+
+<BaseLayout title="Privacy at Numlore" description="What Numlore does and does not record.">
+  <article class="prose-tight max-w-prose space-y-6">
+    <h1 class="text-4xl tracking-tight">Privacy at Numlore</h1>
+
+    <section>
+      <h2 class="text-lg font-semibold">What we don't record.</h2>
+      <p>
+        The numbers and words you look up. Search runs in your browser. Page requests reach our server only as anonymous URL hits; we don't log, analyze, store, or export them.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold">What we do record.</h2>
+      <p>
+        Entries you submit through the Submit form. Submissions are held for editorial review and, if accepted, published as entries on the site. Don't include personal information in submissions.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold">What our infrastructure sees.</h2>
+      <p>
+        Numlore runs on Cloudflare, which handles network-level routing. Cloudflare may retain short-term edge logs for operational reasons. We don't query, export, or analyze them.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold">What we don't use.</h2>
+      <p>
+        Analytics scripts. Third-party fonts or assets. Ad networks. Fingerprinting. Session recorders. A/B testing tools. Cookies, except a transient anti-spam token on the submission form.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold">How this is enforced.</h2>
+      <p>
+        Our build pipeline fails to deploy if a code change would introduce any of the above.
+      </p>
+    </section>
+  </article>
+</BaseLayout>

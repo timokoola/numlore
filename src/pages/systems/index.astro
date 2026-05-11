@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+const systems = [
+  { slug: 'major', title: 'The Major System', summary: 'Consonant sounds map to digits 0–9. Vowels are free, so encoded numbers turn into pronounceable words.' },
+  { slug: 'keypad', title: 'T9 phone keypad', summary: 'Letters mapped to digits 2–9 on legacy mobile phones. Words can be entered as their numeric sequence.' },
+  { slug: 'leet', title: 'Leet (1337-speak)', summary: 'Numbers and symbols substituted for similar-looking letters. Used since the early 1980s BBS scene.' },
+  { slug: 'cultural', title: 'Cultural references', summary: 'Numbers that carry meaning beyond arithmetic: codes, addresses, agent IDs, recurring motifs.' },
+];
+---
+
+<BaseLayout title="Systems — Numlore" description="The mnemonic systems Numlore catalogs.">
+  <h1 class="mb-6 text-4xl tracking-tight">Systems</h1>
+  <ul class="space-y-6">
+    {systems.map((s) => (
+      <li>
+        <a href={`/systems/${s.slug}`} class="text-2xl underline">{s.title}</a>
+        <p class="mt-1 max-w-prose text-[color:var(--text-dim)]">{s.summary}</p>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

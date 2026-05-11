@@ -1,0 +1,31 @@
+# build output
+dist/
+.astro/
+
+# wrangler / cloudflare
+.wrangler/
+.dev.vars
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+pnpm-debug.log*
+
+# environment
+.env
+.env.*
+!.env.example
+
+# editors
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# dictionary build intermediates (artifacts in /data/dictionaries/compiled/ are committed)
+/data/dictionaries/_intermediate/

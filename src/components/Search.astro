@@ -1,0 +1,35 @@
+---
+---
+<form id="numlore-search" method="get" action="/" class="flex gap-2 items-stretch" autocomplete="off">
+  <label class="sr-only" for="numlore-q">Enter a number or word</label>
+  <input
+    id="numlore-q"
+    name="q"
+    type="text"
+    inputmode="text"
+    placeholder="Type a number or a word…"
+    class="flex-1 rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-4 py-3 mono text-lg outline-none focus:border-[color:var(--accent)]"
+  />
+  <button
+    type="submit"
+    class="rounded-[var(--radius)] border border-[color:var(--accent)] bg-[color:var(--accent)] px-4 py-3 text-sm font-medium text-white"
+  >
+    Look up
+  </button>
+</form>
+
+<script>
+  // Lightweight client routing. No network calls, no telemetry.
+  const form = document.getElementById('numlore-search') as HTMLFormElement | null;
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = form.querySelector<HTMLInputElement>('#numlore-q');
+      const raw = (input?.value ?? '').trim();
+      if (!raw) return;
+      const isNumber = /^[0-9]+(?:\.[0-9]+)?$/.test(raw);
+      const slug = isNumber ? raw : raw.toLowerCase().replace(/[^a-z0-9-]+/g, '-');
+      window.location.assign(isNumber ? `/n/${slug}` : `/w/${slug}`);
+    });
+  }
+</script>

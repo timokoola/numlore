@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Submit an entry — Numlore"
+  description="Suggest a number↔word mnemonic for editorial review."
+>
+  <article class="max-w-prose space-y-6">
+    <h1 class="text-4xl tracking-tight">Submit an entry</h1>
+
+    <p class="rounded-[var(--radius)] border border-[color:var(--border)] bg-[color:var(--secondary)]/10 p-4 text-sm">
+      Submissions go through editorial review. Accepted entries are published publicly on the site. Don't include personal information.
+    </p>
+
+    <form method="post" action="/submit" class="space-y-4">
+      <div>
+        <label for="entry-id" class="mb-1 block text-sm font-medium">ID (number or word)</label>
+        <input
+          id="entry-id"
+          name="id"
+          type="text"
+          required
+          class="w-full rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-3 py-2 mono outline-none focus:border-[color:var(--accent)]"
+        />
+      </div>
+
+      <fieldset>
+        <legend class="mb-1 text-sm font-medium">Type</legend>
+        <label class="mr-4 inline-flex items-center gap-2">
+          <input type="radio" name="type" value="number" required /> number
+        </label>
+        <label class="inline-flex items-center gap-2">
+          <input type="radio" name="type" value="word" /> word
+        </label>
+      </fieldset>
+
+      <div>
+        <label for="entry-system" class="mb-1 block text-sm font-medium">System</label>
+        <select id="entry-system" name="system" required class="w-full rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-3 py-2">
+          <option value="cultural">cultural</option>
+          <option value="major">major</option>
+          <option value="keypad">keypad</option>
+          <option value="leet">leet</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="entry-to" class="mb-1 block text-sm font-medium">Mapping value</label>
+        <input
+          id="entry-to"
+          name="to"
+          type="text"
+          required
+          class="w-full rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-3 py-2 mono outline-none focus:border-[color:var(--accent)]"
+        />
+      </div>
+
+      <div>
+        <label for="entry-note" class="mb-1 block text-sm font-medium">Note (optional)</label>
+        <textarea
+          id="entry-note"
+          name="note"
+          rows="3"
+          class="w-full rounded-[var(--radius)] border border-[color:var(--border)] bg-transparent px-3 py-2 outline-none focus:border-[color:var(--accent)]"
+        ></textarea>
+      </div>
+
+      <!-- Cloudflare Turnstile placeholder. The challenge widget is server-injected during the submit handler. -->
+      <div data-turnstile-placeholder class="text-xs text-[color:var(--text-dim)]">
+        Anti-spam challenge will appear here.
+      </div>
+
+      <button
+        type="submit"
+        class="rounded-[var(--radius)] border border-[color:var(--accent)] bg-[color:var(--accent)] px-4 py-2 text-sm font-medium text-white"
+      >
+        Submit for review
+      </button>
+    </form>
+  </article>
+</BaseLayout>

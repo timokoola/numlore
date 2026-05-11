@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+export const prerender = true;
+---
+
+<BaseLayout title="About Numlore" description="A bidirectional dictionary for numbers and the words they mean.">
+  <article class="max-w-prose space-y-6">
+    <h1 class="text-4xl tracking-tight">About</h1>
+    <p>
+      Numlore is a bidirectional number↔word mnemonic dictionary. Type a number to see its cultural references, Major System mnemonics, T9 keypad letters, and leet readings. Type a word to find the numbers it encodes to.
+    </p>
+    <p>
+      Curated entries are written by hand. Notable numbers (years, repdigits, palindromes, well-known codes) are flagged automatically. Everything else is rendered algorithmically on demand.
+    </p>
+    <p>
+      We don't log what you look up. The privacy contract is enforced by our build pipeline — see <a class="underline" href="/privacy">/privacy</a> for the full posture.
+    </p>
+  </article>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { resolveWord } from '../../lib/mnemonics';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  // Word pages are prebuilt from curated entries plus high-rank words.
+  // Build pipeline will expand this list from data/dictionaries/compiled.
+  return [] as Array<{ params: { word: string } }>;
+}
+
+const { word } = Astro.params;
+const data = await resolveWord(word ?? '');
+---
+
+<BaseLayout title={`${word} — Numlore`} description={data.summary}>
+  <article>
+    <header class="mb-8">
+      <h1 class="text-5xl tracking-tight">{word}</h1>
+      <p class="mt-2 text-[color:var(--text-dim)]">{data.summary}</p>
+    </header>
+
+    {data.mappings.length > 0 && (
+      <section class="space-y-3">
+        <h2 class="text-sm uppercase tracking-widest text-[color:var(--text-dim)]">Encodes to</h2>
+        <ul class="space-y-2">
+          {data.mappings.map((m) => (
+            <li class="flex flex-wrap items-baseline gap-3">
+              <span class="rounded-[var(--radius)] bg-[color:var(--secondary)]/15 px-2 py-0.5 text-xs uppercase tracking-wide text-[color:var(--secondary)]">{m.system}</span>
+              <span class="mono">{m.to}</span>
+              {m.note && <span class="text-sm text-[color:var(--text-dim)]">{m.note}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+</BaseLayout>

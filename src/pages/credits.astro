@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+export const prerender = true;
+---
+
+<BaseLayout title="Credits — Numlore" description="Third-party data sources Numlore builds on.">
+  <article class="max-w-prose space-y-6">
+    <h1 class="text-4xl tracking-tight">Credits</h1>
+
+    <p>Numlore builds on the following third-party data sources and libraries.</p>
+
+    <section>
+      <h2 class="text-lg font-semibold">CMU Pronouncing Dictionary</h2>
+      <p class="text-sm text-[color:var(--text-dim)]">
+        ARPAbet phonetic transcriptions for approximately 134,000 English words.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold">Princeton WordNet 3.1</h2>
+      <p class="text-sm text-[color:var(--text-dim)]">
+        Lexical database providing parts of speech and semantic hierarchies.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold">wordfreq</h2>
+      <p class="text-sm text-[color:var(--text-dim)]">
+        Used at build time to compute Zipf word frequency. Development dependency only.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold">Brysbaert, Warriner, & Kuperman (2014)</h2>
+      <p class="text-sm text-[color:var(--text-dim)]">
+        Concreteness ratings for 40,000 generally known English word lemmas. Behavior Research Methods, 46(3), 904–911.
+      </p>
+    </section>
+  </article>
+</BaseLayout>

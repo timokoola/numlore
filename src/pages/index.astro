@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Search from '../components/Search.astro';
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Numlore — a dictionary of numbers and the words they mean"
+  description="A bidirectional number↔word mnemonic dictionary. Type a number to see its associations; type a word to find the numbers it encodes to."
+>
+  <header class="mb-10">
+    <h1 class="font-ui text-4xl tracking-tight">Numlore</h1>
+    <p class="mt-2 max-w-prose text-[color:var(--text-dim)]">
+      Type a number to see its cultural references, Major System mnemonics, T9 keypad letters, and leet readings. Type a word to find the numbers it encodes to.
+    </p>
+  </header>
+
+  <section class="mb-12">
+    <Search />
+  </section>
+
+  <section class="space-y-6">
+    <h2 class="text-sm uppercase tracking-widest text-[color:var(--text-dim)]">Examples</h2>
+    <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <li><a class="mono underline" href="/n/007">007</a></li>
+      <li><a class="mono underline" href="/n/911">911</a></li>
+      <li><a class="mono underline" href="/n/420">420</a></li>
+      <li><a class="mono underline" href="/n/1337">1337</a></li>
+      <li><a class="mono underline" href="/n/666">666</a></li>
+      <li><a class="mono underline" href="/n/90210">90210</a></li>
+      <li><a class="underline" href="/w/money">money</a></li>
+      <li><a class="underline" href="/w/love">love</a></li>
+      <li><a class="underline" href="/w/hello">hello</a></li>
+    </ul>
+  </section>
+</BaseLayout>

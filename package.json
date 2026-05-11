@@ -1,0 +1,37 @@
+{
+  "name": "numlore",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "dev": "astro dev",
+    "preview": "astro preview",
+    "astro": "astro",
+    "build": "pnpm run privacy:audit:pre && astro build && pnpm run privacy:audit:post",
+    "build:dict": "tsx scripts/dictionary/build.ts",
+    "dict:fetch": "tsx scripts/dictionary/fetch.ts",
+    "dict:build": "tsx scripts/dictionary/build.ts",
+    "notable": "tsx scripts/notable.ts",
+    "privacy:audit": "pnpm run privacy:audit:pre && pnpm run privacy:audit:post",
+    "privacy:audit:pre": "tsx scripts/privacy-audit.ts --phase=pre",
+    "privacy:audit:post": "tsx scripts/privacy-audit.ts --phase=post",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^11.2.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/jetbrains-mono": "^5.2.5",
+    "astro": "^4.16.0",
+    "fuse.js": "^7.0.0",
+    "satori": "^0.10.13",
+    "tailwindcss": "^3.4.0",
+    "yaml": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.6.0"
+  }
+}

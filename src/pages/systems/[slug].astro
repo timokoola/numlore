@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  return [
+    { params: { slug: 'major' } },
+    { params: { slug: 'keypad' } },
+    { params: { slug: 'leet' } },
+    { params: { slug: 'cultural' } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+const copy: Record<string, { title: string; body: string }> = {
+  major: {
+    title: 'The Major System',
+    body: 'A phonetic mnemonic technique that maps each digit 0–9 to a set of consonant sounds. Vowels, w, y, and h are free to insert, so any number can be rewritten as a pronounceable word.',
+  },
+  keypad: {
+    title: 'T9 phone keypad',
+    body: 'Legacy mobile phones mapped letters to digits 2–9. The system survives in vanity numbers and in mnemonic word ↔ number conversion.',
+  },
+  leet: {
+    title: 'Leet (1337-speak)',
+    body: 'Numbers and symbols substituted for similar-looking letters: 0=O, 1=I, 3=E, 4=A, 5=S, 7=T. Common since the early 1980s BBS scene.',
+  },
+  cultural: {
+    title: 'Cultural references',
+    body: 'Numbers that mean something specific in a cultural or fictional context: 007 (James Bond), 451 (Fahrenheit 451), 90210 (Beverly Hills), 31337 (elite).',
+  },
+};
+
+const entry = copy[slug ?? ''] ?? { title: 'Unknown system', body: '' };
+---
+
+<BaseLayout title={`${entry.title} — Numlore`} description={entry.body}>
+  <h1 class="mb-4 text-4xl tracking-tight">{entry.title}</h1>
+  <p class="max-w-prose text-[color:var(--text-dim)]">{entry.body}</p>
+</BaseLayout>

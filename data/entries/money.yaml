@@ -1,0 +1,11 @@
+id: "money"
+type: word
+display: "money"
+mappings:
+  - system: keypad
+    to: "66639"
+    note: "T9 phone keypad: M-O-N-E-Y"
+  - system: major
+    to: "32"
+    note: "M=3, N=2 (silent vowels)"
+phonetic_override: ["M", "AH", "N", "IY"]

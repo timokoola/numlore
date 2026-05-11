@@ -1,0 +1,33 @@
+Numlore — Third-party attributions
+
+This product uses the following third-party data sources and libraries.
+The attributions below are also rendered on /credits.
+
+----------------------------------------------------------------------
+
+CMU Pronouncing Dictionary
+  ARPAbet phonetic transcriptions for approximately 134,000 English words.
+  Source: http://www.speech.cs.cmu.edu/cgi-bin/cmudict
+  License: public-domain-style (see the dictionary's distribution).
+
+Princeton WordNet 3.1
+  Lexical database providing parts of speech and semantic hierarchies.
+  Source: https://wordnet.princeton.edu/
+  License: WordNet license (BSD-style attribution).
+
+wordfreq
+  Python library used at build time to compute Zipf word frequency.
+  Used as a development dependency; not shipped in the runtime bundle.
+  Source: https://github.com/rspeer/wordfreq
+  License: MIT.
+
+Brysbaert, Warriner, & Kuperman (2014)
+  Concreteness ratings for 40,000 generally known English word lemmas.
+  Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014).
+  Concreteness ratings for 40 thousand generally known English word lemmas.
+  Behavior Research Methods, 46(3), 904-911.
+
+----------------------------------------------------------------------
+
+Vendored source files live under data/dictionaries/_sources/. They are
+committed to the repository and never fetched at build time.

@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadCategory, listCategorySlugs } from '../../lib/mnemonics';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const slugs = await listCategorySlugs();
+  return slugs.map((slug) => ({ params: { category: slug } }));
+}
+
+const { category } = Astro.params;
+const data = await loadCategory(category ?? '');
+---
+
+<BaseLayout title={`${data.title} — Numlore`} description={data.description}>
+  <article>
+    <header class="mb-8">
+      <h1 class="text-4xl tracking-tight">{data.title}</h1>
+      <p class="mt-2 max-w-prose text-[color:var(--text-dim)]">{data.description}</p>
+    </header>
+
+    <ul class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+      {data.includes.map((id) => (
+        <li><a class="mono underline" href={`/n/${id}`}>{id}</a></li>
+      ))}
+    </ul>
+  </article>
+</BaseLayout>

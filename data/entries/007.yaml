@@ -1,0 +1,12 @@
+id: "007"
+type: number
+display: "007"
+mappings:
+  - system: cultural
+    to: "James Bond"
+    note: "Ian Fleming's MI6 agent, 1953–"
+  - system: major
+    to: "sock"
+    note: "0=s, 0=s, 7=k (silent vowels)"
+  - system: keypad
+    to: "..S"
