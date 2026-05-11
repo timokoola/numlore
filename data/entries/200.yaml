@@ -1,0 +1,12 @@
+id: "200"
+type: number
+display: "200"
+mappings:
+  - system: cultural
+    to: "HTTP 200 OK"
+    note: "The success status code. Server has the resource and is shipping it."
+  - system: cultural
+    to: "Pass GO, collect 200"
+    note: "Monopoly. (Hasbro raised the salary in some recent editions, but 200 is canon.)"
+  - system: math
+    to: "Two centuries"

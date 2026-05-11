@@ -1,0 +1,10 @@
+id: "8086"
+type: number
+display: "8086"
+mappings:
+  - system: cultural
+    to: "Intel 8086"
+    note: "16-bit microprocessor, 1978. The chip that founded the x86 architecture — instruction set still binary-compatible with today's CPUs."
+  - system: cultural
+    to: "Real mode"
+    note: "The original 8086 addressing mode. Every x86 CPU still boots into real mode for backward compatibility."

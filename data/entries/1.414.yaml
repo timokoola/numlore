@@ -1,0 +1,13 @@
+id: "1.414"
+type: number
+display: "1.414"
+mappings:
+  - system: cultural
+    to: "Square root of 2"
+    note: "√2 ≈ 1.41421356. Diagonal of a unit square. The first irrational number known to the Greeks — Pythagorean legend says its discovery cost a life."
+  - system: cultural
+    to: "Paper aspect ratio"
+    note: "ISO A-series (A4, A3, A0, …) sides are in ratio 1 : √2 — the only ratio that halves to itself when folded in two."
+  - system: math
+    to: "Algebraic irrational"
+    note: "Root of x² − 2 = 0."

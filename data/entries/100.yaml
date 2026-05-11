@@ -1,0 +1,15 @@
+id: "100"
+type: number
+display: "100"
+mappings:
+  - system: cultural
+    to: "Per cent"
+    note: "From Latin per centum — 'by the hundred'. The denominator the modern world thinks in."
+  - system: cultural
+    to: "Century"
+    note: "A hundred years, or a batsman's hundred runs in cricket."
+  - system: cultural
+    to: "100 emoji"
+    note: "💯 — the 'keep it 100' affirmation that overtook the actual number on social media."
+  - system: math
+    to: "10²"

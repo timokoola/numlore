@@ -1,0 +1,13 @@
+id: "1789"
+type: number
+display: "1789"
+mappings:
+  - system: cultural
+    to: "French Revolution begins"
+    note: "Storming of the Bastille, 14 July. Declaration of the Rights of Man, 26 August."
+  - system: cultural
+    to: "US Constitution takes effect"
+    note: "4 March; George Washington inaugurated 30 April."
+  - system: cultural
+    to: "Mutiny on the Bounty"
+    note: "28 April, off Tahiti. Fletcher Christian leads the crew against William Bligh."

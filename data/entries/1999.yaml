@@ -1,0 +1,16 @@
+id: "1999"
+type: number
+display: "1999"
+mappings:
+  - system: cultural
+    to: "Prince, 1999"
+    note: "1982 single, prophetic: 'Tonight I'm gonna party like it's 1999.'"
+  - system: cultural
+    to: "The Matrix"
+    note: "Released 31 March. The Wachowskis' bullet-time, the red pill, the green code rain."
+  - system: cultural
+    to: "Y2K eve"
+    note: "Months of panic, billions in remediation, then the calendar rolled cleanly."
+  - system: cultural
+    to: "Napster launched"
+    note: "Shawn Fanning's peer-to-peer file sharing service appeared in June and rewrote the music industry."

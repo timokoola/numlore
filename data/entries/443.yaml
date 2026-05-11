@@ -1,0 +1,12 @@
+id: "443"
+type: number
+display: "443"
+mappings:
+  - system: cultural
+    to: "HTTPS port"
+    note: "TLS over TCP. Where the modern web actually lives."
+  - system: math
+    to: "86th prime"
+  - system: cultural
+    to: "443 area code"
+    note: "Coastal Maryland and Baltimore overlay since 1997."

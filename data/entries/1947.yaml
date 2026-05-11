@@ -1,0 +1,16 @@
+id: "1947"
+type: number
+display: "1947"
+mappings:
+  - system: cultural
+    to: "Roswell incident"
+    note: "Debris recovered near Roswell, New Mexico in July; the US Army Air Forces first reported a 'flying disc', then a weather balloon. Bedrock UFO lore."
+  - system: cultural
+    to: "Edwin Land's Polaroid"
+    note: "First instant camera demonstrated 21 February."
+  - system: cultural
+    to: "Chuck Yeager breaks the sound barrier"
+    note: "14 October, Bell X-1, Mach 1.06."
+  - system: cultural
+    to: "Diary of a Young Girl"
+    note: "Anne Frank's diary, edited by her father Otto, published in Dutch by Contact."

@@ -1,0 +1,13 @@
+id: "1.618"
+type: number
+display: "1.618"
+mappings:
+  - system: cultural
+    to: "Golden ratio (φ)"
+    note: "(1 + √5) / 2 ≈ 1.6180339887. The proportion in which the whole is to the larger part as the larger part is to the smaller. Aesthetics, architecture, sunflowers, pineapples — wildly overclaimed, but the maths is solid."
+  - system: math
+    to: "Algebraic irrational"
+    note: "Root of x² − x − 1 = 0. Limit of the ratio of consecutive Fibonacci numbers."
+  - system: cultural
+    to: "Phi"
+    note: "Named for the sculptor Phidias, supposed (without evidence) to have used the ratio in the Parthenon."

@@ -1,0 +1,12 @@
+id: "4071"
+type: number
+display: "4071"
+mappings:
+  - system: cultural
+    to: "Australian postcode 4071"
+    note: "Inner-western Brisbane suburbs — Indooroopilly, Chelmer, Chapel Hill — adjacent to St Lucia (4067), the campus of the University of Queensland."
+  - system: math
+    to: "Factorisation"
+    note: "4071 = 3 × 23 × 59."
+  - system: math
+    to: "Odd, composite, not prime"

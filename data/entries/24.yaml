@@ -1,0 +1,15 @@
+id: "24"
+type: number
+display: "24"
+mappings:
+  - system: cultural
+    to: "Hours in a day"
+    note: "From the Egyptian division of day and night into twelve each."
+  - system: cultural
+    to: "Jack Bauer"
+    note: "Fox's 24 (2001–2014); each season is a single day told in 24 real-time episodes."
+  - system: cultural
+    to: "Kobe Bryant's Lakers number"
+    note: "Worn from 2006 until retirement in 2016. The Lakers retired both his jerseys — 8 and 24."
+  - system: math
+    to: "4! = 24"

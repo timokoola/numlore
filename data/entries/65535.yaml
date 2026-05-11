@@ -1,0 +1,13 @@
+id: "65535"
+type: number
+display: "65535"
+mappings:
+  - system: cultural
+    to: "Max 16-bit unsigned"
+    note: "2¹⁶ − 1. The highest port number, the highest value in a 16-bit colour channel, the cap on countless legacy fields."
+  - system: cultural
+    to: "Civilization unit cap"
+    note: "Sid Meier's Civilization games used 16-bit counters; legend has it Gandhi's aggression would underflow from 0 to 65535 and turn him nuclear. Legend is mostly wrong — but the meme stuck."
+  - system: math
+    to: "Composite"
+    note: "65535 = 3 × 5 × 17 × 257."

@@ -1,0 +1,16 @@
+id: "21"
+type: number
+display: "21"
+mappings:
+  - system: cultural
+    to: "Blackjack target"
+    note: "Beat the dealer's hand without going over."
+  - system: cultural
+    to: "21 Jump Street"
+    note: "1987 Fox series; 2012 film reboot with Jonah Hill and Channing Tatum."
+  - system: cultural
+    to: "US drinking age"
+    note: "National Minimum Drinking Age Act, 1984."
+  - system: math
+    to: "Triangular number"
+    note: "1+2+3+4+5+6 = 21. Also Fibonacci."

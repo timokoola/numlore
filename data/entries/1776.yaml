@@ -1,0 +1,13 @@
+id: "1776"
+type: number
+display: "1776"
+mappings:
+  - system: cultural
+    to: "US Declaration of Independence"
+    note: "Adopted 4 July, Philadelphia. 'We hold these truths to be self-evident…'"
+  - system: cultural
+    to: "Adam Smith, The Wealth of Nations"
+    note: "Published 9 March. Founding text of modern economics."
+  - system: cultural
+    to: "Edward Gibbon, Decline and Fall"
+    note: "Volume I published the same year — a vintage year for Enlightenment publishing."

@@ -1,0 +1,12 @@
+id: "137"
+type: number
+display: "137"
+mappings:
+  - system: cultural
+    to: "Fine-structure constant"
+    note: "1/α ≈ 137.036. The dimensionless number that sets the strength of the electromagnetic interaction. Pauli was obsessed with it; Feynman called it 'a magic number that comes to us with no understanding.'"
+  - system: math
+    to: "33rd prime"
+  - system: cultural
+    to: "Hospital room 137"
+    note: "The room at the Red Cross Hospital in Zurich where Pauli died — bedside legend."

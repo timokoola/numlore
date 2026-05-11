@@ -1,0 +1,13 @@
+id: "99"
+type: number
+display: "99"
+mappings:
+  - system: cultural
+    to: "Wayne Gretzky"
+    note: "The Great One's number. The NHL retired 99 league-wide in 2000 — the only number ever so honoured."
+  - system: cultural
+    to: "Nena, 99 Luftballons"
+    note: "1983 German New Wave protest single; English-language version '99 Red Balloons' released months later."
+  - system: cultural
+    to: "Jay-Z, 99 Problems"
+    note: "2004 single. The boast and its rhyme have entered everyday speech."

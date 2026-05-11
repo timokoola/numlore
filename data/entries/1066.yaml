@@ -1,0 +1,13 @@
+id: "1066"
+type: number
+display: "1066"
+mappings:
+  - system: cultural
+    to: "Norman Conquest of England"
+    note: "Battle of Hastings, 14 October. William of Normandy defeats Harold Godwinson; English aristocracy, language, and law reshaped for centuries."
+  - system: cultural
+    to: "Bayeux Tapestry"
+    note: "70-metre embroidered chronicle of the conquest, commissioned within a generation of the event."
+  - system: cultural
+    to: "1066 and All That"
+    note: "Sellar & Yeatman's 1930 comic history — 'a memorable history of England, comprising all the parts you can remember including 103 good things, 5 bad kings and 2 genuine dates'."

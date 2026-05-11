@@ -1,0 +1,13 @@
+id: "144"
+type: number
+display: "144"
+mappings:
+  - system: cultural
+    to: "Gross"
+    note: "A dozen dozen. The standard wholesale lot for items shipped by the literal grossful."
+  - system: math
+    to: "12²"
+    note: "Square of the dozen. Also the 12th Fibonacci number — the only non-trivial Fibonacci square."
+  - system: cultural
+    to: "144 fps"
+    note: "Common high-refresh gaming monitor rate; six times 24fps cinema frame rate."

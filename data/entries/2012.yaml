@@ -1,0 +1,13 @@
+id: "2012"
+type: number
+display: "2012"
+mappings:
+  - system: cultural
+    to: "Mayan long-count rollover"
+    note: "13.0.0.0.0 on 21 December 2012 — end of the 13th b'ak'tun. Predicted (by people who weren't Mayan scholars) to mean the end of the world. The Mayan calendar simply rolled to the next cycle."
+  - system: cultural
+    to: "2012 (film)"
+    note: "Roland Emmerich's 2009 disaster film built on the same speculation."
+  - system: cultural
+    to: "London Olympics"
+    note: "27 July – 12 August. Mr Bean, the Queen and James Bond, Mo Farah's double."

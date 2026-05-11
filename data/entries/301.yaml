@@ -1,0 +1,12 @@
+id: "301"
+type: number
+display: "301"
+mappings:
+  - system: cultural
+    to: "HTTP 301 Moved Permanently"
+    note: "The redirect status that tells search engines to update their index. The polite way to retire a URL."
+  - system: cultural
+    to: "301 Spartans"
+    note: "The Battle of Thermopylae had 300 Spartans plus their king, Leonidas — 301 if you count him separately, as some retellings do. Frank Miller's count differs."
+  - system: math
+    to: "Centered hexagonal number"

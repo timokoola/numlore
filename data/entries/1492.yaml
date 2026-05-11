@@ -1,0 +1,13 @@
+id: "1492"
+type: number
+display: "1492"
+mappings:
+  - system: cultural
+    to: "Columbus's first voyage"
+    note: "Genoese navigator Christopher Columbus made landfall in the Caribbean on 12 October, opening sustained contact between Europe and the Americas — and four centuries of consequence for the peoples already living there."
+  - system: cultural
+    to: "Fall of Granada"
+    note: "Surrender of the Emirate of Granada in January ended Muslim rule on the Iberian peninsula."
+  - system: cultural
+    to: "Alhambra Decree"
+    note: "Expulsion of practising Jews from the Crown of Castile and Aragon, 31 March."

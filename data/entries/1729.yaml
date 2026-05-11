@@ -1,0 +1,10 @@
+id: "1729"
+type: number
+display: "1729"
+mappings:
+  - system: cultural
+    to: "Hardy–Ramanujan number"
+    note: "G. H. Hardy visiting Ramanujan in hospital: 'I came in taxi-cab number 1729, which seemed to me rather a dull number.' Ramanujan: 'No, Hardy, it is a very interesting number. It is the smallest number expressible as the sum of two cubes in two different ways.' 1729 = 1³ + 12³ = 9³ + 10³."
+  - system: math
+    to: "Taxicab number Ta(2)"
+    note: "Smallest number that can be written as the sum of two positive cubes in two ways."

@@ -1,0 +1,13 @@
+id: "360"
+type: number
+display: "360"
+mappings:
+  - system: cultural
+    to: "Degrees in a circle"
+    note: "Babylonian base-60 again — 360 is the closest highly composite number to the days in a year that divides evenly into halves, thirds, quarters, fifths, sixths."
+  - system: cultural
+    to: "Xbox 360"
+    note: "Microsoft's second console, 2005–2016."
+  - system: cultural
+    to: "Coming full circle"
+    note: "'A 360' in skateboarding, snowboarding, surfing — one full rotation back to where you started."

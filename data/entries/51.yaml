@@ -1,0 +1,10 @@
+id: "51"
+type: number
+display: "51"
+mappings:
+  - system: cultural
+    to: "Area 51"
+    note: "US Air Force facility at Groom Lake, Nevada. Officially acknowledged only in 2013. UFO-conspiracy fixed star since the 1980s."
+  - system: cultural
+    to: "Storm Area 51"
+    note: "September 2019 Facebook joke event — 'They Can't Stop All of Us' — that became real and brought ~150 people to the desert gates."

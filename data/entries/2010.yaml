@@ -1,0 +1,13 @@
+id: "2010"
+type: number
+display: "2010"
+mappings:
+  - system: cultural
+    to: "Arthur C. Clarke, 2010: Odyssey Two"
+    note: "1982 sequel to 2001: A Space Odyssey; 'My God — it's full of stars.' Film adaptation 1984."
+  - system: cultural
+    to: "iPad"
+    note: "Apple introduced the iPad on 27 January 2010, shipped April. Tablet as we know it."
+  - system: cultural
+    to: "Instagram"
+    note: "Launched 6 October 2010, iOS only. Square photos, sepia filters, the everyday rectangle of a decade."

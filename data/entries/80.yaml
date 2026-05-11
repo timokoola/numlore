@@ -1,0 +1,13 @@
+id: "80"
+type: number
+display: "80"
+mappings:
+  - system: cultural
+    to: "HTTP default port"
+    note: "Plain-text HTTP. The number every web request once carried before the move to HTTPS on 443."
+  - system: cultural
+    to: "Around the World in 80 Days"
+    note: "Jules Verne, 1872; Phileas Fogg's wager. Updated by David Niven (1956) and many since."
+  - system: math
+    to: "9th highly composite number"
+    note: "80 has ten divisors: 1, 2, 4, 5, 8, 10, 16, 20, 40, 80."

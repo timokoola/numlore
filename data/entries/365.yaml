@@ -1,0 +1,13 @@
+id: "365"
+type: number
+display: "365"
+mappings:
+  - system: cultural
+    to: "Days in a year"
+    note: "Common year. 366 in leap years. The slight discrepancy is why we have Februaries that wobble."
+  - system: cultural
+    to: "Microsoft 365"
+    note: "Subscription rebrand of Office (2017→), pitched as 'productivity every day of the year'."
+  - system: cultural
+    to: "365 days a year"
+    note: "The unit of expected uptime promises and 365-day fitness apps."

@@ -1,0 +1,16 @@
+id: "12"
+type: number
+display: "12"
+mappings:
+  - system: cultural
+    to: "Dozen"
+    note: "Twelve has more divisors than ten, which is why bakers, jurors, and clock-makers prefer it. 'Baker's dozen' is thirteen — a hedge against being caught short."
+  - system: cultural
+    to: "Twelve signs of the zodiac"
+    note: "Aries through Pisces. Twelve also gives the Chinese zodiac its full cycle (Rat through Pig) and the hours of the clock face."
+  - system: cultural
+    to: "Twelve disciples"
+    note: "The apostles of Jesus. Twelve tribes of Israel before that."
+  - system: math
+    to: "First abundant number"
+    note: "The sum of its proper divisors (1+2+3+4+6 = 16) exceeds 12 itself."

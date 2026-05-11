@@ -1,0 +1,13 @@
+id: "1900"
+type: number
+display: "1900"
+mappings:
+  - system: cultural
+    to: "L. Frank Baum, The Wonderful Wizard of Oz"
+    note: "Published. Dorothy, Toto, ruby slippers (silver, in the book)."
+  - system: cultural
+    to: "Planck's quantum hypothesis"
+    note: "Max Planck introduces the quantum of energy, 14 December — birthday of quantum physics."
+  - system: cultural
+    to: "Paris Exposition Universelle"
+    note: "Hosted the 1900 Summer Olympics and showcased the Eiffel Tower a decade after its completion."

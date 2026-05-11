@@ -1,0 +1,16 @@
+id: "1955"
+type: number
+display: "1955"
+mappings:
+  - system: cultural
+    to: "Back to the Future target year"
+    note: "Marty McFly's destination. The film's 1985 'past' is now further from us than 1955 was from the film."
+  - system: cultural
+    to: "Disneyland opens"
+    note: "17 July, Anaheim, California."
+  - system: cultural
+    to: "Rosa Parks"
+    note: "Refused to give up her bus seat in Montgomery, Alabama, 1 December — flashpoint of the US civil rights movement."
+  - system: cultural
+    to: "McDonald's first franchise"
+    note: "Ray Kroc opens the first franchised McDonald's in Des Plaines, Illinois."

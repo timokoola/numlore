@@ -1,0 +1,13 @@
+id: "1865"
+type: number
+display: "1865"
+mappings:
+  - system: cultural
+    to: "Lewis Carroll, Alice's Adventures in Wonderland"
+    note: "Published 26 November. Down the rabbit hole."
+  - system: cultural
+    to: "13th Amendment ratified"
+    note: "6 December. Abolished slavery in the United States."
+  - system: cultural
+    to: "Gregor Mendel's pea paper"
+    note: "Presented to the Natural History Society of Brünn — the foundation of modern genetics, ignored for thirty-five years."

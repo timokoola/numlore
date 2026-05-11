@@ -1,0 +1,13 @@
+id: "1812"
+type: number
+display: "1812"
+mappings:
+  - system: cultural
+    to: "Tchaikovsky's 1812 Overture"
+    note: "Composed 1880 to commemorate Russia's defence against Napoleon's invasion of 1812. Famous for its cannons."
+  - system: cultural
+    to: "Grimms' Fairy Tales"
+    note: "First volume of Kinder- und Hausmärchen by the Brothers Grimm published 20 December."
+  - system: cultural
+    to: "War of 1812"
+    note: "Between the United States and the United Kingdom; gave the US 'The Star-Spangled Banner' and the burning (then rebuilding) of the White House."

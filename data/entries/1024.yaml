@@ -1,0 +1,12 @@
+id: "1024"
+type: number
+display: "1024"
+mappings:
+  - system: cultural
+    to: "Kilobyte (binary)"
+    note: "2¹⁰ = 1024. Pedants insist on 'kibibyte' (KiB) for the binary value, leaving 'kilobyte' (KB) for the decimal 1000. The market disagrees."
+  - system: cultural
+    to: "First non-system port"
+    note: "Ports 0–1023 are 'well-known'; 1024+ are 'registered' and usable without admin privileges on most systems."
+  - system: math
+    to: "2¹⁰"

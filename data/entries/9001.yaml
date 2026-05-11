@@ -1,0 +1,10 @@
+id: "9001"
+type: number
+display: "9001"
+mappings:
+  - system: cultural
+    to: "It's over 9000!"
+    note: "Dragon Ball Z, 1997 dub of episode 'The Return of Goku'. Vegeta's scouter reads Goku's power level: 'It's over nine thousand!' (In the Japanese original, 'over 8000'.) Universal nerd shorthand for 'absurdly high'."
+  - system: cultural
+    to: "ISO 9001"
+    note: "Quality management systems standard, first published 1987 — the certification on every other warehouse."

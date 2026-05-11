@@ -1,0 +1,13 @@
+id: "50"
+type: number
+display: "50"
+mappings:
+  - system: cultural
+    to: "Hawaii Five-O"
+    note: "CBS series (1968–1980, reboot 2010–2020). 'Book 'em, Danno.' Five-O is also American slang for police, after the show."
+  - system: cultural
+    to: "Fifty / 50/50"
+    note: "Even odds. 'Going fifty-fifty' on a bill."
+  - system: cultural
+    to: "United States of America"
+    note: "Fifty states since Hawaii joined in 1959."

@@ -1,0 +1,12 @@
+id: "1234"
+type: number
+display: "1234"
+mappings:
+  - system: cultural
+    to: "Most-used 4-digit PIN"
+    note: "Tops every leaked-PIN dataset, narrowly beating 1111 and 0000. About 10% of all PINs in some analyses."
+  - system: cultural
+    to: "Feist, 1234"
+    note: "2007 single. The breakthrough use of the iPod nano television ad."
+  - system: math
+    to: "Ascending sequence"

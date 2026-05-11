@@ -1,0 +1,16 @@
+id: "1985"
+type: number
+display: "1985"
+mappings:
+  - system: cultural
+    to: "Back to the Future"
+    note: "Released 3 July. Marty McFly's 'present'. 'Where we're going, we don't need roads.'"
+  - system: cultural
+    to: "Live Aid"
+    note: "13 July. Dual benefit concerts at Wembley and JFK Stadium broadcast to ~1.9 billion viewers."
+  - system: cultural
+    to: "Microsoft Windows 1.0"
+    note: "Shipped 20 November. Two decades before Windows became the desktop default."
+  - system: cultural
+    to: "Super Mario Bros."
+    note: "Released for the Nintendo Famicom in September; the cartridge that saved the home video game market."

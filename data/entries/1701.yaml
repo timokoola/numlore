@@ -1,0 +1,10 @@
+id: "1701"
+type: number
+display: "1701"
+mappings:
+  - system: cultural
+    to: "USS Enterprise NCC-1701"
+    note: "Star Trek. The Constitution-class starship of Captains Pike and Kirk. The hull number became the show's secondary brand."
+  - system: cultural
+    to: "House of Hanover, 1701"
+    note: "Act of Settlement passed, fixing the line of British succession on the Protestant Hanoverians — the ancestors of the present royal family."

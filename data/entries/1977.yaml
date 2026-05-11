@@ -1,0 +1,16 @@
+id: "1977"
+type: number
+display: "1977"
+mappings:
+  - system: cultural
+    to: "Star Wars"
+    note: "Released 25 May. 'A long time ago in a galaxy far, far away…'"
+  - system: cultural
+    to: "Apple II"
+    note: "Launched in June. The personal computer for everyone — and the platform VisiCalc would later sell."
+  - system: cultural
+    to: "Voyagers 1 & 2"
+    note: "Launched August and September; still operational in interstellar space, carrying the Golden Record."
+  - system: cultural
+    to: "Punk year zero"
+    note: "Sex Pistols, Never Mind the Bollocks (October); The Clash debut; Talking Heads '77; Saturday Night Fever in cinemas."

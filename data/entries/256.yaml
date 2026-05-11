@@ -1,0 +1,12 @@
+id: "256"
+type: number
+display: "256"
+mappings:
+  - system: cultural
+    to: "2⁸ — the byte"
+    note: "256 distinct values per byte: 0–255. Why classic 8-bit graphics topped out at 256 colours."
+  - system: cultural
+    to: "Pac-Man kill screen"
+    note: "Level 256 (0xFF + 1) overflows the level counter — half the screen renders as garbled digits. The original integer-overflow bug as folklore."
+  - system: math
+    to: "2⁸"

@@ -1,0 +1,10 @@
+id: "418"
+type: number
+display: "418"
+mappings:
+  - system: cultural
+    to: "HTTP 418 I'm a teapot"
+    note: "RFC 2324, 1 April 1998. The Hyper Text Coffee Pot Control Protocol. 'Any attempt to brew coffee with a teapot should result in the error code 418 I'm a teapot.' Still returned by Google for /teapot."
+  - system: math
+    to: "419 is prime, 418 is not"
+    note: "418 = 2 × 11 × 19."

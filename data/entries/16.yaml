@@ -1,0 +1,13 @@
+id: "16"
+type: number
+display: "16"
+mappings:
+  - system: cultural
+    to: "Sweet sixteen"
+    note: "US coming-of-age party tradition. In NCAA basketball, the round of 16 teams in March Madness."
+  - system: cultural
+    to: "16-bit"
+    note: "Generation of game consoles after the 8-bit era — SNES, Mega Drive / Genesis, TurboGrafx-16."
+  - system: math
+    to: "2⁴"
+    note: "Smallest non-trivial fourth power; also a square (4²)."

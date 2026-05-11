@@ -1,0 +1,10 @@
+id: "95"
+type: number
+display: "95"
+mappings:
+  - system: cultural
+    to: "Windows 95"
+    note: "Released 24 August 1995. The Start button, the taskbar, and the Rolling Stones' 'Start Me Up' as the launch anthem."
+  - system: cultural
+    to: "Luther's 95 Theses"
+    note: "Martin Luther nailed the Ninety-five Theses to the door of the Wittenberg Castle Church, 31 October 1517 — opening the Protestant Reformation."

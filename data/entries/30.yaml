@@ -1,0 +1,13 @@
+id: "30"
+type: number
+display: "30"
+mappings:
+  - system: cultural
+    to: "30 Rock"
+    note: "Tina Fey's NBC sitcom (2006–2013), named for 30 Rockefeller Plaza in Manhattan."
+  - system: cultural
+    to: "End-of-story dash"
+    note: "Journalists' '-30-' or '— 30 —' at the end of a story to signal 'the end'. Telegraph-era convention."
+  - system: cultural
+    to: "Thirtysomething"
+    note: "ABC drama (1987–1991) that gave the demographic its label."

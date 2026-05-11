@@ -1,0 +1,13 @@
+id: "60"
+type: number
+display: "60"
+mappings:
+  - system: cultural
+    to: "Sexagesimal"
+    note: "Base-60. Babylonian, ~2000 BCE. Survives in seconds per minute, minutes per hour, and degrees per right angle."
+  - system: cultural
+    to: "Sixty Minutes"
+    note: "CBS newsmagazine, on the air since 1968. The ticking stopwatch is its sting."
+  - system: math
+    to: "Highly composite"
+    note: "60 has twelve divisors. Smaller than any of its near neighbours."

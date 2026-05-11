@@ -1,0 +1,13 @@
+id: "1398"
+type: number
+display: "1398"
+mappings:
+  - system: cultural
+    to: "1398 SH (Solar Hijri)"
+    note: "Iranian calendar year corresponding to 21 March 2019 – 19 March 2020 Gregorian. The official civil calendar in Iran and Afghanistan."
+  - system: cultural
+    to: "Sack of Delhi"
+    note: "Timur (Tamerlane) takes Delhi, 17 December 1398 — one of the most consequential events of medieval South Asian history, ending the Tughlaq dynasty's effective rule."
+  - system: math
+    to: "Factorisation"
+    note: "1398 = 2 × 3 × 233."

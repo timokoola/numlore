@@ -1,0 +1,16 @@
+id: "2000"
+type: number
+display: "2000"
+mappings:
+  - system: cultural
+    to: "Y2K rollover"
+    note: "Date rolled from 99 to 00 without widespread incident — the result of years of patched COBOL, not luck."
+  - system: cultural
+    to: "Sydney Olympics"
+    note: "15 September – 1 October. 'The best Olympic Games ever,' said IOC president Juan Antonio Samaranch."
+  - system: cultural
+    to: "Dotcom peak"
+    note: "Nasdaq peaked at 5,048.62 on 10 March, then began the multi-year correction."
+  - system: cultural
+    to: "Millennium"
+    note: "The third millennium technically began 1 January 2001, but it never felt that way at parties."

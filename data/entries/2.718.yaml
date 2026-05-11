@@ -1,0 +1,13 @@
+id: "2.718"
+type: number
+display: "2.718"
+mappings:
+  - system: cultural
+    to: "Euler's number (e)"
+    note: "2.7182818284… The base of the natural logarithm; the unique number whose derivative is itself. The continuous-compounding constant."
+  - system: math
+    to: "Transcendental and irrational"
+    note: "Not the root of any polynomial with rational coefficients. Hermite, 1873."
+  - system: cultural
+    to: "Google's IPO"
+    note: "Google filed its 2004 IPO to raise $2,718,281,828 — exactly 'e' billion dollars, to the dollar."

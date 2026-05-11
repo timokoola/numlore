@@ -1,0 +1,10 @@
+id: "311"
+type: number
+display: "311"
+mappings:
+  - system: cultural
+    to: "Non-emergency municipal line"
+    note: "First adopted by Baltimore in 1996, then most major North American cities. The number you dial for a pothole, not a fire."
+  - system: cultural
+    to: "311 (band)"
+    note: "Omaha-formed alt-rock band, active since 1988. Named after the police code for indecent exposure their bassist once received."

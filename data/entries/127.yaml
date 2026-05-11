@@ -1,0 +1,12 @@
+id: "127"
+type: number
+display: "127"
+mappings:
+  - system: cultural
+    to: "127.0.0.1 — localhost"
+    note: "The loopback IPv4 address. 'There's no place like 127.0.0.1.'"
+  - system: math
+    to: "Largest signed 8-bit integer"
+    note: "2⁷ − 1. Also a Mersenne prime: 2⁷ − 1 = 127."
+  - system: math
+    to: "31st prime"

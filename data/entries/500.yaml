@@ -1,0 +1,16 @@
+id: "500"
+type: number
+display: "500"
+mappings:
+  - system: cultural
+    to: "HTTP 500 Internal Server Error"
+    note: "The server's 'something went wrong and I'm not telling you what'."
+  - system: cultural
+    to: "Fortune 500"
+    note: "Annual ranking of US corporations by revenue, published by Fortune since 1955."
+  - system: cultural
+    to: "Indianapolis 500"
+    note: "500-mile motor race held annually since 1911 on Memorial Day weekend."
+  - system: cultural
+    to: "The Proclaimers, 500 Miles"
+    note: "1988. 'And I would walk five hundred miles, and I would walk five hundred more…'"
