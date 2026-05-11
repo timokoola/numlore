@@ -1,0 +1,12 @@
+id: "67"
+type: number
+display: "67"
+mappings:
+  - system: cultural
+    to: "Gen Alpha catchphrase"
+    note: "Spoken 'six-seven' with an upswing on the second syllable. Spread through short-form video and NBA highlight clips in 2024–2025; absorbed into middle-school slang as a non-sequitur affirmation. Teachers have reported entire classrooms chanting it on cue."
+  - system: cultural
+    to: "Rolling 6-7"
+    note: "Dice slang: rolling a 6 then a 7 on two consecutive throws of 2d6. Also a Skrilla & LilTjay track that helped seed the meme."
+  - system: math
+    to: "19th prime"

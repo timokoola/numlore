@@ -12,6 +12,7 @@ import { getCuratedNumber, getCuratedWord, listCuratedNumberIds } from './entrie
 import { getCategory, listCategories } from './categories';
 import { isNotable } from '../../scripts/notable';
 import { digitsToLeet, wordToT9 } from '../../scripts/dictionary/encoders';
+import { findCalculationPatterns } from './number-properties';
 
 export type System = 'cultural' | 'major' | 'keypad' | 'leet' | 'math';
 export type Tier = 'curated' | 'notable' | 'longtail';
@@ -193,7 +194,24 @@ function algorithmicNumberMappings(raw: string, asInt: number | null): Mapping[]
     }
   }
 
+  for (const pattern of findCalculationPatterns(digits)) {
+    out.push({ system: 'math', to: pattern.description, note: calcPatternNote(pattern.kind) });
+  }
+
   return out;
+}
+
+function calcPatternNote(kind: string): string {
+  switch (kind) {
+    case 'fib-digits':     return 'self-referential digit pattern';
+    case 'sum-split':      return 'the digits encode an addition';
+    case 'product-split':  return 'the digits encode a multiplication';
+    case 'concat-squares': return 'two perfect squares written end-to-end';
+    case 'narcissistic':   return 'narcissistic / Armstrong number';
+    case 'factorion':      return 'equals the sum of the factorials of its own digits';
+    case 'perfect':        return 'one of only four perfect numbers below a million';
+    default:               return '';
+  }
 }
 
 function algorithmicWordMappings(word: string): Mapping[] {

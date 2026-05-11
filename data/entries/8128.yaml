@@ -1,0 +1,10 @@
+id: "8128"
+type: number
+display: "8128"
+mappings:
+  - system: math
+    to: "Fourth perfect number"
+    note: "After 6, 28, and 496. The next perfect number is 33,550,336 — far beyond Numlore's prebuilt range. Known to Nicomachus of Gerasa around 100 CE."
+  - system: math
+    to: "Triangular number"
+    note: "T₁₂₇ = 1+2+…+127 = 8128. All even perfect numbers are triangular."
