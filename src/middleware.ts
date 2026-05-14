@@ -17,6 +17,21 @@ const CSP = [
 ].join('; ');
 
 export const onRequest = defineMiddleware(async (context, next) => {
+  // The auto-assigned *.pages.dev hostname is not the canonical site. Bots
+  // (notably GPTBot on 2026-05-13) discover it and crawl the full /n/* corpus,
+  // bypassing analytics on numlore.com. Send them away cheaply.
+  const host = context.url.hostname;
+  if (host.endsWith('.pages.dev')) {
+    return new Response('Not found', {
+      status: 404,
+      headers: {
+        'content-type': 'text/plain; charset=utf-8',
+        'x-robots-tag': 'noindex, nofollow',
+        'cache-control': 'public, max-age=86400',
+      },
+    });
+  }
+
   const response = await next();
   response.headers.set('Referrer-Policy', 'same-origin');
   response.headers.set('Content-Security-Policy', CSP);
