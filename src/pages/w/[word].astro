@@ -4,6 +4,7 @@ import { resolveWord } from '../../lib/mnemonics';
 import type { Mapping, System } from '../../lib/mnemonics';
 import { listCuratedWordIds } from '../../lib/entries';
 import { pythagoreanRoot, archetype } from '../../lib/numerology';
+import { definedTermSchema, breadcrumbSchema } from '../../lib/schema';
 
 export const prerender = true;
 
@@ -33,14 +34,26 @@ const tierLabel: Record<string, string> = {
   notable: 'Notable · Auto-flagged',
   longtail: 'Algorithmic · Computed',
 };
+
+const schemas = [
+  definedTermSchema({
+    path: `/w/${word}`,
+    name: word ?? '',
+    description: data.summary,
+  }),
+  breadcrumbSchema([
+    { name: 'Numlore', path: '/' },
+    { name: word ?? '', path: `/w/${word}` },
+  ]),
+];
 ---
 
-<BaseLayout title={`${word} — Numlore`} description={data.summary} wide={true}>
+<BaseLayout title={`${word} — Numlore`} description={data.summary} wide={true} schemas={schemas}>
   <article>
     <p class="kicker text-center">{tierLabel[data.tier] ?? data.tier}</p>
 
     <header class="mt-4 text-center">
-      <h1 class="specimen italic-serif text-[clamp(4rem,16vw,11rem)] text-[color:var(--gold-soft)]">{word}</h1>
+      <h1 class="specimen italic-serif text-[clamp(2.75rem,12vw,11rem)] text-[color:var(--gold-soft)]">{word}</h1>
       <p class="lede mx-auto mt-4 text-center">{data.summary}</p>
 
       {root && (

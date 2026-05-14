@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import NumberPage from '../../components/NumberPage.astro';
 import { resolveNumber } from '../../lib/mnemonics';
+import { definedTermSchema, breadcrumbSchema } from '../../lib/schema';
 
 // SSR longtail fallback. Reached only for /n/<number> paths not in the
 // prebuilt set (curated + 0–9999 + notable 5–6 digit). One-year edge cache.
@@ -25,12 +26,26 @@ Astro.response.headers.set(
   'Cache-Control',
   'public, max-age=31536000, immutable',
 );
+
+const schemas = [
+  definedTermSchema({
+    path: `/n/${number}`,
+    name: number,
+    description: data.summary,
+    termCode: number,
+  }),
+  breadcrumbSchema([
+    { name: 'Numlore', path: '/' },
+    { name: number, path: `/n/${number}` },
+  ]),
+];
 ---
 
 <BaseLayout
   title={`${number} — Numlore`}
   description={data.summary}
   robots={robots}
+  schemas={schemas}
 >
   <NumberPage number={number} data={data} />
 </BaseLayout>

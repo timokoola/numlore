@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import NumberPage from '../../components/NumberPage.astro';
 import { resolveNumber, listPrebuiltNumberIds } from '../../lib/mnemonics';
+import { definedTermSchema, breadcrumbSchema } from '../../lib/schema';
 
 // Prebuilt tier: curated YAML, every integer 0–9999, and every notable 5–6
 // digit number. Longtail 5–6 digit numbers are served by the SSR sibling at
@@ -13,12 +14,27 @@ export async function getStaticPaths() {
 }
 
 const { number } = Astro.params;
-const data = await resolveNumber(number ?? '');
+const id = number ?? '';
+const data = await resolveNumber(id);
+
+const schemas = [
+  definedTermSchema({
+    path: `/n/${id}`,
+    name: id,
+    description: data.summary,
+    termCode: id,
+  }),
+  breadcrumbSchema([
+    { name: 'Numlore', path: '/' },
+    { name: id, path: `/n/${id}` },
+  ]),
+];
 ---
 
 <BaseLayout
-  title={`${number} — Numlore`}
+  title={`${id} — Numlore`}
   description={data.summary}
+  schemas={schemas}
 >
-  <NumberPage number={number ?? ''} data={data} />
+  <NumberPage number={id} data={data} />
 </BaseLayout>

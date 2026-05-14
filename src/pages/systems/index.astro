@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { collectionPageSchema, breadcrumbSchema } from '../../lib/schema';
 
 export const prerender = true;
 
@@ -9,9 +10,23 @@ const spheres = [
   { slug: 'leet',     roman: 'III', name: 'Leet',      descr: 'the modern glyph — digits worn as letters, since 1980.',              example: '1337 ⇄ LEET' },
   { slug: 'cultural', roman: 'IV',  name: 'Cultural',  descr: 'the named echoes — codes, addresses, agents, omens.',                 example: '90210 ⇄ Beverly Hills' },
 ];
+
+const pageSchema = collectionPageSchema({
+  path: '/systems',
+  name: 'The four spheres',
+  description: 'The four mnemonic systems Numlore reads.',
+  items: spheres.map((s) => ({ name: s.name, path: `/systems/${s.slug}` })),
+});
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Numlore', path: '/' },
+    { name: 'Systems', path: '/systems' },
+  ]),
+];
 ---
 
-<BaseLayout title="The four spheres — Numlore" description="The four mnemonic systems Numlore reads." wide={true}>
+<BaseLayout title="The four spheres — Numlore" description="The four mnemonic systems Numlore reads." wide={true} pageSchema={pageSchema} schemas={schemas}>
   <p class="kicker text-center">Index <span class="dot"></span> the four spheres</p>
   <h1 class="display mt-3 text-center text-[clamp(3rem,9vw,6rem)] font-bold leading-tight text-[color:var(--ink)]">
     Four ways<br/>to read a number.

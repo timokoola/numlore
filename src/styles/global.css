@@ -55,6 +55,7 @@ html, body {
   margin: 0;
   line-height: 1.45;
   text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
 body {
@@ -478,6 +479,9 @@ hr { border: 0; border-top: 1px solid var(--gold-dim); }
   line-height: .9;
   color: var(--gold-soft);
   text-shadow: 0 2px 0 var(--shadow);
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* ── Card surface (alt to .plate, less ornate) ─────────── */

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { definedTermSetSchema, breadcrumbSchema } from '../../lib/schema';
 
 export const prerender = true;
 
@@ -91,9 +92,28 @@ const copy: Record<string, SystemCopy> = {
 };
 
 const entry = copy[slug ?? ''] ?? { roman: '·', title: 'Unknown system', subtitle: '', body: '', chipMod: '' };
+
+const schemas = [
+  definedTermSetSchema({
+    path: `/systems/${slug}`,
+    setIdFragment: 'set',
+    name: entry.title,
+    description: entry.body,
+    terms: entry.table?.map((row) => ({
+      termCode: row.key,
+      name: row.value,
+      description: `${row.key} ↔ ${row.value}`,
+    })),
+  }),
+  breadcrumbSchema([
+    { name: 'Numlore', path: '/' },
+    { name: 'Systems', path: '/systems' },
+    { name: entry.title, path: `/systems/${slug}` },
+  ]),
+];
 ---
 
-<BaseLayout title={`${entry.title} — Numlore`} description={entry.body} wide={true}>
+<BaseLayout title={`${entry.title} — Numlore`} description={entry.body} wide={true} schemas={schemas}>
   <p class="kicker text-center">Sphere <span class="dot"></span> {entry.roman}</p>
   <h1 class="display mt-3 text-center text-[clamp(3rem,8vw,5.5rem)] font-bold leading-tight text-[color:var(--ink)]">
     {entry.title}
