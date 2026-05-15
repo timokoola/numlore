@@ -48,6 +48,23 @@ function majorFromIndex(digits: string): Mapping | null {
   };
 }
 
+// Phrase mnemonic for a chunked digit sequence: take the top-1 dictionary
+// candidate for each chunk and string them together. Returns null if any
+// chunk has no hits in the index — half a phrase is worse than nothing.
+function phraseFromChunks(chunks: string[]): Mapping | null {
+  const words: string[] = [];
+  for (const chunk of chunks) {
+    const candidates = INDEX[chunk];
+    if (!candidates || candidates.length === 0) return null;
+    words.push(candidates[0].word);
+  }
+  return {
+    system: 'major',
+    to: words.join(' · '),
+    note: `chunked ${chunks.map((c) => c.length).join('+')} — top word per chunk`,
+  };
+}
+
 export type System = 'cultural' | 'major' | 'keypad' | 'leet' | 'math';
 export type Tier = 'curated' | 'notable' | 'longtail';
 
@@ -212,12 +229,14 @@ function algorithmicNumberMappings(raw: string, asInt: number | null): Mapping[]
 
   const digits = raw.replace(/^-/, '');
 
-  out.push({ system: 'keypad', to: digitsToKeypadLetters(digits), note: 'T9 phone-keypad letter set per digit' });
+  out.push({ system: 'keypad', to: digitsToKeypadLetters(digits), note: 'each digit shown with its T9 letter set; 0 and 1 carry no letters' });
   out.push({ system: 'leet', to: digitsToLeet(digits), note: 'leet substitution: 0=O, 1=I, 3=E, 4=A, 5=S, 7=T, etc.' });
 
   const majorMapping = majorFromIndex(digits);
   if (majorMapping) out.push(majorMapping);
 
+  // Phrase mnemonics for 5–6 digit numbers: take top-1 word per chunk
+  // for each chunking, emit as additional Major mappings.
   if (digits.length === 5 || digits.length === 6) {
     for (const chunked of chunkings(digits)) {
       out.push({
@@ -225,6 +244,8 @@ function algorithmicNumberMappings(raw: string, asInt: number | null): Mapping[]
         to: chunked.map(digitsToLeet).join(' '),
         note: `chunked ${chunked.map((c) => c.length).join('+')}, leet`,
       });
+      const phrase = phraseFromChunks(chunked);
+      if (phrase) out.push(phrase);
     }
   }
 
@@ -269,9 +290,11 @@ function algorithmicWordMappings(word: string): Mapping[] {
 }
 
 function digitsToKeypadLetters(digits: string): string {
+  // Show each digit alongside its T9 letter set so the pairing is obvious
+  // even on small screens. 0 and 1 have no letters on a real keypad; we
+  // render them as the bare digit with no separator. Output for "604":
+  // "6·MNO 0 4·GHI"
   const groups: Record<string, string> = {
-    '0': '⌷',
-    '1': '⌷',
     '2': 'ABC',
     '3': 'DEF',
     '4': 'GHI',
@@ -281,7 +304,10 @@ function digitsToKeypadLetters(digits: string): string {
     '8': 'TUV',
     '9': 'WXYZ',
   };
-  return digits.split('').map((d) => groups[d] ?? '⌷').join(' ');
+  return digits.split('').map((d) => {
+    const letters = groups[d];
+    return letters ? `${d}·${letters}` : d;
+  }).join(' ');
 }
 
 function chunkings(digits: string): string[][] {

@@ -42,12 +42,15 @@
     keywords?: string;
   };
 
+  type DictRow = { word: string; major: string; score: number };
+
   const form = document.getElementById('numlore-search') as HTMLFormElement | null;
   const input = document.getElementById('numlore-q') as HTMLInputElement | null;
   const panel = document.getElementById('numlore-suggestions') as HTMLUListElement | null;
 
   if (form && input && panel) {
     let fusePromise: Promise<{ search: (q: string) => Array<{ item: IndexRow }> }> | null = null;
+    let dictPromise: Promise<DictRow[]> | null = null;
 
     const ensureFuse = () => {
       if (fusePromise) return fusePromise;
@@ -68,6 +71,15 @@
         });
       })();
       return fusePromise;
+    };
+
+    // Dictionary slice is ~250 KB gzipped — load it only after the user
+    // has actually typed two or more characters AND the curated index
+    // came up short.
+    const ensureDict = (): Promise<DictRow[]> => {
+      if (dictPromise) return dictPromise;
+      dictPromise = fetch('/search-words.json', { credentials: 'omit' }).then((r) => r.json());
+      return dictPromise;
     };
 
     const isNumberLike = (s: string) => /^[0-9]+(?:\.[0-9]+)?$/.test(s);
@@ -113,9 +125,27 @@
         : { id: q, display: q, type: 'word', path: routeFor(q) };
       const fuse = await ensureFuse();
       const fuzzy = fuse.search(q).slice(0, 6).map((h) => h.item);
+
+      // Dip into the dictionary slice when the curated index came up
+      // thin and the query looks like a word. Prefix-match by score.
+      let dictHits: IndexRow[] = [];
+      if (!isNumberLike(q) && q.length >= 2 && fuzzy.length < 3) {
+        const ql = q.toLowerCase();
+        const dict = await ensureDict();
+        dictHits = dict
+          .filter((w) => w.word.startsWith(ql))
+          .slice(0, 5)
+          .map((w) => ({
+            id: w.word,
+            display: w.word,
+            type: 'word' as const,
+            path: `/w/${encodeURIComponent(w.word)}`,
+          }));
+      }
+
       const seen = new Set<string>();
       const rows: IndexRow[] = [];
-      for (const r of [direct, ...fuzzy]) {
+      for (const r of [direct, ...fuzzy, ...dictHits]) {
         if (seen.has(r.path)) continue;
         seen.add(r.path);
         rows.push(r);

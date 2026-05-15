@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { resolveWord } from '../../lib/mnemonics';
+import type { Mapping, System } from '../../lib/mnemonics';
+import { pythagoreanRoot, archetype } from '../../lib/numerology';
+import { definedTermSchema } from '../../lib/schema';
+import { wordPageMeta } from '../../lib/page-meta';
+
+// SSR longtail fallback for arbitrary words. Reached only when /w/<word>
+// isn't in the prebuilt curated set. Used in particular by the client-side
+// dictionary search, which routes hits from search-words.json here.
+export const prerender = false;
+
+const rest = Astro.params.rest ?? '';
+if (rest.includes('/')) {
+  return new Response('Not found', { status: 404 });
+}
+
+const word = decodeURIComponent(rest).toLowerCase();
+const data = await resolveWord(word);
+const root = pythagoreanRoot(word);
+
+const robots = data.tier === 'longtail' ? 'noindex,follow' : undefined;
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, max-age=31536000, immutable',
+);
+
+const SYSTEMS: ReadonlyArray<{ key: System; label: string; chipMod: string; descr: string }> = [
+  { key: 'keypad',   label: 'T9 Keypad', chipMod: 'chip--keypad',  descr: 'the tactile cipher' },
+  { key: 'major',    label: 'Major',    chipMod: 'chip--major',    descr: 'the phonetic cipher' },
+  { key: 'leet',     label: 'Leet',     chipMod: 'chip--leet',     descr: 'the modern glyph' },
+  { key: 'cultural', label: 'Cultural', chipMod: 'chip--cultural', descr: 'the named echo' },
+  { key: 'math',     label: 'Math',     chipMod: 'chip--math',     descr: 'the property' },
+];
+
+const groupedMappings = SYSTEMS.map((s) => ({
+  ...s,
+  items: data.mappings.filter((m: Mapping) => m.system === s.key),
+})).filter((g) => g.items.length > 0);
+
+const tierLabel: Record<string, string> = {
+  curated: 'Curated · Hand-written',
+  notable: 'Notable · Auto-flagged',
+  longtail: 'Algorithmic · Computed',
+};
+
+const tierColor: Record<string, string> = {
+  curated: 'var(--accent)',
+  notable: 'var(--hot)',
+  longtail: 'var(--text-dim)',
+};
+
+const meta = wordPageMeta(word, data);
+
+const schemas = [
+  definedTermSchema({
+    path: `/w/${word}`,
+    name: word,
+    description: meta.description,
+  }),
+];
+
+const breadcrumbs = [
+  { name: 'Numlore', path: '/' },
+  { name: 'Words', path: '/w' },
+  { name: word, path: `/w/${word}` },
+];
+---
+
+<BaseLayout title={meta.title} description={meta.description} robots={robots} ogType="article" wide={true} schemas={schemas} breadcrumbs={breadcrumbs}>
+  <article>
+    <p class="kicker text-center" style={`color: ${tierColor[data.tier] ?? 'var(--ink)'}`}>
+      {tierLabel[data.tier] ?? data.tier}
+    </p>
+
+    <header class="mt-4 text-center">
+      <h1 class="specimen italic-serif text-[clamp(2.75rem,12vw,11rem)] text-[color:var(--gold-soft)]">{word}</h1>
+      <p class="lede mx-auto mt-4 text-center">{data.summary}</p>
+
+      {root && (
+        <div class="mx-auto mt-6 inline-block border border-[color:var(--gold-dim)] px-6 py-3">
+          <p class="kicker">Letter root · Pythagorean</p>
+          <p class="mono mt-2 text-[color:var(--gold-dim)] text-xs">{root.steps.join(' → ')}</p>
+          <p class="display mt-2 text-4xl font-black text-[color:var(--amaranth)]">{root.root}</p>
+          <p class="italic-serif mt-1 text-[color:var(--ink)] opacity-80">— {archetype(root.root)}</p>
+        </div>
+      )}
+    </header>
+
+    <div class="divider"><span class="line"></span><span class="glyph">encodings</span><span class="line"></span></div>
+
+    {groupedMappings.length > 0 ? (
+      <section class="grid gap-4 md:grid-cols-2">
+        {groupedMappings.map((g) => (
+          <article class="card">
+            <div class="flex items-baseline justify-between">
+              <span class={`chip ${g.chipMod}`}>{g.label}</span>
+              <span class="italic-serif text-sm text-[color:var(--ink)] opacity-70">— {g.descr}</span>
+            </div>
+            <ul class="mt-4 space-y-3">
+              {g.items.map((m) => {
+                const digits = /^\d+$/.test(m.to) ? m.to : null;
+                return (
+                  <li>
+                    <p class="display text-3xl text-[color:var(--ink)]">
+                      {digits ? (
+                        <a class="text-[color:var(--ink)] hover:text-[color:var(--gold)] underline decoration-[color:var(--gold-dim)] underline-offset-4" href={`/n/${digits}`}>{m.to}</a>
+                      ) : (
+                        m.to
+                      )}
+                    </p>
+                    {m.note && (
+                      <p class="italic-serif mt-1 text-sm text-[color:var(--ink)] opacity-75">{m.note}</p>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </article>
+        ))}
+      </section>
+    ) : (
+      <section class="card">
+        <span class="chip chip--math">Encodings</span>
+        <p class="italic-serif mt-4 text-[color:var(--ink)] opacity-80">No encodings found.</p>
+      </section>
+    )}
+  </article>
+</BaseLayout>
