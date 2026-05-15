@@ -8,7 +8,7 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "astro": "astro",
-    "build": "pnpm run privacy:audit:pre && pnpm run og:build && astro build && pnpm run privacy:audit:post",
+    "build": "pnpm run validate:pseo && pnpm run privacy:audit:pre && pnpm run og:build && astro build && pnpm run privacy:audit:post",
     "build:dict": "tsx scripts/dictionary/build.ts",
     "og:build": "tsx scripts/og-cards/build.ts",
     "dict:fetch": "tsx scripts/dictionary/fetch.ts",
@@ -17,6 +17,7 @@
     "privacy:audit": "pnpm run privacy:audit:pre && pnpm run privacy:audit:post",
     "privacy:audit:pre": "tsx scripts/privacy-audit.ts --phase=pre",
     "privacy:audit:post": "tsx scripts/privacy-audit.ts --phase=post",
+    "validate:pseo": "tsx scripts/validate-pseo.ts",
     "typecheck": "astro check"
   },
   "dependencies": {
