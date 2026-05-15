@@ -36,6 +36,10 @@
     --paper:        #08071A;
     --paper-light:  #161034;
     --ink:          #1A1538;
+    /* --paper is dark in light mode (plates become dark stamps against the
+       parchment page) so --ink-deep — which paints text on .plate/.plate-digits
+       — has to flip to a light cream or those plates become unreadable. */
+    --ink-deep:     #F1E7C8;
     --gold:         #8A6B2A;
     --gold-soft:    #C8A04C;
     --gold-dim:     #C9B27A;
