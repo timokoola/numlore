@@ -53,7 +53,7 @@ const breadcrumbs = [
 ];
 ---
 
-<BaseLayout title={meta.title} description={meta.description} ogType="article" wide={true} schemas={schemas} breadcrumbs={breadcrumbs}>
+<BaseLayout title={meta.title} description={meta.description} ogType="article" ogImage={`/og/w/${word}.png`} wide={true} schemas={schemas} breadcrumbs={breadcrumbs}>
   <article>
     <p class="kicker text-center">{tierLabel[data.tier] ?? data.tier}</p>
 

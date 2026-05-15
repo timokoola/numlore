@@ -40,7 +40,7 @@ const breadcrumbs = [
 ];
 ---
 
-<BaseLayout title={meta.title} description={meta.description} ogType="article" wide={true} pageSchema={pageSchema} breadcrumbs={breadcrumbs}>
+<BaseLayout title={meta.title} description={meta.description} ogType="article" ogImage={`/og/c/${category}.png`} wide={true} pageSchema={pageSchema} breadcrumbs={breadcrumbs}>
   <article>
     <p class="kicker text-center">Collection <span class="dot"></span> {data.slug}</p>
 

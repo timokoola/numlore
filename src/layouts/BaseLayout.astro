@@ -47,7 +47,7 @@ const {
   title,
   description = 'A bidirectional number↔word mnemonic dictionary.',
   robots,
-  ogImage,
+  ogImage = '/og/default.png',
   ogType = 'website',
   wide = false,
   pageSchema,
@@ -56,6 +56,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://numlore.com').toString();
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.site ?? 'https://numlore.com').toString();
 
 const rootPageSchema =
   pageSchema ??
@@ -88,8 +89,12 @@ const allSchemas: unknown[] = [...siteEntities(), rootPageSchema, ...breadcrumbE
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Numlore" />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
     {allSchemas.map((s) => <JsonLd data={s} />)}
     <script defer data-site-id="8a94eed0-5d97-4b94-b629-1c75ec5e8606" src="https://glyphex.io/tracker.js"></script>
   </head>

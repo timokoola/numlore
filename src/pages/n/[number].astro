@@ -35,12 +35,16 @@ const breadcrumbs = [
   { name: 'Numbers', path: '/n' },
   { name: id, path: `/n/${id}` },
 ];
+
+// Per-page social cards only exist for curated entries — see scripts/og-cards/build.ts.
+const ogImage = data.tier === 'curated' ? `/og/n/${id}.png` : '/og/default.png';
 ---
 
 <BaseLayout
   title={meta.title}
   description={meta.description}
   ogType="article"
+  ogImage={ogImage}
   schemas={schemas}
   breadcrumbs={breadcrumbs}
 >

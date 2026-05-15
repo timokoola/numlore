@@ -121,7 +121,7 @@ const breadcrumbs = [
 ];
 ---
 
-<BaseLayout title={meta.title} description={meta.description} ogType="article" wide={true} schemas={schemas} breadcrumbs={breadcrumbs}>
+<BaseLayout title={meta.title} description={meta.description} ogType="article" ogImage={`/og/systems/${slug}.png`} wide={true} schemas={schemas} breadcrumbs={breadcrumbs}>
   <p class="kicker text-center">Sphere <span class="dot"></span> {entry.roman}</p>
   <h1 class="display mt-3 text-center text-[clamp(3rem,8vw,5.5rem)] font-bold leading-tight text-[color:var(--ink)]">
     {entry.title}
