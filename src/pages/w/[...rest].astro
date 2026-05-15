@@ -16,7 +16,15 @@ if (rest.includes('/')) {
   return new Response('Not found', { status: 404 });
 }
 
-const word = decodeURIComponent(rest).toLowerCase();
+// Only lowercase alnum + hyphens are valid word slugs. Capitals,
+// punctuation, encoded chars, and absurd lengths all 404 before
+// resolveWord burns edge CPU. Keeps one canonical URL per word so we
+// don't end up with /w/Hello and /w/hello serving the same content.
+if (rest.length === 0 || rest.length > 64 || !/^[a-z0-9-]+$/.test(rest)) {
+  return new Response('Not found', { status: 404 });
+}
+
+const word = rest;
 const data = await resolveWord(word);
 const root = pythagoreanRoot(word);
 

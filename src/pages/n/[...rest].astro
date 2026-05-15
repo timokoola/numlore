@@ -19,6 +19,14 @@ if (rest.includes('/')) {
 }
 
 const number = decodeURIComponent(rest);
+
+// Only digit-strings and decimals are valid number slugs. Anything else
+// (random text, bot probes, malformed URLs) gets a 404 before we burn
+// edge CPU on resolveNumber. Length cap keeps absurd inputs out.
+if (number.length > 32 || !/^\d+(?:\.\d+)?$/.test(number)) {
+  return new Response('Not found', { status: 404 });
+}
+
 const data = await resolveNumber(number);
 
 const robots = data.tier === 'longtail' ? 'noindex,follow' : undefined;
