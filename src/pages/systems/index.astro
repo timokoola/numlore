@@ -11,10 +11,12 @@ const spheres = [
   { slug: 'cultural', roman: 'IV',  name: 'Cultural',  descr: 'the named echoes — codes, addresses, agents, omens.',                 example: '90210 ⇄ Beverly Hills' },
 ];
 
+const description = 'Four mnemonic systems Numlore reads — the Major phonetic cipher, the T9 phone keypad, Leet substitution, and cultural references.';
+
 const pageSchema = collectionPageSchema({
   path: '/systems',
   name: 'The four spheres',
-  description: 'The four mnemonic systems Numlore reads.',
+  description,
   items: spheres.map((s) => ({ name: s.name, path: `/systems/${s.slug}` })),
 });
 
@@ -24,7 +26,7 @@ const breadcrumbs = [
 ];
 ---
 
-<BaseLayout title="The four spheres — Numlore" description="The four mnemonic systems Numlore reads." wide={true} pageSchema={pageSchema} breadcrumbs={breadcrumbs}>
+<BaseLayout title="The four spheres — Numlore" description={description} wide={true} pageSchema={pageSchema} breadcrumbs={breadcrumbs}>
   <p class="kicker text-center">Index <span class="dot"></span> the four spheres</p>
   <h1 class="display mt-3 text-center text-[clamp(3rem,9vw,6rem)] font-bold leading-tight text-[color:var(--ink)]">
     Four ways<br/>to read a number.

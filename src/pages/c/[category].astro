@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadCategory, listCategorySlugs } from '../../lib/mnemonics';
 import { digitalRoot, archetype } from '../../lib/numerology';
 import { collectionPageSchema } from '../../lib/schema';
+import { categoryPageMeta } from '../../lib/page-meta';
 
 export const prerender = true;
 
@@ -19,10 +20,16 @@ const rows = data.includes.map((id) => {
   return { id, root: r?.root ?? 0, label: r ? archetype(r.root) : '' };
 });
 
+const meta = categoryPageMeta({
+  title: data.title,
+  description: data.description,
+  count: data.includes.length,
+});
+
 const pageSchema = collectionPageSchema({
   path: `/c/${category}`,
   name: data.title,
-  description: data.description,
+  description: meta.description,
   items: data.includes.map((id) => ({ name: id, path: `/n/${id}` })),
 });
 
@@ -33,7 +40,7 @@ const breadcrumbs = [
 ];
 ---
 
-<BaseLayout title={`${data.title} — Numlore`} description={data.description} wide={true} pageSchema={pageSchema} breadcrumbs={breadcrumbs}>
+<BaseLayout title={meta.title} description={meta.description} ogType="article" wide={true} pageSchema={pageSchema} breadcrumbs={breadcrumbs}>
   <article>
     <p class="kicker text-center">Collection <span class="dot"></span> {data.slug}</p>
 

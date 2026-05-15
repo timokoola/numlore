@@ -4,6 +4,7 @@ import NumberPage from '../../components/NumberPage.astro';
 import { resolveNumber, listPrebuiltNumberIds } from '../../lib/mnemonics';
 import { siblingsByRoot } from '../../lib/related';
 import { definedTermSchema } from '../../lib/schema';
+import { numberPageMeta } from '../../lib/page-meta';
 
 // Prebuilt tier: curated YAML, every integer 0–9999, and every notable 5–6
 // digit number. Longtail 5–6 digit numbers are served by the SSR sibling at
@@ -18,12 +19,13 @@ const { number } = Astro.params;
 const id = number ?? '';
 const data = await resolveNumber(id);
 const siblings = siblingsByRoot(id, 5);
+const meta = numberPageMeta(id, data);
 
 const schemas = [
   definedTermSchema({
     path: `/n/${id}`,
     name: id,
-    description: data.summary,
+    description: meta.description,
     termCode: id,
   }),
 ];
@@ -36,8 +38,9 @@ const breadcrumbs = [
 ---
 
 <BaseLayout
-  title={`${id} — Numlore`}
-  description={data.summary}
+  title={meta.title}
+  description={meta.description}
+  ogType="article"
   schemas={schemas}
   breadcrumbs={breadcrumbs}
 >

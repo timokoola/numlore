@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { definedTermSetSchema } from '../../lib/schema';
+import { systemPageMeta } from '../../lib/page-meta';
 
 export const prerender = true;
 
@@ -93,6 +94,12 @@ const copy: Record<string, SystemCopy> = {
 
 const entry = copy[slug ?? ''] ?? { roman: '·', title: 'Unknown system', subtitle: '', body: '', chipMod: '' };
 
+const meta = systemPageMeta({
+  title: entry.title,
+  subtitle: entry.subtitle,
+  body: entry.body,
+});
+
 const schemas = [
   definedTermSetSchema({
     path: `/systems/${slug}`,
@@ -114,7 +121,7 @@ const breadcrumbs = [
 ];
 ---
 
-<BaseLayout title={`${entry.title} — Numlore`} description={entry.body} wide={true} schemas={schemas} breadcrumbs={breadcrumbs}>
+<BaseLayout title={meta.title} description={meta.description} ogType="article" wide={true} schemas={schemas} breadcrumbs={breadcrumbs}>
   <p class="kicker text-center">Sphere <span class="dot"></span> {entry.roman}</p>
   <h1 class="display mt-3 text-center text-[clamp(3rem,8vw,5.5rem)] font-bold leading-tight text-[color:var(--ink)]">
     {entry.title}

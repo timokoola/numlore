@@ -7,10 +7,13 @@ export const prerender = true;
 
 const categories = listCategories().slice().sort((a, b) => a.title.localeCompare(b.title));
 
+const titleList = categories.map((c) => c.title.toLowerCase()).join(', ');
+const description = `Hand-grouped sets of numbers, themed by tradition or context — ${titleList}. ${categories.length} collections in all.`;
+
 const pageSchema = collectionPageSchema({
   path: '/c',
   name: 'Collections — Numlore',
-  description: 'Hand-grouped sets of numbers, themed.',
+  description,
   items: categories.map((c) => ({ name: c.title, path: `/c/${c.slug}` })),
 });
 
@@ -21,8 +24,8 @@ const breadcrumbs = [
 ---
 
 <BaseLayout
-  title="Collections — Numlore"
-  description="Hand-grouped sets of numbers, themed by tradition or context."
+  title={`Collections — ${categories.length} themed sets · Numlore`}
+  description={description}
   wide={true}
   pageSchema={pageSchema}
   breadcrumbs={breadcrumbs}

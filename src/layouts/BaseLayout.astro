@@ -16,6 +16,12 @@ interface Props {
   description?: string;
   robots?: string;
   ogImage?: string;
+  /**
+   * og:type. Defaults to "website" (right for the home, hubs, and static
+   * info pages). Use "article" for content pages — number, word, category,
+   * and system slug pages.
+   */
+  ogType?: string;
   wide?: boolean;
   /**
    * Page-root JSON-LD schema (WebPage, CollectionPage, or similar). When
@@ -42,6 +48,7 @@ const {
   description = 'A bidirectional number↔word mnemonic dictionary.',
   robots,
   ogImage,
+  ogType = 'website',
   wide = false,
   pageSchema,
   schemas = [],
@@ -78,7 +85,8 @@ const allSchemas: unknown[] = [...siteEntities(), rootPageSchema, ...breadcrumbE
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Numlore" />
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content="summary_large_image" />
