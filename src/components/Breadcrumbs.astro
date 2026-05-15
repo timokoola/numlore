@@ -1,0 +1,35 @@
+---
+// Visible breadcrumb trail. Paired with BreadcrumbList JSON-LD emitted by
+// BaseLayout from the same item list — see src/layouts/BaseLayout.astro.
+
+interface Item {
+  name: string;
+  path: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+{items.length > 1 && (
+  <nav aria-label="Breadcrumb" class="kicker mb-6 text-[color:var(--gold-dim)]">
+    <ol class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+      {items.map((item, i) => {
+        const isLast = i === items.length - 1;
+        return (
+          <li class="flex items-center gap-x-2">
+            {isLast ? (
+              <span aria-current="page" class="text-[color:var(--ink)]">{item.name}</span>
+            ) : (
+              <a href={item.path}>{item.name}</a>
+            )}
+            {!isLast && <span aria-hidden="true" class="text-[color:var(--amaranth)]">·</span>}
+          </li>
+        );
+      })}
+    </ol>
+  </nav>
+)}

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { listCategories } from '../../lib/categories';
+import { collectionPageSchema } from '../../lib/schema';
+
+export const prerender = true;
+
+const categories = listCategories().slice().sort((a, b) => a.title.localeCompare(b.title));
+
+const pageSchema = collectionPageSchema({
+  path: '/c',
+  name: 'Collections — Numlore',
+  description: 'Hand-grouped sets of numbers, themed.',
+  items: categories.map((c) => ({ name: c.title, path: `/c/${c.slug}` })),
+});
+
+const breadcrumbs = [
+  { name: 'Numlore', path: '/' },
+  { name: 'Collections', path: '/c' },
+];
+---
+
+<BaseLayout
+  title="Collections — Numlore"
+  description="Hand-grouped sets of numbers, themed by tradition or context."
+  wide={true}
+  pageSchema={pageSchema}
+  breadcrumbs={breadcrumbs}
+>
+  <p class="kicker text-center">Index <span class="dot"></span> collections</p>
+  <h1 class="display mt-3 text-center text-[clamp(3rem,9vw,6rem)] font-bold leading-tight text-[color:var(--ink)]">
+    Collections
+  </h1>
+  <p class="lede mx-auto mt-2 text-center">
+    Numbers gathered by theme — angel numbers, bond numbers, numerology roots, pop classics.
+  </p>
+
+  <div class="divider"><span class="line"></span><span class="glyph">✦  ☉  ✦</span><span class="line"></span></div>
+
+  <div class="mx-auto mt-6 grid gap-3 sm:grid-cols-2" style="max-width: 880px;">
+    {categories.map((c) => (
+      <a class="card hover:border-[color:var(--gold)]" href={`/c/${c.slug}`}>
+        <p class="display text-2xl font-bold text-[color:var(--ink)]">{c.title}</p>
+        <p class="italic-serif mt-2 text-sm opacity-80">{c.description}</p>
+        <p class="kicker mt-3 text-[color:var(--gold-dim)]">{c.includes.length} entries →</p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

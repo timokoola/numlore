@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { listAllCurated } from '../../lib/entries';
+import { pythagoreanRoot, archetype } from '../../lib/numerology';
+import { collectionPageSchema } from '../../lib/schema';
+
+export const prerender = true;
+
+const curated = listAllCurated()
+  .filter((e) => e.type === 'word')
+  .map((e) => {
+    const r = pythagoreanRoot(e.id);
+    return {
+      id: e.id,
+      display: e.display,
+      root: r?.root ?? 0,
+      steps: r?.steps ?? [],
+      archetype: r ? archetype(r.root) : '',
+    };
+  })
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+const systems = [
+  { slug: 'major',    name: 'Major',     descr: 'phonetic cipher' },
+  { slug: 'keypad',   name: 'T9 Keypad', descr: 'tactile cipher' },
+  { slug: 'leet',     name: 'Leet',      descr: 'modern glyph' },
+  { slug: 'cultural', name: 'Cultural',  descr: 'named echoes' },
+];
+
+const pageSchema = collectionPageSchema({
+  path: '/w',
+  name: 'Words — Numlore',
+  description: 'Curated word entries with their Pythagorean roots and T9 encodings.',
+  items: curated.map((c) => ({ name: c.id, path: `/w/${c.id}` })),
+});
+
+const breadcrumbs = [
+  { name: 'Numlore', path: '/' },
+  { name: 'Words', path: '/w' },
+];
+---
+
+<BaseLayout
+  title="Words — Numlore"
+  description="Curated word entries, reduced through the Pythagorean cipher and encoded by every system Numlore reads."
+  wide={true}
+  pageSchema={pageSchema}
+  breadcrumbs={breadcrumbs}
+>
+  <p class="kicker text-center">Index <span class="dot"></span> words</p>
+  <h1 class="display mt-3 text-center text-[clamp(3rem,9vw,6rem)] font-bold leading-tight text-[color:var(--ink)]">
+    Words
+  </h1>
+  <p class="lede mx-auto mt-2 text-center">
+    {curated.length} curated entries — each shown with its Pythagorean letter root.
+  </p>
+
+  <div class="divider"><span class="line"></span><span class="glyph">i · curated</span><span class="line"></span></div>
+  <h2 class="sect-h text-center">Hand-written entries</h2>
+
+  <div class="mx-auto mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2" style="max-width: 720px;">
+    {curated.map((row) => (
+      <a class="slip" href={`/w/${row.id}`}>
+        <span class="word">{row.display}</span>
+        <span class="calc">{row.steps.join(' → ')} →</span>
+        <span class="root">{row.root}</span>
+      </a>
+    ))}
+  </div>
+
+  <div class="divider"><span class="line"></span><span class="glyph">ii · spheres</span><span class="line"></span></div>
+  <h2 class="sect-h text-center">How a word becomes a number</h2>
+  <p class="sect-sub text-center">read any word through one of the four ciphers.</p>
+
+  <div class="mx-auto mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-4" style="max-width: 880px;">
+    {systems.map((s) => (
+      <a class="card text-center hover:border-[color:var(--gold)]" href={`/systems/${s.slug}`}>
+        <p class="display text-xl font-bold text-[color:var(--ink)]">{s.name}</p>
+        <p class="italic-serif mt-2 text-sm opacity-80">{s.descr}</p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

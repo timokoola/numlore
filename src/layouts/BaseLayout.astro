@@ -2,8 +2,14 @@
 import '../styles/global.css';
 import Masthead from '../components/Masthead.astro';
 import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import JsonLd from '../components/JsonLd.astro';
-import { siteEntities, webPageSchema } from '../lib/schema';
+import { siteEntities, webPageSchema, breadcrumbSchema } from '../lib/schema';
+
+interface BreadcrumbItem {
+  name: string;
+  path: string;
+}
 
 interface Props {
   title: string;
@@ -18,11 +24,17 @@ interface Props {
    */
   pageSchema?: unknown;
   /**
-   * Additional schemas to render alongside the page root — typically a
-   * BreadcrumbList, plus DefinedTerm / DefinedTermSet etc. The sitewide
-   * WebSite + Organization + dictionary DefinedTermSet are always emitted.
+   * Additional schemas to render alongside the page root. The sitewide
+   * WebSite + Organization + dictionary DefinedTermSet are always emitted,
+   * and a BreadcrumbList is generated automatically from `breadcrumbs`.
    */
   schemas?: unknown[];
+  /**
+   * Page-hierarchy trail. The first item should be the site root. Rendered
+   * both as a visible <nav> at the top of <main> and as BreadcrumbList
+   * JSON-LD. Omit on the homepage.
+   */
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 const {
@@ -33,6 +45,7 @@ const {
   wide = false,
   pageSchema,
   schemas = [],
+  breadcrumbs,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://numlore.com').toString();
@@ -45,7 +58,9 @@ const rootPageSchema =
     description,
   });
 
-const allSchemas: unknown[] = [...siteEntities(), rootPageSchema, ...schemas];
+const breadcrumbExtras = breadcrumbs && breadcrumbs.length > 1 ? [breadcrumbSchema(breadcrumbs)] : [];
+
+const allSchemas: unknown[] = [...siteEntities(), rootPageSchema, ...breadcrumbExtras, ...schemas];
 ---
 
 <!doctype html>
@@ -73,6 +88,7 @@ const allSchemas: unknown[] = [...siteEntities(), rootPageSchema, ...schemas];
   <body>
     <Masthead />
     <main class={`mx-auto ${wide ? 'max-w-5xl' : 'max-w-3xl'} px-6 py-14`}>
+      {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
       <slot />
     </main>
     <Footer />

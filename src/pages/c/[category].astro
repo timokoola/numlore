@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadCategory, listCategorySlugs } from '../../lib/mnemonics';
 import { digitalRoot, archetype } from '../../lib/numerology';
-import { collectionPageSchema, breadcrumbSchema } from '../../lib/schema';
+import { collectionPageSchema } from '../../lib/schema';
 
 export const prerender = true;
 
@@ -26,15 +26,14 @@ const pageSchema = collectionPageSchema({
   items: data.includes.map((id) => ({ name: id, path: `/n/${id}` })),
 });
 
-const schemas = [
-  breadcrumbSchema([
-    { name: 'Numlore', path: '/' },
-    { name: data.title, path: `/c/${category}` },
-  ]),
+const breadcrumbs = [
+  { name: 'Numlore', path: '/' },
+  { name: 'Collections', path: '/c' },
+  { name: data.title, path: `/c/${category}` },
 ];
 ---
 
-<BaseLayout title={`${data.title} — Numlore`} description={data.description} wide={true} pageSchema={pageSchema} schemas={schemas}>
+<BaseLayout title={`${data.title} — Numlore`} description={data.description} wide={true} pageSchema={pageSchema} breadcrumbs={breadcrumbs}>
   <article>
     <p class="kicker text-center">Collection <span class="dot"></span> {data.slug}</p>
 

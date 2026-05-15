@@ -4,7 +4,7 @@ import { resolveWord } from '../../lib/mnemonics';
 import type { Mapping, System } from '../../lib/mnemonics';
 import { listCuratedWordIds } from '../../lib/entries';
 import { pythagoreanRoot, archetype } from '../../lib/numerology';
-import { definedTermSchema, breadcrumbSchema } from '../../lib/schema';
+import { definedTermSchema } from '../../lib/schema';
 
 export const prerender = true;
 
@@ -41,14 +41,16 @@ const schemas = [
     name: word ?? '',
     description: data.summary,
   }),
-  breadcrumbSchema([
-    { name: 'Numlore', path: '/' },
-    { name: word ?? '', path: `/w/${word}` },
-  ]),
+];
+
+const breadcrumbs = [
+  { name: 'Numlore', path: '/' },
+  { name: 'Words', path: '/w' },
+  { name: word ?? '', path: `/w/${word}` },
 ];
 ---
 
-<BaseLayout title={`${word} — Numlore`} description={data.summary} wide={true} schemas={schemas}>
+<BaseLayout title={`${word} — Numlore`} description={data.summary} wide={true} schemas={schemas} breadcrumbs={breadcrumbs}>
   <article>
     <p class="kicker text-center">{tierLabel[data.tier] ?? data.tier}</p>
 
@@ -77,14 +79,23 @@ const schemas = [
               <span class="italic-serif text-sm text-[color:var(--ink)] opacity-70">— {g.descr}</span>
             </div>
             <ul class="mt-4 space-y-3">
-              {g.items.map((m) => (
-                <li>
-                  <p class="display text-3xl text-[color:var(--ink)]">{m.to}</p>
-                  {m.note && (
-                    <p class="italic-serif mt-1 text-sm text-[color:var(--ink)] opacity-75">{m.note}</p>
-                  )}
-                </li>
-              ))}
+              {g.items.map((m) => {
+                const digits = /^\d+$/.test(m.to) ? m.to : null;
+                return (
+                  <li>
+                    <p class="display text-3xl text-[color:var(--ink)]">
+                      {digits ? (
+                        <a class="text-[color:var(--ink)] hover:text-[color:var(--gold)] underline decoration-[color:var(--gold-dim)] underline-offset-4" href={`/n/${digits}`}>{m.to}</a>
+                      ) : (
+                        m.to
+                      )}
+                    </p>
+                    {m.note && (
+                      <p class="italic-serif mt-1 text-sm text-[color:var(--ink)] opacity-75">{m.note}</p>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </article>
         ))}

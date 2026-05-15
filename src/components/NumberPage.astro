@@ -1,13 +1,29 @@
 ---
 import type { NumberResult, Mapping, System } from '../lib/mnemonics';
 import { digitalRoot, archetype } from '../lib/numerology';
+import { getCuratedWord } from '../lib/entries';
 
 interface Props {
   number: string;
   data: NumberResult;
+  siblings?: string[];
 }
 
-const { number, data } = Astro.props;
+const { number, data, siblings = [] } = Astro.props;
+
+// Render the comma-separated Major candidate list as inline links for every
+// word that has a curated /w/<word> page. Other words stay as plain text
+// until the dictionary-backed /w/ catchall is live.
+function majorCandidateNodes(toField: string): Array<{ word: string; href: string | null }> {
+  return toField
+    .split(',')
+    .map((w) => w.trim())
+    .filter((w) => w.length > 0)
+    .map((word) => {
+      const curated = getCuratedWord(word);
+      return { word, href: curated ? `/w/${encodeURIComponent(word)}` : null };
+    });
+}
 
 const asInt = /^-?\d+$/.test(number) ? Number(number) : null;
 const prevNum = asInt !== null ? Math.max(0, asInt - 1) : null;
@@ -75,7 +91,22 @@ const tierLabel: Record<string, string> = {
           <ul class="mt-4 space-y-3">
             {g.items.map((m) => (
               <li>
-                <p class="display text-2xl text-[color:var(--ink)]">{m.to}</p>
+                {m.system === 'major' ? (
+                  <p class="display text-2xl text-[color:var(--ink)]">
+                    {majorCandidateNodes(m.to).map((c, i, arr) => (
+                      <>
+                        {c.href ? (
+                          <a class="text-[color:var(--ink)] hover:text-[color:var(--gold)] underline decoration-[color:var(--gold-dim)] underline-offset-4" href={c.href}>{c.word}</a>
+                        ) : (
+                          <span>{c.word}</span>
+                        )}
+                        {i < arr.length - 1 && <span class="text-[color:var(--gold-dim)]">, </span>}
+                      </>
+                    ))}
+                  </p>
+                ) : (
+                  <p class="display text-2xl text-[color:var(--ink)]">{m.to}</p>
+                )}
                 {m.note && (
                   <p class="italic-serif mt-1 text-sm text-[color:var(--ink)] opacity-75">{m.note}</p>
                 )}
@@ -91,6 +122,22 @@ const tierLabel: Record<string, string> = {
       <p class="italic-serif mt-4 text-[color:var(--ink)] opacity-80">
         Nothing landed for this input. Try a different number or word.
       </p>
+    </section>
+  )}
+
+  {siblings.length > 0 && root && (
+    <section class="mt-12">
+      <div class="divider"><span class="line"></span><span class="glyph">same root · {root.root}</span><span class="line"></span></div>
+      <p class="sect-sub text-center">others that reduce to <span class="text-[color:var(--amaranth)]">{root.root}</span>.</p>
+      <ul class="mx-auto mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5" style="max-width: 880px;">
+        {siblings.map((s) => (
+          <li>
+            <a class="plate block text-center" href={`/n/${s}`}>
+              <div class="plate-digits text-[clamp(28px,4.5vw,40px)]">{s}</div>
+            </a>
+          </li>
+        ))}
+      </ul>
     </section>
   )}
 

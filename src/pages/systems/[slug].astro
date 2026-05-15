@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { definedTermSetSchema, breadcrumbSchema } from '../../lib/schema';
+import { definedTermSetSchema } from '../../lib/schema';
 
 export const prerender = true;
 
@@ -105,15 +105,16 @@ const schemas = [
       description: `${row.key} ↔ ${row.value}`,
     })),
   }),
-  breadcrumbSchema([
-    { name: 'Numlore', path: '/' },
-    { name: 'Systems', path: '/systems' },
-    { name: entry.title, path: `/systems/${slug}` },
-  ]),
+];
+
+const breadcrumbs = [
+  { name: 'Numlore', path: '/' },
+  { name: 'Systems', path: '/systems' },
+  { name: entry.title, path: `/systems/${slug}` },
 ];
 ---
 
-<BaseLayout title={`${entry.title} — Numlore`} description={entry.body} wide={true} schemas={schemas}>
+<BaseLayout title={`${entry.title} — Numlore`} description={entry.body} wide={true} schemas={schemas} breadcrumbs={breadcrumbs}>
   <p class="kicker text-center">Sphere <span class="dot"></span> {entry.roman}</p>
   <h1 class="display mt-3 text-center text-[clamp(3rem,8vw,5.5rem)] font-bold leading-tight text-[color:var(--ink)]">
     {entry.title}

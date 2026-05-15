@@ -8,7 +8,7 @@ import { listPrebuiltNumberIds } from '../lib/mnemonics';
 
 export const prerender = true;
 
-const STATIC_PATHS = ['/', '/about', '/credits', '/privacy', '/submit', '/systems'];
+const STATIC_PATHS = ['/', '/about', '/credits', '/privacy', '/submit', '/systems', '/n', '/w', '/c'];
 const SYSTEM_SLUGS = ['major', 'keypad', 'leet', 'cultural'];
 
 function xmlEscape(s: string): string {

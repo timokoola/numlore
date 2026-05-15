@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import NumberPage from '../../components/NumberPage.astro';
 import { resolveNumber } from '../../lib/mnemonics';
-import { definedTermSchema, breadcrumbSchema } from '../../lib/schema';
+import { definedTermSchema } from '../../lib/schema';
 
 // SSR longtail fallback. Reached only for /n/<number> paths not in the
 // prebuilt set (curated + 0–9999 + notable 5–6 digit). One-year edge cache.
@@ -34,10 +34,12 @@ const schemas = [
     description: data.summary,
     termCode: number,
   }),
-  breadcrumbSchema([
-    { name: 'Numlore', path: '/' },
-    { name: number, path: `/n/${number}` },
-  ]),
+];
+
+const breadcrumbs = [
+  { name: 'Numlore', path: '/' },
+  { name: 'Numbers', path: '/n' },
+  { name: number, path: `/n/${number}` },
 ];
 ---
 
@@ -46,6 +48,7 @@ const schemas = [
   description={data.summary}
   robots={robots}
   schemas={schemas}
+  breadcrumbs={breadcrumbs}
 >
   <NumberPage number={number} data={data} />
 </BaseLayout>

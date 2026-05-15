@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { listAllCurated } from '../../lib/entries';
+import { listCategories } from '../../lib/categories';
+import { digitalRoot, archetype } from '../../lib/numerology';
+import { collectionPageSchema } from '../../lib/schema';
+
+export const prerender = true;
+
+const curated = listAllCurated()
+  .filter((e) => e.type === 'number')
+  .map((e) => {
+    const r = digitalRoot(e.id);
+    return {
+      id: e.id,
+      display: e.display,
+      root: r?.root ?? 0,
+      archetype: r ? archetype(r.root) : '',
+    };
+  })
+  .sort((a, b) => {
+    const an = Number(a.id);
+    const bn = Number(b.id);
+    if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
+    return a.id.localeCompare(b.id);
+  });
+
+const categories = listCategories();
+
+const systems = [
+  { slug: 'major',    name: 'Major',     descr: 'phonetic cipher' },
+  { slug: 'keypad',   name: 'T9 Keypad', descr: 'tactile cipher' },
+  { slug: 'leet',     name: 'Leet',      descr: 'modern glyph' },
+  { slug: 'cultural', name: 'Cultural',  descr: 'named echoes' },
+];
+
+const pageSchema = collectionPageSchema({
+  path: '/n',
+  name: 'Numbers — Numlore',
+  description: 'Every curated number in Numlore, grouped with collections and the four mnemonic systems.',
+  items: curated.map((c) => ({ name: c.id, path: `/n/${c.id}` })),
+});
+
+const breadcrumbs = [
+  { name: 'Numlore', path: '/' },
+  { name: 'Numbers', path: '/n' },
+];
+---
+
+<BaseLayout
+  title="Numbers — Numlore"
+  description="Every curated number, grouped with the four mnemonic systems and the collections."
+  wide={true}
+  pageSchema={pageSchema}
+  breadcrumbs={breadcrumbs}
+>
+  <p class="kicker text-center">Index <span class="dot"></span> numbers</p>
+  <h1 class="display mt-3 text-center text-[clamp(3rem,9vw,6rem)] font-bold leading-tight text-[color:var(--ink)]">
+    Numbers
+  </h1>
+  <p class="lede mx-auto mt-2 text-center">
+    {curated.length} curated entries, four collections, four spheres of meaning.
+  </p>
+
+  <div class="divider"><span class="line"></span><span class="glyph">i · curated</span><span class="line"></span></div>
+  <h2 class="sect-h text-center">Hand-written entries</h2>
+  <p class="sect-sub text-center">numbers Numlore knows by name.</p>
+
+  <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+    {curated.map((row) => (
+      <a class="plate" href={`/n/${row.id}`}>
+        <div class="plate-digits">{row.display}</div>
+        <p class="plate-reduce">root <span class="arrow">→</span> <span class="root">{row.root}</span></p>
+        <p class="plate-meta">{row.archetype}</p>
+      </a>
+    ))}
+  </div>
+
+  <div class="divider"><span class="line"></span><span class="glyph">ii · collections</span><span class="line"></span></div>
+  <h2 class="sect-h text-center">Browse by collection</h2>
+
+  <div class="mx-auto mt-6 grid gap-3 sm:grid-cols-2" style="max-width: 880px;">
+    {categories.map((c) => (
+      <a class="card hover:border-[color:var(--gold)]" href={`/c/${c.slug}`}>
+        <p class="display text-2xl font-bold text-[color:var(--ink)]">{c.title}</p>
+        <p class="italic-serif mt-2 text-sm opacity-80">{c.description}</p>
+        <p class="kicker mt-3 text-[color:var(--gold-dim)]">{c.includes.length} entries →</p>
+      </a>
+    ))}
+  </div>
+
+  <div class="divider"><span class="line"></span><span class="glyph">iii · spheres</span><span class="line"></span></div>
+  <h2 class="sect-h text-center">Browse by system</h2>
+
+  <div class="mx-auto mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-4" style="max-width: 880px;">
+    {systems.map((s) => (
+      <a class="card text-center hover:border-[color:var(--gold)]" href={`/systems/${s.slug}`}>
+        <p class="display text-xl font-bold text-[color:var(--ink)]">{s.name}</p>
+        <p class="italic-serif mt-2 text-sm opacity-80">{s.descr}</p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>
