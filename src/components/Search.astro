@@ -82,6 +82,12 @@
       return dictPromise;
     };
 
+    // The direct suggestion echoes the raw query, which is untrusted user
+    // input — escape before it goes into innerHTML so characters like &, <,
+    // and " render literally instead of corrupting the markup.
+    const escapeHtml = (s: string) =>
+      s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
     const isNumberLike = (s: string) => /^[0-9]+(?:\.[0-9]+)?$/.test(s);
 
     const routeFor = (raw: string): string => {
@@ -102,11 +108,12 @@
       if (rows.length === 0) return close();
       panel.innerHTML = rows
         .map((r) => {
+          const safeDisplay = escapeHtml(r.display);
           const display = r.type === 'number'
-            ? `<span class="display font-bold text-[color:var(--gold)]">${r.display}</span>`
-            : `<span class="italic-serif">${r.display}</span>`;
+            ? `<span class="display font-bold text-[color:var(--gold)]">${safeDisplay}</span>`
+            : `<span class="italic-serif">${safeDisplay}</span>`;
           return `<li role="option">` +
-            `<a href="${r.path}">` +
+            `<a href="${escapeHtml(r.path)}">` +
               `<span>${display}</span>` +
               `<span class="stype">${r.type}</span>` +
             `</a>` +
