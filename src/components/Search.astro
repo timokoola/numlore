@@ -86,7 +86,7 @@
     // input — escape before it goes into innerHTML so characters like &, <,
     // and " render literally instead of corrupting the markup.
     const escapeHtml = (s: string) =>
-      s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
     const isNumberLike = (s: string) => /^[0-9]+(?:\.[0-9]+)?$/.test(s);
 
