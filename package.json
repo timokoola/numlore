@@ -33,6 +33,7 @@
     "yaml": "^2.5.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@fontsource/cinzel": "^5.2.8",
     "@fontsource/cormorant-garamond": "^5.2.11",
     "@resvg/resvg-js": "^2.6.2",

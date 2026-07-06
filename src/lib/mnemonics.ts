@@ -16,8 +16,8 @@ import mnemonicIndex from '../../data/dictionaries/compiled/mnemonic-index.json'
 
 interface MnemonicCandidate {
   word: string;
-  phonemes: string;
-  zipf: number;
+  pos: string;
+  score: number;
 }
 const INDEX = mnemonicIndex as Record<string, MnemonicCandidate[]>;
 
