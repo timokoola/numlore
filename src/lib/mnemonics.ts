@@ -184,6 +184,18 @@ export function listPrebuiltNumberIds(): string[] {
   return [...ids];
 }
 
+export function listIndexableNumberIds(): string[] {
+  // The numbers whose pages are indexable: curated entries plus notable
+  // integers (0–999999). Plain 0–9999 numbers are prebuilt but resolve to
+  // the longtail tier and emit noindex,follow, so they stay out of the
+  // sitemap. Mirrors the tier logic in resolveNumber().
+  const ids = new Set<string>(listCuratedNumberIds());
+  for (let n = 0; n <= 999999; n++) {
+    if (isNotable(n)) ids.add(String(n));
+  }
+  return [...ids];
+}
+
 // ---- summaries ---------------------------------------------------------------
 
 function curatedNumberSummary(display: string): string {

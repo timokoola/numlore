@@ -4,7 +4,7 @@
 import type { APIRoute } from 'astro';
 import { listCuratedWordIds } from '../lib/entries';
 import { listCategories } from '../lib/categories';
-import { listPrebuiltNumberIds } from '../lib/mnemonics';
+import { listIndexableNumberIds } from '../lib/mnemonics';
 
 export const prerender = true;
 
@@ -23,12 +23,18 @@ export const GET: APIRoute = async ({ site }) => {
   urls.push(...SYSTEM_SLUGS.map((s) => `/systems/${s}`));
   urls.push(...listCategories().map((c) => `/c/${c.slug}`));
   urls.push(...listCuratedWordIds().map((w) => `/w/${encodeURIComponent(w)}`));
-  urls.push(...listPrebuiltNumberIds().map((n) => `/n/${encodeURIComponent(n)}`));
+  // Only indexable numbers: plain 0–9999 longtail pages are noindex and
+  // listing them here sent Google ~10k pages it was told not to index.
+  urls.push(...listIndexableNumberIds().map((n) => `/n/${encodeURIComponent(n)}`));
+
+  // Emit the canonical form (trailing slash); the bare form either 308s
+  // (prebuilt pages) or serves a duplicate (SSR pages).
+  const withSlash = (path: string) => (path.endsWith('/') ? path : `${path}/`);
 
   const body =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-    urls.map((path) => `  <url><loc>${xmlEscape(origin + path)}</loc></url>`).join('\n') +
+    urls.map((path) => `  <url><loc>${xmlEscape(origin + withSlash(path))}</loc></url>`).join('\n') +
     '\n</urlset>\n';
 
   return new Response(body, {

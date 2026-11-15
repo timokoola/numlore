@@ -55,7 +55,10 @@ const {
   breadcrumbs,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://numlore.com').toString();
+// Canonical always uses the trailing-slash form, so SSR pages reached
+// without the slash (/n/5271, /w/hello) don't declare themselves canonical.
+const canonicalPath = /\/$|\.[a-z0-9]+$/i.test(Astro.url.pathname) ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = new URL(canonicalPath, Astro.site ?? 'https://numlore.com').toString();
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.site ?? 'https://numlore.com').toString();
 
 const rootPageSchema =

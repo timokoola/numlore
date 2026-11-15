@@ -43,6 +43,7 @@ const ogImage = data.tier === 'curated' ? `/og/n/${id}.png` : '/og/default.png';
 <BaseLayout
   title={meta.title}
   description={meta.description}
+  robots={data.tier === 'longtail' ? 'noindex,follow' : undefined}
   ogType="article"
   ogImage={ogImage}
   schemas={schemas}
